@@ -9,6 +9,9 @@ import { FaUserAlt } from "react-icons/fa";
 
 const HomePage = () => {
   const text = "Investigations . . .";
+  const CreateNewClaim = () => {
+
+  }
   return (
     <div>
       <div className="header-component">
@@ -21,7 +24,7 @@ const HomePage = () => {
           <input type="search" placeholder=' search for claims . . . .'/>
         </div>
         <div className='buttons-container'>
-          <button className='rotating-shadow'>Create New</button>
+          <button className='rotating-shadow' onClick={CreateNewClaim}>Create New</button>
           <button><FaUserAlt /> Login</button>
         </div>
       </div>
@@ -32,6 +35,12 @@ const HomePage = () => {
         <div className="text-container">
           <h3 className="static-text">Vehicle Insurance</h3>
           <h3 className="typing-text">Investigations.!</h3>
+        </div>
+      </div>
+      <div className="body-component2">
+        <h2>Investigation records ⬇</h2>
+        <div>
+          <p> claim no: XXXXXXX     policy no:   XXXXXXX        case number:  XXXXXXXX          vehicle type: XXXXXX</p>
         </div>
       </div>
     </div>

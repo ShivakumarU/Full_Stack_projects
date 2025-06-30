@@ -6,4 +6,4 @@ const InvestigationForm = () => {
   )
 }
 
-export default InvestigationForm
+export default InvestigationFormwww
