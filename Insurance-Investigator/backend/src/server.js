@@ -1,7 +1,7 @@
 import express from "express" ;
 import dotenv from "dotenv";
-import { connectDB } from "../config/mongoDB.js";
-import insuredDetails from "../routes/insuredDetails.routes.js";
+import { connectDB } from "./config/mongoDB.js";
+import insuredDetails from "./routes/insuredDetails.routes.js";
 
 dotenv.config();
 const app = express();
