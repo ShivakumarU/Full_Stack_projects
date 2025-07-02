@@ -1,8 +1,8 @@
-import insuredDetails from "../models/insuredDetails.model.js";
+import InsuredDetails from "../models/insuredDetails.model.js";
 
 export const createInsuredDetails = async (req, res) => {
   try {
-    const doc = new insuredDetails(req.body);
+    const doc = new InsuredDetails(req.body);
 
     doc.caseNumber = doc._id.toString();
 
@@ -19,7 +19,7 @@ export const createInsuredDetails = async (req, res) => {
 export const getInsuredDetailsByID = async (req, res) => {
   try {
     const { caseNumber } = req.params;
-    const details = await insuredDetails.findOne({ caseNumber }); 
+    const details = await InsuredDetails.findOne({ caseNumber }); 
 
     if (!details) {
       return res.status(404).json({ message: "No record found" });
@@ -35,7 +35,7 @@ export const getInsuredDetailsByID = async (req, res) => {
 
 export const getAllInsuredDetails = async (req,res) =>{
     try {
-        const allDetails = await insuredDetails.find();
+        const allDetails = await InsuredDetails.find();
         res.status(200).json(allDetails);
     } catch (error) {
         console.error(" Error fetching insured details:", error);
@@ -46,7 +46,7 @@ export const getAllInsuredDetails = async (req,res) =>{
 export const updateInsuredDetails = async (req, res) => {
   try {
     const { caseNumber } = req.params;
-    const updateDetails = await insuredDetails.findOneAndUpdate(
+    const updateDetails = await InsuredDetails.findOneAndUpdate(
       { caseNumber },           
       { $set: req.body },       
       { new: true }             
@@ -67,7 +67,7 @@ export const updateInsuredDetails = async (req, res) => {
 export const deleteInsuredDetails = async (req, res) => {
   try {
     const { caseNumber } = req.params;
-    const deleteDetails = await insuredDetails.findOneAndDelete({ caseNumber }); 
+    const deleteDetails = await InsuredDetails.findOneAndDelete({ caseNumber }); 
 
     if (!deleteDetails) {
       return res.status(404).json({ message: "No record found to delete" });

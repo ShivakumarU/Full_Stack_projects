@@ -44,10 +44,10 @@ const insuredDetailsSchema = new mongoose.Schema({
     required: true,
   },
 
-  invoiceAmount: { type: String, required: true },
+  invoiceAmount: { type: Number, required: true },
   lossLocation: { type: String, required: true },
   causeOfLoss: { type: String, required: true },
 
 }, { timestamps: true });
 
-export default mongoose.model("insuredDetails", insuredDetailsSchema);
+export default mongoose.model("InsuredDetails", insuredDetailsSchema);
