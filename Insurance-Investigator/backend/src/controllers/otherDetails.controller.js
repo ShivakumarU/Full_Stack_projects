@@ -3,11 +3,7 @@ import OtherDetails from "../models/otherDetails.model.js";
 export const createOtherDetails = async (req, res) => {
   try {
     const doc = new OtherDetails(req.body);
-
-    doc.caseNumber = doc._id.toString();
-
     await doc.save();
-
     res.status(201).json(doc);
   } catch (error) {
     console.error("Error creating Other details:", error);

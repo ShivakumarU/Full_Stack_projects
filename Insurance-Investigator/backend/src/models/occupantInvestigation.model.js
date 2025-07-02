@@ -42,7 +42,8 @@ const OccupantSchema = new mongoose.Schema({
     ]
   },
 
-  otherPersonDetails: { type: String },
+  photosSenderName: { type: String },
+  PhotosSenderNumber: { type: String },
 
   occupantDL: {
     type: String,
@@ -60,6 +61,7 @@ const OccupantSchema = new mongoose.Schema({
     enum: ["Match", "Mismatch", "Not available"]
   },
 
+  addAnything: { type: String, enum: ["yes", "no"] },
   additionalComments: { type: String } 
 });
 
