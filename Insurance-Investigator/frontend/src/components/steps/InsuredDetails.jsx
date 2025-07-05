@@ -1,0 +1,189 @@
+import React from 'react'
+
+const InsuredDetails = () =>  {
+  return (
+    <div className="space-y-4 p-5">
+      <h1 className="gradient-flex text-2xl font-bold mb-4 text-center">Insured Details</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label className="label">Insurance Company</label>
+          <select
+            className="select select-bordered w-1/2"
+            // value={formData.insuranceCompany || ''}
+            onChange={(e) => setFormData({ ...formData, insuranceCompany: e.target.value })}
+          >
+            <option value="">Select Company</option>
+            <option value="TATA AIG general insurance Co Ltd">TATA AIG general insurance Co Ltd</option>
+            <option value="Chola MS general insurance Co Ltd">Chola MS general insurance Co Ltd</option>
+            <option value="Relaince general insurance Co Ltd">Relaince general insurance Co Ltd</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="label">Case Number</label>
+          <input
+            type="text"
+            className="input input-bordered w-3/4"
+            // value={formData.caseNumber || ''}
+            onChange={(e) => setFormData({ ...formData, caseNumber: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Claim No</label>
+          <input
+            type="text"
+            className="input input-bordered w-3/4"
+            // value={formData.claimNo || ''}
+            onChange={(e) => setFormData({ ...formData, claimNo: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Policy No</label>
+          <input
+            type="text"
+            className="input input-bordered w-3/4"
+            // value={formData.policyNo || ''}
+            onChange={(e) => setFormData({ ...formData, policyNo: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Policy Start Date</label>
+          <input
+            type="date"
+            className="input input-bordered w-1/3"
+            // value={formData.policyStartDate || ''}
+            onChange={(e) => setFormData({ ...formData, policyStartDate: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Policy End Date</label>
+          <input
+            type="date"
+            className="input input-bordered w-1/3"
+            // value={formData.policyEndDate || ''}
+            onChange={(e) => setFormData({ ...formData, policyEndDate: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Insured Name</label>
+          <input
+            type="text"
+            className="input input-bordered w-3/4"
+            // value={formData.insuredName || ''}
+            onChange={(e) => setFormData({ ...formData, insuredName: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Insured Address</label>
+          <input
+            type="text"
+            className="input input-bordered w-full"
+            // value={formData.insuredAddress || ''}
+            onChange={(e) => setFormData({ ...formData, insuredAddress: e.target.value })}
+          />
+        </div>
+
+
+        <div>
+          <label className="label">Accident Date & Time</label>
+          <input
+            type="datetime-local"
+            className="input input-bordered w-1/3"
+            // value={formData.accidentDateTime || ''}
+            onChange={(e) => setFormData({ ...formData, accidentDateTime: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">IV (Insured Vehicle) Driver</label>
+          <input
+            type="text"
+            className="input input-bordered w-3/4"
+            // value={formData.ivDriver || ''}
+            onChange={(e) => setFormData({ ...formData, ivDriver: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Claim Intimation Date</label>
+          <input
+            type="date"
+            className="input input-bordered w-1/3"
+            // value={formData.claimIntimationDate || ''}
+            onChange={(e) => setFormData({ ...formData, claimIntimationDate: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">IV Number</label>
+          <input
+            type="text"
+            className="input input-bordered w-3/4"
+            // value={formData.ivNumber || ''}
+            onChange={(e) => setFormData({ ...formData, ivNumber: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="label">Vehicle Type</label>
+          <select
+            className="select select-bordered w-1/3"
+            // value={formData.vehicleType || ''}
+            onChange={(e) => setFormData({ ...formData, vehicleType: e.target.value })}
+          >
+            <option value="">Select Type</option>
+            <option value="two wheeler">Two Wheeler</option>
+            <option value="three wheeler">Three Wheeler</option>
+            <option value="private car">Private Car</option>
+            <option value="cab">Cab</option>
+            <option value="lorry">Lorry</option>
+            <option value="goods vehicle">Goods Vehicle</option>
+            <option value="bus">Bus</option>
+            <option value="miscellaneous vehicle">Miscellaneous Vehicle</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="label">Invoice Amount</label>
+          <input
+            type="number"
+            className="input input-bordered w-1/2"
+            // value={formData.invoiceAmount || ''}
+            onChange={(e) => setFormData({ ...formData, invoiceAmount: e.target.value })}
+          />
+        </div>
+
+        {/* 15. Loss Location */}
+        <div>
+          <label className="label">Loss Location</label>
+          <input
+            type="text"
+            className="input input-bordered w-full"
+            // value={formData.lossLocation || ''}
+            onChange={(e) => setFormData({ ...formData, lossLocation: e.target.value })}
+          />
+        </div>
+
+        {/* 16. Cause of Loss */}
+        <div>
+          <label className="label">Cause of Loss</label>
+          <input
+            type="text"
+            className="input input-bordered w-full"
+            // value={formData.causeOfLoss || ''}
+            onChange={(e) => setFormData({ ...formData, causeOfLoss: e.target.value })}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InsuredDetails
