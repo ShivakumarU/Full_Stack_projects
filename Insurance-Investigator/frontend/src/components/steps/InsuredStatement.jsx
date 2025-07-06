@@ -250,11 +250,11 @@ const InsuredStatement = ({ formData, setFormData }) => {
                 <option value="">Select</option>
                 <option value="FIRfiled">FIR Filed</option>
                 <option value="no">No</option>
-                <option value="panchanama">Panchanama</option>
+                <option value="Panchanama">Panchanama</option>
               </select>
             </div>
 
-            {(formData.policeCase === 'FIRfiled' || formData.policeCase === 'panchanama') && (
+            {(formData.policeCase === 'FIRfiled' || formData.policeCase === 'Panchanama') && (
               <div>
                 <label className="label">Police Station Name</label>
                 <input
