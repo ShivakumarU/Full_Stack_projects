@@ -42,17 +42,29 @@ const DriverInvestigation = ({ formData, setFormData }) => {
             {formData.driverInjured === 'yes' && (
               <>
                 <div>
-                  <label className="label">Medical Records</label>
-                  <select
-                    className="select select-bordered"
-                    value={formData.driverMedicalRecords || ''}
-                    onChange={(e) => handleChange('driverMedicalRecords', e.target.value)}
-                  >
+                  <label className="label">Hospitalized ?</label>
+                  <select className="select select-bordered" value={formData.Hospitalized || ''} onChange={(e) => handleChange('Hospitalized', e.target.value)}>
                     <option value="">Select</option>
-                    <option value="available">Available</option>
-                    <option value="not available">Not Available</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
                   </select>
                 </div>
+
+                {formData.Hospitalized === 'yes' && (<>
+                  <div>
+                    <label className='label'>Hospital Name</label>
+                    <input type="text" className="input input-bordered w-full" value={formData.HospitalName || ''} onChange={(e) => handleChange('HospitalName', e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="label">Medical Records</label>
+                    <select className="select select-bordered" value={formData.medicalRecords || ''} onChange={(e) => handleChange('medicalRecords', e.target.value)}>
+                      <option value="">Select</option>
+                      <option value="available">Available</option>
+                      <option value="not available">Not Available</option>
+                    </select>
+                  </div>
+                </>)}
+
 
                 <div>
                   <label className="label">Injuries Correlating</label>
@@ -112,6 +124,7 @@ const DriverInvestigation = ({ formData, setFormData }) => {
                 <option value="">Select</option>
                 <option value="available">Available</option>
                 <option value="not available">Not Available</option>
+                <option value="driver not-cooperated">Driver Not-Cooperated</option>
                 <option value="basic mobile">Basic Mobile</option>
               </select>
             </div>

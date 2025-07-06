@@ -67,6 +67,7 @@ const SpotVerification = ({ formData, setFormData }) => {
             <div>
               <label className="label">Upload Spot Photos</label>
               <input
+                multiple
                 type="file"
                 className="file-input file-input-bordered w-1/2"
                 onChange={(e) => handleChange('spotPhotos', e.target.files[0])}

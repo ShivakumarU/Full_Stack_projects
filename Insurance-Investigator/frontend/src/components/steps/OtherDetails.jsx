@@ -176,21 +176,21 @@ const OtherDetails = ({ formData, setFormData }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="label">Any Suspects?</label>
+            <label className="label">Opinion</label>
             <select
               className="select select-bordered"
-              value={formData.anySuspects || ''}
-              onChange={(e) => handleChange('anySuspects', e.target.value)}
+              value={formData.opinion || ''}
+              onChange={(e) => handleChange('opinion', e.target.value)}
             >
               <option value="">Select</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+              <option value="payable">Payable</option>
+              <option value="repudiation">Repudiation</option>
             </select>
           </div>
 
-          {formData.anySuspects === 'yes' && (
+          {formData.opinion === 'repudiation' && (
             <div className="md:col-span-2">
-              <label className="label">Evidence (Suspect Details)</label>
+              <label className="label">Evidence (Reason)</label>
               <textarea
                 className="textarea textarea-bordered w-full"
                 value={formData.suspectEvidence || ''}

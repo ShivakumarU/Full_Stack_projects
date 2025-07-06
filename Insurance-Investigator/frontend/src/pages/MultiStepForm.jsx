@@ -9,7 +9,7 @@ import OccupantInvestigation from "../components/steps/OccupantInvestigation";
 import InvestigationFindindsInsured from "../components/steps/InvestigationFindindsInsured";
 import SpotVerification from "../components/steps/SpotVerification";
 import GarageVerification from "../components/steps/GarageVerification";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CircleArrowLeft, CircleArrowRight, DatabaseZap, Download } from "lucide-react";
 
 
 const steps = [
@@ -47,20 +47,41 @@ const MultiStepForm = () => {
         <div className="mb-6 rounded shadow-md bg-base-100">
             <StepComponent formData={formData} setFormData={setFormData} />
         </div>
-        <div className=" flex justify-between mb-5 p-3 border-t-[1px]">
-          <button
-            onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}
-            disabled={currentStep === 0}
-            className="btn btn-outline"> Previous </button>
+        <div className=" flex justify-between mb-5 pt-6 p-3 border-t-[1px]">
+          {currentStep > 0 && (
+            <button
+              onClick={() => setCurrentStep((prev) => prev - 1)}
+              className="btn btn-outline"
+            >
+              <CircleArrowLeft /> Previous
+            </button>
+          )}
 
           <button
             onClick={() => alert('Saved')}
-            className="btn btn-outline btn-success"> Save It</button>
+            className="btn btn-outline btn-success"> Save <DatabaseZap /></button>
 
-          <button
-            onClick={() => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1))}
-            disabled={currentStep === steps.length - 1}
-            className="btn btn-outline">  Next </button>
+          {currentStep < steps.length - 1 && (
+            <button
+              onClick={() => setCurrentStep((prev) => prev + 1)}
+              className="btn btn-outline"
+            >
+              Next <CircleArrowRight />
+            </button>
+          )}
+
+          {currentStep === steps.length - 1 && (
+            <div className="flex gap-4 mt-4">
+              <button className="btn btn-outline">Preview Report</button>
+              <button className="btn btn-outline">
+                Invoice <Download />
+              </button>
+              <button className="btn btn-outline">
+                Report <Download />
+              </button>
+            </div>
+          )}
+
         </div>
       </div>
   )

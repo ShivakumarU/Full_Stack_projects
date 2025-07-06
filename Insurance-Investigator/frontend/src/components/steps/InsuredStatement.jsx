@@ -11,6 +11,18 @@ const InsuredStatement = ({ formData, setFormData }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
+              <label className="label">Insured Type</label>
+              <select
+                className="select select-bordered"
+                value={formData.insuredType || ''}
+                onChange={(e) => handleChange('insuredType', e.target.value)}
+              >
+                <option value="">Select</option>
+                <option value="insured">Insured</option>
+                <option value="insured cum driver">Insured cum Driver</option>
+              </select>
+        </div>
+        <div>
           <label className="label">Insured Verified</label>
           <select
             className="select select-bordered"
@@ -47,19 +59,6 @@ const InsuredStatement = ({ formData, setFormData }) => {
             </div>
 
             <div>
-              <label className="label">Insured Type</label>
-              <select
-                className="select select-bordered"
-                value={formData.insuredType || ''}
-                onChange={(e) => handleChange('insuredType', e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="insured">Insured</option>
-                <option value="insured cum driver">Insured cum Driver</option>
-              </select>
-            </div>
-
-            <div>
               <label className="label">Insured Gender</label>
               <select
                 className="select select-bordered"
@@ -77,8 +76,7 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.insuredName || ''}
-                readOnly
+                // value={formData.insuredName || ''}
               />
             </div>
 
@@ -97,8 +95,7 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-3/4"
-                value={formData.ivNumber || ''}
-                readOnly
+                // value={formData.ivNumber || ''}
               />
             </div>
 
@@ -136,7 +133,7 @@ const InsuredStatement = ({ formData, setFormData }) => {
             </div>
 
             <div>
-              <label className="label">Travelling Person</label>
+              <label className="label">Travelling Person Relation with insured</label>
               <input
                 type="text"
                 className="input input-bordered w-full"
@@ -219,7 +216,7 @@ const InsuredStatement = ({ formData, setFormData }) => {
             </div>
 
             <div>
-              <label className="label">Injured Person</label>
+              <label className="label">Any Injury/Death ?</label>
               <select
                 className="select select-bordered"
                 value={formData.injuredPerson || ''}
@@ -227,18 +224,13 @@ const InsuredStatement = ({ formData, setFormData }) => {
               >
                 <option value="">Select</option>
                 <option value="No one injured">No one injured</option>
-                <option value="IV driving person injured">IV driving person injured</option>
-                <option value="IV occupant injured">IV occupant injured</option>
-                <option value="IV pillion rider injured">IV pillion rider injured</option>
-                <option value="TP driving person injured">TP driving person injured</option>
-                <option value="TP pillion rider injured">TP pillion rider injured</option>
-                <option value="TP occupant injured">TP occupant injured</option>
+                <option value="IV driving person injured">Injured</option>
               </select>
             </div>
 
             {formData.injuredPerson && formData.injuredPerson !== 'No one injured' && (
               <div>
-                <label className="label">Injured Name if any</label>
+                <label className="label">Injured Name & relation with IV</label>
                 <input
                   type="text"
                   className="input input-bordered w-full"
@@ -256,12 +248,13 @@ const InsuredStatement = ({ formData, setFormData }) => {
                 onChange={(e) => handleChange('policeCase', e.target.value)}
               >
                 <option value="">Select</option>
-                <option value="yes">Yes</option>
+                <option value="FIRfiled">FIR Filed</option>
                 <option value="no">No</option>
+                <option value="panchanama">Panchanama</option>
               </select>
             </div>
 
-            {formData.policeCase === 'yes' && (
+            {(formData.policeCase === 'FIRfiled' || formData.policeCase === 'panchanama') && (
               <div>
                 <label className="label">Police Station Name</label>
                 <input

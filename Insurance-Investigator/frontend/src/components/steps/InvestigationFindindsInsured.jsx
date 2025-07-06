@@ -34,13 +34,28 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
             {formData.insuredInjured === 'yes' && (
               <>
                 <div>
-                  <label className="label">Medical Records</label>
-                  <select className="select select-bordered" value={formData.medicalRecords || ''} onChange={(e) => handleChange('medicalRecords', e.target.value)}>
+                  <label className="label">Hospitalized ?</label>
+                  <select className="select select-bordered" value={formData.Hospitalized || ''} onChange={(e) => handleChange('Hospitalized', e.target.value)}>
                     <option value="">Select</option>
-                    <option value="available">Available</option>
-                    <option value="not available">Not Available</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
                   </select>
                 </div>
+
+                {formData.Hospitalized === 'yes' && (<>
+                  <div>
+                    <label className='label'>Hospital Name</label>
+                    <input type="text" className="input input-bordered w-full" value={formData.HospitalName || ''} onChange={(e) => handleChange('HospitalName', e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="label">Medical Records</label>
+                    <select className="select select-bordered" value={formData.medicalRecords || ''} onChange={(e) => handleChange('medicalRecords', e.target.value)}>
+                      <option value="">Select</option>
+                      <option value="available">Available</option>
+                      <option value="not available">Not Available</option>
+                    </select>
+                  </div>
+                </>)}
 
                 <div>
                   <label className="label">Injuries Correlating</label>
@@ -53,7 +68,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
               </>
             )}
           </>
-        )}
+          )}
 
         <div>
           <label className="label">Insured Google Timeline</label>
@@ -63,7 +78,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
             <option value="not co-relating">Not Co-relating</option>
             <option value="no places visited">No Places Visited</option>
             <option value="insured not-cooperated">Insured Not-Cooperated</option>
-            <option value="basic mobile">Basic Mobile</option>
+            <option value="basic mobile">Basic Mobile</option> 
           </select>
         </div>
 

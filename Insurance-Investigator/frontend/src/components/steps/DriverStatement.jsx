@@ -12,7 +12,7 @@ const DriverStatement = ({ formData, setFormData }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div>
-          <label className="label">Visited ???</label>
+          <label className="label">Driver Verified ?</label>
           <select
             className="select select-bordered"
             value={formData.visited || ''}
@@ -60,18 +60,6 @@ const DriverStatement = ({ formData, setFormData }) => {
                   onChange={(e) =>
                     handleChange('photoFile', e.target.files?.[0] || null)
                   }
-                />
-              </div>
-            )}
-
-            {formData.photosTaken === 'no' && (
-              <div>
-                <label className="label">Reason for not taking photo</label>
-                <input
-                  type="text"
-                  className="input input-bordered w-full"
-                  value={formData.photoReason || ''}
-                  onChange={(e) => handleChange('photoReason', e.target.value)}
                 />
               </div>
             )}
@@ -198,20 +186,13 @@ const DriverStatement = ({ formData, setFormData }) => {
               >
                 <option value="">Select</option>
                 <option value="No one injured">No one injured</option>
-                <option value="All persons in IV injured">All persons in IV injured</option>
-                <option value="IV driving person injured">IV driving person injured</option>
-                <option value="IV occupant injured">IV occupant injured</option>
-                <option value="IV pillion rider injured">IV pillion rider injured</option>
-                <option value="TP driving person injured">TP driving person injured</option>
-                <option value="All persons in TP injured">All persons in TP injured</option>
-                <option value="TP pillion rider injured">TP pillion rider injured</option>
-                <option value="TP occupant injured">TP occupant injured</option>
+                <option value="All persons in IV injured">injured</option>
               </select>
             </div>
 
             {formData.whoInjured && formData.whoInjured !== 'No one injured' && (
               <div>
-                <label className="label">Injured Name if any</label>
+                <label className="label">Injured Name & relation with IV</label>
                 <input
                   type="text"
                   className="input input-bordered w-full"
@@ -259,18 +240,6 @@ const DriverStatement = ({ formData, setFormData }) => {
                 <option value="other-person">Other Person</option>
               </select>
             </div>
-
-            {formData.carDrivenBy === 'other-person' && (
-              <div>
-                <label className="label">Name of Other Driver</label>
-                <input
-                  type="text"
-                  className="input input-bordered w-5/6"
-                  value={formData.otherDriverName || ''}
-                  onChange={(e) => handleChange('otherDriverName', e.target.value)}
-                />
-              </div>
-            )}
 
             <div>
               <label className="label">Driver Name as per Statement</label>

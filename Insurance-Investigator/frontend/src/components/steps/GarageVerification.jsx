@@ -61,6 +61,31 @@ const GarageVerification = ({ formData, setFormData }) => {
           </div>
 
           <div>
+            <label className="label">Any blood marks ?</label>
+            <select
+              className="select select-bordered "
+              value={formData.bloodMarks || ''}
+              onChange={(e) => handleChange('bloodMarks', e.target.value)}
+            >
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+        {formData.bloodMarks === 'yes' && (
+        <div>
+          <label className="label">Blood Marks Description</label>
+          <input
+            type="text"
+            className="input input-bordered w-full"
+            value={formData.bloodMarksDescription || ''}
+            onChange={(e) => handleChange('bloodMarksDescription', e.target.value)}
+          />
+        </div>
+      )}
+
+          <div>
             <label className="label">Photos Taken</label>
             <select
               className="select select-bordered"
@@ -78,6 +103,7 @@ const GarageVerification = ({ formData, setFormData }) => {
               <label className="label">Upload Garage Photos</label>
               <input
                 type="file"
+                multiple
                 className="file-input file-input-bordered w-3/4"
                 onChange={(e) => handleChange('garagePhotoFiles', e.target.files[0])}
               />

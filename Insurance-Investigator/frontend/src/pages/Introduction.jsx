@@ -6,6 +6,8 @@ import img3 from '../assets/insuranceAgent-working-site-car.jpg';
 import img4 from '../assets/car-insurance-claim.jpg';
 import img5 from '../assets/insurance-company.jpeg';
 import { useNavigate } from 'react-router-dom';
+import LogoImage from '../assets/Logo-img.png'
+import LogoName from '../assets/Logo-Name.png'
 
 const images = [ img1, img2, img3, img4, img5 ];
 
@@ -24,7 +26,13 @@ const Introduction = () => {
   }, []);
 
   return (
-    <div className="hero bg-base-800 min-h-screen px-4 lg:px-24">
+  <div className="min-h-screen flex flex-col bg-base-800">  
+    <div className="flex items-center px-4 py-2">
+      <img src={LogoImage} className="h-12 w-12" alt="LogoImage in navbar" />
+      <img src={LogoName} className="h-14 w-45" alt="LogoName in navbar" />
+    </div>
+
+    <div className="flex-1 flex items-center justify-center hero px-4 lg:px-24">
       <div className="hero-content flex-col lg:flex-row items-start gap-10">
         <div className="relative w-[490px] h-[390px] rounded-lg shadow-2xl overflow-hidden">
           {images.map((img, index) => (
@@ -50,7 +58,7 @@ const Introduction = () => {
             style={{ fontFamily: '"Libertinus Math", system-ui' }}
           >
             At{" "}
-            <span className="inline-block text-sky-300">
+            <span className="inline-block text-sky-100">
               Tejaswi Solutions
             </span>
             , we are a professional private detective agency offering a wide range of investigative services for individuals, employees, and companies. Our team is composed of highly experienced and skilled professionals.
@@ -58,7 +66,10 @@ const Introduction = () => {
             We specialize in insurance fraud investigations, including background checks, written and recorded statements, and thorough interviews with witnesses and suspects. Our investigators utilize a variety of tools and techniques to uncover factual information related to fraud cases filed against insurers.
           </p>
 
-          <button onClick={() => navigate('/login')} className="mt-6 btn btn-outline btn-success btn-hover-fill before:bg-error hover:text-white w-40 group">
+          <button
+            onClick={() => navigate('/login')}
+            className="mt-6 btn btn-outline btn-success btn-hover-fill before:bg-error hover:text-white w-40 group"
+          >
             <span className="flex items-center">
               <span className="mr-1">Get Started</span>
               <ChevronsRight
@@ -70,7 +81,9 @@ const Introduction = () => {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Introduction;

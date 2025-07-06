@@ -21,12 +21,12 @@ const InsuredDetails = () =>  {
         </div>
 
         <div>
-          <label className="label">Case Number</label>
+          <label className="label">Ref Number : </label>
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.caseNumber || ''}
-            onChange={(e) => setFormData({ ...formData, caseNumber: e.target.value })}
+            // value={formData.refNumber || ''}
+            onChange={(e) => setFormData({ ...formData, refNumber: e.target.value })}
           />
         </div>
 
@@ -102,7 +102,7 @@ const InsuredDetails = () =>  {
         </div>
 
         <div>
-          <label className="label">IV (Insured Vehicle) Driver</label>
+          <label className="label">IV Driver (as per claim intimation)</label>
           <input
             type="text"
             className="input input-bordered w-3/4"
