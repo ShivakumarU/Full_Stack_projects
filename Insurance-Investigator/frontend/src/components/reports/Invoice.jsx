@@ -137,7 +137,6 @@ const Invoice = ({ data }) => {
               <Text>Hyderabad</Text>
             </View>
 
-            {/* Table 1 */}
             <View style={{ marginTop: 10 }}>
               <View style={[styles.tableRow, styles.tableHeader]}>
                 <Text style={styles.colDesc}>Description</Text>
@@ -155,7 +154,6 @@ const Invoice = ({ data }) => {
               </View>
             </View>
 
-            {/* Table 2 - Bank Details */}
             <View style={styles.bankTable}>
               <Text style={styles.bankHeader}>Bank Details</Text>
               {bankRows.map((row, index) => (
@@ -172,7 +170,6 @@ const Invoice = ({ data }) => {
               ))}
             </View>
 
-            {/* Signature */}
             <Text style={styles.signature}>
               For MAHESH KOLA{'\n'}Authorized signatory's Name{'\n'}Signature & Stamp
             </Text>

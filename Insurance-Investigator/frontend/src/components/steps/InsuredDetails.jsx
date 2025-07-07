@@ -171,7 +171,6 @@ const InsuredDetails = () =>  {
           />
         </div>
 
-        {/* 16. Cause of Loss */}
         <div>
           <label className="label">Cause of Loss</label>
           <input

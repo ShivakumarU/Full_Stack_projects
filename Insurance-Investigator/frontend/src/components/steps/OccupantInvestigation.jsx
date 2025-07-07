@@ -32,7 +32,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
 
         {formData.anyOccupantInIV === 'yes' && (
           <>
-            {/* 89. Is any occupant verified? */}
             <div>
               <label className="label"> Is any occupant verified?</label>
               <select
@@ -46,7 +45,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
               </select>
             </div>
 
-            {/* If NO, ask reason */}
             {formData.occupantVerified === 'no' && (
               <div className="md:col-span-2">
                 <label className="label">Please mention reason</label>
@@ -59,10 +57,8 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
               </div>
             )}
 
-            {/* If YES, show how many occupants */}
             {formData.occupantVerified === 'yes' && (
               <>
-                {/* 90. How many occupants verified? */}
                 <div>
                   <label className="label"> How many occupants verified?</label>
                   <input
@@ -74,14 +70,10 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                     onChange={(e) => {
                       const count = parseInt(e.target.value || '0');
 
-                      // Ensure it's not negative or too large
-                      const safeCount = Math.max(0, Math.min(count, 20)); // max 20 occupants
-
-                      // Build the occupants array while preserving existing data
+                      const safeCount = Math.max(0, Math.min(count, 20)); 
                       const existing = formData.occupants || [];
                       const newOccupants = Array.from({ length: safeCount }, (_, i) => existing[i] || {});
 
-                      // Update both occupantCount and occupants together
                       setFormData({
                         ...formData,
                         occupantCount: safeCount,
@@ -96,7 +88,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                     <h2 className="text-lg font-semibold mb-2">Occupant {index + 1}</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* 91. Occupant Name */}
                       <div>
                         <label className="label">Occupant Name</label>
                         <input
@@ -107,7 +98,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         />
                       </div>
 
-                      {/* 92. Is he/she injured */}
                       <div>
                         <label className="label">Is he/she injured?</label>
                         <select
@@ -121,7 +111,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </select>
                       </div>
 
-                      {/* 93 & 94 only if injured = yes */}
                       {occupant.injured === 'yes' && (
                         <>
                           <div>
@@ -156,7 +145,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </>
                       )}
 
-                      {/* 95. Google timeline */}
                       <div className="md:col-span-2">
                         <label className="label">Google Timeline</label>
                         <select
@@ -175,7 +163,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </select>
                       </div>
 
-                      {/* 96, 97, 98, 99 if not Basic Mobile */}
                       {occupant.googleTimeline !== 'basic mobile' && (
                         <>
                           <div>
@@ -210,7 +197,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                             </select>
                           </div>
 
-                          {/* 98 & 99 only if photos available */}
                           {occupant.accidentPhotos === 'available' && (
                             <>
                               <div>
@@ -247,7 +233,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                                 </select>
                               </div>
 
-                              {/* If other person sent in WhatsApp, ask name & number */}
                               {occupant.photosNoticedIn === 'other person whatsapp' && (
                                 <>
                                   <div>
@@ -279,7 +264,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </>
                       )}
 
-                      {/* 100. Occupant DL */}
                       <div>
                         <label className="label">Occupant DL</label>
                         <select
@@ -296,7 +280,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </select>
                       </div>
 
-                      {/* 101. Call data */}
                       <div>
                         <label className="label">Call Data</label>
                         <select
@@ -313,7 +296,6 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </select>
                       </div>
 
-                      {/* 102. Additional Info */}
                       <div className="md:col-span-2">
                         <label className="label">Do you want to add anything?</label>
                         <select
