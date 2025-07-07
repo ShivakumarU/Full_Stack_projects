@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   logo: {
-    width: '100%',
+    width: '98%',
     height: 70,
     marginBottom: 10,
   },
@@ -116,8 +116,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 6,
   },
-  bankTable: {
+  footerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 20,
+  },
+  bankTable: {
     width: '50%',
     border: '1pt solid black',
   },
@@ -132,14 +136,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottom: '1pt solid black',
   },
+  signatureContainer: {
+    alignItems: 'flex-end',
+  },
+  stamp: {
+    width: 60,
+    height: 60,
+    marginBottom: 5,
+  },
   signature: {
-    marginTop: 40,
     textAlign: 'right',
     fontSize: 11,
   },
 });
 
 const logoURL = '/Letter Head logo and name.jpg';
+const stamp = '/Stamp and Sign copy.jpg';
 
 const Invoice = ({ data }) => {
   const { insuranceCompany, refNumber, claimNo, insuredName, invoiceAmount = 0 } = data;
@@ -214,26 +226,32 @@ const Invoice = ({ data }) => {
               <Text style={styles.amountInWords}>{totalWords}</Text>
             </View>
 
-            <View style={styles.bankTable}>
-              <Text style={styles.bankHeader}>Bank Details</Text>
-              {bankRows.map((row, index) => (
-                <View
-                  key={index}
-                  style={[
-                    styles.bankRow,
-                    index === bankRows.length - 1 && { borderBottom: 0 }
-                  ]}
-                >
-                  <View style={styles.cellLeft}><Text>{row.label}</Text></View>
-                  <View style={styles.verticalDivider} />
-                  <View style={styles.cellRight}><Text>{row.value}</Text></View>
-                </View>
-              ))}
-            </View>
+            {/* Footer Row with Bank Table and Signature */}
+            <View style={styles.footerRow}>
+              <View style={styles.bankTable}>
+                <Text style={styles.bankHeader}>Bank Details</Text>
+                {bankRows.map((row, index) => (
+                  <View
+                    key={index}
+                    style={[
+                      styles.bankRow,
+                      index === bankRows.length - 1 && { borderBottom: 0 }
+                    ]}
+                  >
+                    <View style={styles.cellLeft}><Text>{row.label}</Text></View>
+                    <View style={styles.verticalDivider} />
+                    <View style={styles.cellRight}><Text>{row.value}</Text></View>
+                  </View>
+                ))}
+              </View>
 
-            <Text style={styles.signature}>
-              For MAHESH KOLA{'\n'}Authorized signatory's Name{'\n'}Signature & Stamp
-            </Text>
+              <View style={styles.signatureContainer}>
+                <Image src={stamp} style={styles.stamp} />
+                <Text style={styles.signature}>
+                  For MAHESH KOLA{'\n'}Authorized signatory's Name{'\n'}Signature & Stamp
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
       </Page>
