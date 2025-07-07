@@ -57,11 +57,12 @@ const Introduction = () => {
             className="py-5 text-base leading-relaxed text-yellow-500"
             style={{ fontFamily: '"Libertinus Math", system-ui' }}
           >
-            At{" "}
+            {/* At{" "}
             <span className="inline-block text-sky-100">
               Tejaswi Solutions
             </span>
-            , we are a professional private detective agency offering a wide range of investigative services for individuals, employees, and companies. Our team is composed of highly experienced and skilled professionals.
+            ,  */}
+            We are a professional private detective agency offering a wide range of investigative services for individuals, employees, and companies. Our team is composed of highly experienced and skilled professionals.
             <br /> <br />
             We specialize in insurance fraud investigations, including background checks, written and recorded statements, and thorough interviews with witnesses and suspects. Our investigators utilize a variety of tools and techniques to uncover factual information related to fraud cases filed against insurers.
           </p>

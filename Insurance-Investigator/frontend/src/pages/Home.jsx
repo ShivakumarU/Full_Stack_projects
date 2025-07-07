@@ -9,7 +9,7 @@ const Home = () => {
     refNumber: 'CHO17MY25',
     claimNo: '3362/2500023251/OD',
     insuredName: 'KUMMARI ANJANEYULU',
-    invoiceAmount: 5000,
+    invoiceAmount: 1000,
   });
 
   return (
