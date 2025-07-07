@@ -8,7 +8,6 @@ import {
   Image,
 } from '@react-pdf/renderer';
 
-// Converts number to Indian currency words
 const numberToWords = (num) => {
   const a = [
     '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
@@ -67,7 +66,8 @@ const styles = StyleSheet.create({
     border: '1pt solid black',
     padding: 10,
     width: '100%',
-    marginTop: 13,
+    height:'82%' ,
+    marginTop: 15,
   },
   heading: {
     fontSize: 11,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   rightTextBlock: {
     alignItems: 'flex-end',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   leftTextBlock: {
     marginTop: 5,
@@ -137,7 +137,10 @@ const styles = StyleSheet.create({
     borderBottom: '1pt solid black',
   },
   signatureContainer: {
-    alignItems: 'flex-end',
+  position: 'absolute',
+  right: 33,
+  bottom: 68,
+  alignItems: 'flex-end',
   },
   stamp: {
     width: 60,
@@ -148,6 +151,19 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: 11,
   },
+  addressText:{
+    fontSize:8.1,
+    width:'100%', 
+    textAlign:'left',
+    padding:2,
+    borderBottom: '1pt solid black',
+    borderLeft: '1pt solid black',
+    borderRight: '1pt solid black',
+    paddingHorizontal:10,
+    paddingVertical:3,
+    fontWeight:'bold',
+    fontFamily: 'Times-Roman'
+  }
 });
 
 const logoURL = '/Letter Head logo and name.jpg';
@@ -182,6 +198,12 @@ const Invoice = ({ data }) => {
       <Page size="A4" style={styles.page}>
         <View style={styles.outerBorder}>
           <Image src={logoURL} style={styles.logo} />
+          <View style={styles.signatureContainer}>
+            <Image src={stamp} style={styles.stamp} />
+            <Text style={styles.signature}>
+              For MAHESH KOLA{'\n'}Authorized signatory's Name{'\n'}Signature & Stamp
+            </Text>
+          </View>
           <View style={styles.innerBox}>
             <Text style={styles.heading}>TAX INVOICE</Text>
 
@@ -199,14 +221,12 @@ const Invoice = ({ data }) => {
             </View>
 
             <View style={styles.tableBox}>
-              {/* Table Header */}
               <View style={[styles.tableRow, styles.tableHeader]}>
                 <View style={styles.cellLeft}><Text>Description</Text></View>
                 <View style={styles.verticalDivider} />
                 <View style={styles.cellRight}><Text>Amount (Rs)</Text></View>
               </View>
 
-              {/* Table Rows */}
               {descriptions.map((item, i) => (
                 <View style={styles.tableRow} key={i}>
                   <View style={styles.cellLeft}><Text>{item.label}</Text></View>
@@ -215,18 +235,15 @@ const Invoice = ({ data }) => {
                 </View>
               ))}
 
-              {/* Total Row */}
               <View style={[styles.tableRow, { fontWeight: 'bold' }]}>
                 <View style={styles.cellLeft}><Text>Total Amount</Text></View>
                 <View style={styles.verticalDivider} />
                 <View style={styles.cellRight}><Text>{invoiceAmount.toFixed(2)}</Text></View>
               </View>
 
-              {/* Amount in Words */}
               <Text style={styles.amountInWords}>{totalWords}</Text>
             </View>
 
-            {/* Footer Row with Bank Table and Signature */}
             <View style={styles.footerRow}>
               <View style={styles.bankTable}>
                 <Text style={styles.bankHeader}>Bank Details</Text>
@@ -244,15 +261,10 @@ const Invoice = ({ data }) => {
                   </View>
                 ))}
               </View>
-
-              <View style={styles.signatureContainer}>
-                <Image src={stamp} style={styles.stamp} />
-                <Text style={styles.signature}>
-                  For MAHESH KOLA{'\n'}Authorized signatory's Name{'\n'}Signature & Stamp
-                </Text>
-              </View>
             </View>
           </View>
+          <Text style={styles.addressText}>Address for communication: Mahesh Kola, 3-5-214/A, Shanthi Nivas, Krishnanagar, Moulaali, Telangana- 500040,{'\n'}
+Cell: 9553999072, Mail: Maheshkola.2020@gmail.com</Text>
         </View>
       </Page>
     </Document>
