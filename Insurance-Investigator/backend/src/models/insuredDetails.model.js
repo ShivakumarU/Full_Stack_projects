@@ -13,6 +13,7 @@ const insuredDetailsSchema = new mongoose.Schema({
   },
 
   caseNumber: { type: String, required: true },
+  refNumber: {type:String, required:true},
   claimNumber: { type: String, required: true },
   policyNumber: { type: String, required: true },
 
@@ -32,14 +33,14 @@ const insuredDetailsSchema = new mongoose.Schema({
   vehicleType: {
     type: String,
     enum: [
-      "Two Wheeler",
-      "Three Wheeler",
-      "Private Car",
-      "Cab",
-      "Lorry",
-      "Goods Vehicle",
-      "Bus",
-      "Miscellaneous Vehicle"
+      "two wheeler",
+      "three wheeler",
+      "private car",
+      "cab",
+      "lorry",
+      "goods vehicle",
+      "bus",
+      "miscellaneous vehicle"
     ],
     required: true,
   },
