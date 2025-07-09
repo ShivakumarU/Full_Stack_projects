@@ -10,6 +10,8 @@ import InvestigationFindindsInsured from "../components/steps/InvestigationFindi
 import SpotVerification from "../components/steps/SpotVerification";
 import GarageVerification from "../components/steps/GarageVerification";
 import { ArrowLeft, CircleArrowLeft, CircleArrowRight, DatabaseZap, Download } from "lucide-react";
+import { PDFViewer } from '@react-pdf/renderer';
+import Invoice from '../components/reports/Invoice';
 
 
 const steps = [
@@ -31,6 +33,26 @@ const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const StepComponent = steps[currentStep].component ;
+  const [downloadInvoice,setdownloadInvoice] = useState(false);
+  
+
+  if (downloadInvoice) {
+    return (
+      <div className="w-screen h-screen">
+        <div className="absolute top-4 left-4 z-10">
+          <button
+            onClick={() => setdownloadInvoice(false)}
+            className="btn btn-warning hover:btn-success ml-50 mt-16"
+          >
+            ← Back to Form
+          </button>
+        </div>
+        <PDFViewer width="100%" height="100%">
+          <Invoice data={formData} />
+        </PDFViewer>
+      </div>
+    );
+  }
 
   return (
       <div className="p-6 max-w-8xl mx-auto  mt-1">
@@ -72,8 +94,7 @@ const MultiStepForm = () => {
 
           {currentStep === steps.length - 1 && (
             <div className="flex gap-4 mt-4">
-              <button className="btn btn-outline">Preview Report</button>
-              <button className="btn btn-outline">
+              <button onClick={()=> setdownloadInvoice(true)} className="btn btn-outline">
                 Invoice <Download />
               </button>
               <button className="btn btn-outline">
