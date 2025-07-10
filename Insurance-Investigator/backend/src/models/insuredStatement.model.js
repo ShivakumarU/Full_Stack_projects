@@ -7,74 +7,69 @@ const InsuredStatementSchema = new mongoose.Schema({
     ref: "insuredDetails",
   },
 
-  insuredVerified: { type: String, enum: ["yes", "no"], required: true },
-  insuredNotVerifiedReason: { type: String }, 
-  insuredVisitPhoto: { type: String }, 
   insuredType: {
     type: String,
     enum: ["insured", "insured cum driver"],
     required: true,
   },
 
-  insuredGender: { type: String, enum: ["he", "she"], required: true },
-  insuredName: { type: String }, 
+  insuredVerified: {
+    type: String,
+    enum: ["yes", "no"],
+    required: true,
+  },
+
+  insuredNotVerifiedReason: { type: String },
+
+  insuredPhotosUpload: {
+    type: [String], 
+  },
+
+  insuredGender: {
+    type: String,
+    enum: ["he", "she"],
+    required: true,
+  },
+
+  insuredNameInInsuredStatement: { type: String },
   insuredOccupation: { type: String },
 
-  ivNumber: { type: String }, 
-  ivUsingFor: {
+  ivNumberInInsuredStatement: { type: String },
+  ivUse: {
     type: String,
     enum: ["personal work", "commercial use"],
   },
 
-  accidentDate: { type: String }, 
-  accidentTime: { type: String }, 
+  accidentDateInInsuredStatement: { type: String },
+  accidentTimeInInsuredStatement: { type: String },
 
-  travellingPerson: {
+  travellingPersonRelationInInsuredStatement: { type: String },
+  driverGender: {
     type: String,
-    enum: [
-      "insured",
-      "insured husband",
-      "insured wife",
-      "insured brother",
-      "insured sister",
-      "insured son",
-      "insured daughter",
-      "insured neighbor",
-      "insured friend",
-      "driver",
-      "insured colleague",
-      "insured relatives",
-    ],
+    enum: ["he", "she"],
   },
+  travellingPersonNameInInsuredStatement: { type: String },
 
-  driverGender: { type: String, enum: ["he", "she"] },
-  travellingPersonName: { type: String },
+  accidentPlaceInInsuredStatement: { type: String },
+  travelFromInsuredStatement: { type: String },
+  travelToInsuredStatement: { type: String },
+  accidentMannerInInsuredStatement: { type: String },
+  totalPersonsInInsuredStatement: { type: Number },
 
-  accidentPlace: { type: String },
-  travellingFrom: { type: String },
-  travellingTo: { type: String },
-  accidentManner: { type: String },
-  totalPersonsTravelling: { type: Number },
-
-  injuredPerson: {
+  anyInjuryInInsured: {
     type: String,
-    enum: [
-      "No one injured",
-      "IV driving person injured",
-      "IV occupant injured",
-      "IV pillion rider injured",
-      "TP driving person injured",
-      "TP pillion rider injured",
-      "TP occupant injured",
-    ],
+    enum: ["No one injured", "injured"],
   },
-  injuredNameIfAny: { type: String },
+  injuredNameRelationInInsured: { type: String },
 
-  policeCaseFiled: { type: String, enum: ["yes", "no"] },
-  policeStationName: { type: String },
+  policeCaseInInsured: {
+    type: String,
+    enum: ["yes", "no", "Panchanama"],
+  },
+  policeStationNameInInsured: { type: String },
 
-  ivDriverName: { type: String },
-  ivDriverDL: {
+  ivDriverNameInInsured: { type: String },
+  driverDLInInsured: {
     type: String,
     enum: [
       "having valid DL",
@@ -84,7 +79,11 @@ const InsuredStatementSchema = new mongoose.Schema({
     ],
   },
 
-  statementGiven: { type: String, enum: ["yes", "no"] },
+  statementGivenInInsured: {
+    type: String,
+    enum: ["yes", "no"],
+  },
+
 }, {
   timestamps: true,
 });

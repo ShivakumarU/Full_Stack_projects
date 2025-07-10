@@ -50,7 +50,7 @@ const DriverInvestigationSchema = new mongoose.Schema({
   },
 
   driverPhotosSenderName: { type: String },
-  driverPhotosSenderNumber: { type: String ,   match: [/^\d{10}$/, "Please enter a valid 10-digit mobile number"]},
+  driverPhotosSenderNumber: { type: String },
 
   driverDLStatus: {
     type: String,

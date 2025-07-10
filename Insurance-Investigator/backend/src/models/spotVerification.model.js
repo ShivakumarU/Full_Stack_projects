@@ -28,7 +28,7 @@ const SpotVerificationSchema = new mongoose.Schema({
   },
 
   spotPhotosUpload: {
-    type: String, 
+    type: [String], 
   },
 
   spotPhotosNotTakenReason: {

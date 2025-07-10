@@ -13,7 +13,7 @@ const GarageVerificationSchema = new mongoose.Schema({
     required: true
   },
 
-  notVisitedReason: {
+  garageNotVisitedReason: {
     type: String
   },
 
@@ -27,16 +27,25 @@ const GarageVerificationSchema = new mongoose.Schema({
     enum: ["yes", "no"]
   },
 
-  photosTaken: {
+  bloodMarks: {
     type: String,
     enum: ["yes", "no"]
   },
 
-  photoUpload: {
-    type: String 
+  bloodMarksDescription: {
+    type: String,
   },
 
-  noPhotoReason: {
+  garagePhotosTaken: {
+    type: String,
+    enum: ["yes", "no"]
+  },
+
+  garagePhotosUpload: {
+    type: [String] 
+  },
+
+  garagePhotosNotTakenReason: {
     type: String
   }
 

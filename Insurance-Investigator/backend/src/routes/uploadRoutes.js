@@ -1,29 +1,30 @@
-import express from 'express';
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
+import express from "express";
+import multer from "multer";
+import path from "path";
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
-// Ensure uploads folder exists
-const uploadFolder = 'uploads/';
-if (!fs.existsSync(uploadFolder)) fs.mkdirSync(uploadFolder);
-
-// Setup multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, uploadFolder);
+    cb(null, "uploads/"); 
   },
   filename: function (req, file, cb) {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName);
-  },
+    const ext = path.extname(file.originalname);
+    const filename = uuidv4() + ext;
+    cb(null, filename);
+  }
 });
+
 const upload = multer({ storage });
 
-// Route to upload a single file
-router.post('/upload', upload.single('file'), (req, res) => {
-  res.json({ filePath: `/uploads/${req.file.filename}` });
+router.post("/upload", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  const filePath = `/uploads/${req.file.filename}`;
+  res.status(200).json({ filePath });
 });
 
 export default router;
