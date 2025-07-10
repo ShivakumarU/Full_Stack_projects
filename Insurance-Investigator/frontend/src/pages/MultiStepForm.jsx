@@ -6,12 +6,14 @@ import InsuredDetails from "../components/steps/InsuredDetails";
 import InsuredStatement from "../components/steps/InsuredStatement";
 import OtherDetails from "../components/steps/OtherDetails";
 import OccupantInvestigation from "../components/steps/OccupantInvestigation";
-import InvestigationFindindsInsured from "../components/steps/InvestigationFindindsInsured";
+import InvestigationFindingsInsured from "../components/steps/InvestigationFindingsInsured";
 import SpotVerification from "../components/steps/SpotVerification";
 import GarageVerification from "../components/steps/GarageVerification";
 import { ArrowLeft, CircleArrowLeft, CircleArrowRight, DatabaseZap, Download } from "lucide-react";
 import { PDFViewer } from '@react-pdf/renderer';
 import Invoice from '../components/reports/Invoice';
+import toast from 'react-hot-toast';
+import api from "../../lib/axios";
 
 
 const steps = [
@@ -20,7 +22,7 @@ const steps = [
   {title: "Driver Statement", component: DriverStatement},
   {title: "Spot Verification", component: SpotVerification},  
   {title: "Garage Verification", component: GarageVerification}, 
-  {title: "Insured Findings", component : InvestigationFindindsInsured }, 
+  {title: "Insured Findings", component: InvestigationFindingsInsured},
   {title: "Driver Investigation", component: DriverInvestigation}, 
   {title: "Occupant Investigation", component: OccupantInvestigation}, 
   {title: "Other Details", component: OtherDetails}
@@ -31,9 +33,180 @@ const MultiStepForm = () => {
   
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+      insuranceCompany: "",
+      caseNumber: "",
+      refNumber: "",
+      claimNumber: "",
+      policyNumber: "",
+      policyStartDate: "",
+      policyEndDate: "",
+      insuredName: "",
+      insuredAddress: "",
+      accidentDateTime: "",
+      ivDriver: "",
+      claimIntimationDate: "",
+      ivNumber: "",
+      vehicleType: "",
+      invoiceAmount: "",
+      lossLocation: "",
+      causeOfLoss: "",
+
+
+      insuredInVehicle: "",
+      insuredInjured: "",
+      hospitalized: "",
+      hospitalName: "",
+      insuredMedicalRecords: "",
+      insuredInjuriesCorrelating: "",
+      insuredGoogleTimeline: "",
+      insuredTimelinePhotosAttached: "",
+      insuredAccidentPhotosInMobile: "",
+      photosDateInfo: "",
+      insuredPhotosSource: "",
+      insuredPhotosSenderName: "",
+      insuredPhotosSenderNumber: "",
+      insuredDL: "",
+      insuredCallData: "",
+      addAnything: "",
+      additionalComments: ""
+  });
   const StepComponent = steps[currentStep].component ;
   const [downloadInvoice,setdownloadInvoice] = useState(false);
+
+  const saveFormDataToDB = async () =>{
+   try {
+    let res;
+    switch (currentStep) {
+      case 0:
+        res = await api.post("/insured-details", formData);
+        if (res.status === 200 || res.status === 201) {
+          setFormData((prev) => ({ ...prev, caseNumber: res.data.caseNumber }));
+          toast.success("Insured Details Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 1:
+        res = await api.post("/insured-statement", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Insured Statement Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 2:
+        res = await api.post("/driver-statement", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Driver Statement Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }          
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 3:
+        res = await api.post("/spot-verification", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Spot Verification Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 4:
+        res = await api.post("/garage-verification", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Garage Verification Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 5:
+        res = await api.post("/investigationfinding-insured", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Insured Findings Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 6:
+        res = await api.post("/driver-investigation", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Driver Investigation Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 7:
+        res = await api.post("/occupants-investigation", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Occupant Investigation Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+
+      case 8:
+        res = await api.post("/other-details", formData);
+        if (res.status === 200 || res.status === 201) {
+          toast.success("Other Details Saved!");
+          if (currentStep < steps.length - 1) {
+            setCurrentStep((prev) => prev + 1);
+          }
+        } else {
+          toast.error("Unexpected response from server.");
+        }
+        break;
+      }
+     }catch (error) {
+      console.error("Error saving Details", error)
+          if (error.response) {
+          const status = error.response.status;
+
+          if (status === 400) {
+            toast.error("Bad request. Please check the form.");
+          } else if (status === 500) {
+            toast.error("Server error. Try again later.");
+          } else {
+            toast.error(`Unexpected error: ${status}`);
+          }
+        } else if (error.request) {
+          toast.error("No response from server. Check your connection.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      }
+    }
+
   
 
   if (downloadInvoice) {
@@ -80,7 +253,7 @@ const MultiStepForm = () => {
           )}
 
           <button
-            onClick={() => alert('Saved')}
+            onClick={saveFormDataToDB}
             className="btn btn-outline btn-success"> Save <DatabaseZap /></button>
 
           {currentStep < steps.length - 1 && (
@@ -106,6 +279,6 @@ const MultiStepForm = () => {
         </div>
       </div>
   )
-}
 
-export default MultiStepForm
+}
+export default MultiStepForm ;

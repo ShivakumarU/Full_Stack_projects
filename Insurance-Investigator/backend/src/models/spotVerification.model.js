@@ -13,7 +13,7 @@ const SpotVerificationSchema = new mongoose.Schema({
     required: true,
   },
 
-  notVerifiedReason: {
+  spotNotVerifiedReason: {
     type: String,
   },
 
@@ -27,11 +27,11 @@ const SpotVerificationSchema = new mongoose.Schema({
     enum: ["yes", "no"],
   },
 
-  photoUpload: {
+  spotPhotosUpload: {
     type: String, 
   },
 
-  noPhotoReason: {
+  spotPhotosNotTakenReason: {
     type: String,
   }
 }, {

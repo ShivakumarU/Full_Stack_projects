@@ -12,6 +12,8 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
 
  
   insuredInjured: { type: String, enum: ["yes", "no"] },
+  hospitalized: {type: String,enum: ['yes', 'no'],},
+  hospitalName: {type: String},
   insuredMedicalRecords: { type: String, enum: ["available", "not available"] },
   insuredInjuriesCorelating: { type: String, enum: ["yes", "no"] },
 
@@ -21,8 +23,8 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
     enum: [
       "corelating",
       "not co-relating",
-      "No places visited",
-      "Insured not-cooperated",
+      "no places visited",
+      "insured not-cooperated",
       "basic mobile",
     ],
     required: true,
@@ -30,23 +32,23 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
 
   insuredTimelinePhotosAttached: { type: String, enum: ["yes", "no"] },
 
-  insuredAccidentPhotosMobile: {
+  insuredAccidentPhotosInMobile: {
     type: String,
-    enum: ["available", "not available", "Basic mobile"],
+    enum: ["available", "not available", "basic mobile"],
   },
 
-  insuredAccidentPhotosDate: {
+  photosDateInfo: {
     type: String,
-    enum: ["On the same day", "Before accident date", "After the accident date"],
+    enum: ["on the same day", "before accident date", "after accident date"],
   },
   insuredPhotosSource: {
     type: String,
     enum: [
-      "Camera files",
-      "Whatsapp files",
-      "SnapChat files",
-      "Instagram files",
-      "Other person sent in Whatsapp",
+      "camera files",
+      "whatsapp files",
+      "snapchat files",
+      "instagram files",
+      "other person sent in whatsapp",
     ],
   },
   insuredPhotosSenderName: { type: String },
@@ -64,7 +66,7 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
     required: true,
   },
 
-  insuredCallData: { type: String, enum: ["Match", "Mismatch", "Not available"] },
+  insuredCallData: { type: String, enum: ["match", "mismatch", "not available"] },
 
   addAnything: { type: String, enum: ["yes", "no"] },
   additionalComments: { type: String },

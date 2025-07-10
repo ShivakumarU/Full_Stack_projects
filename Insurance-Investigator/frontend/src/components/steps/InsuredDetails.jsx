@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InsuredDetails = () =>  {
+const InsuredDetails = ({formData, setFormData}) =>  {
   return (
     <div className="space-y-4 p-5">
       <h1 className="gradient-flex text-2xl font-bold mb-4 text-center">Insured Details</h1>
@@ -10,13 +10,13 @@ const InsuredDetails = () =>  {
           <label className="label">Insurance Company</label>
           <select
             className="select select-bordered w-1/2"
-            // value={formData.insuranceCompany || ''}
+            value={formData.insuranceCompany || ''}
             onChange={(e) => setFormData({ ...formData, insuranceCompany: e.target.value })}
           >
             <option value="">Select Company</option>
-            <option value="TATA AIG general insurance Co Ltd">TATA AIG general insurance Co Ltd</option>
-            <option value="Chola MS general insurance Co Ltd">Chola MS general insurance Co Ltd</option>
-            <option value="Relaince general insurance Co Ltd">Relaince general insurance Co Ltd</option>
+            <option value="TATA AIG General Insurance Co Ltd">TATA AIG general insurance Co Ltd</option>
+            <option value="Chola MS General Insurance Co Ltd">Chola MS general insurance Co Ltd</option>
+            <option value="Relaince General Insurance Co Ltd">Relaince general insurance Co Ltd</option>
           </select>
         </div>
 
@@ -25,28 +25,28 @@ const InsuredDetails = () =>  {
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.refNumber || ''}
+            value={formData.refNumber || ''}
             onChange={(e) => setFormData({ ...formData, refNumber: e.target.value })}
           />
         </div>
 
         <div>
-          <label className="label">Claim No</label>
+          <label className="label">Claim No :</label>
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.claimNo || ''}
-            onChange={(e) => setFormData({ ...formData, claimNo: e.target.value })}
+            value={formData.claimNumber || ''}
+            onChange={(e) => setFormData({ ...formData, claimNumber: e.target.value })}
           />
         </div>
 
         <div>
-          <label className="label">Policy No</label>
+          <label className="label">Policy No :</label>
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.policyNo || ''}
-            onChange={(e) => setFormData({ ...formData, policyNo: e.target.value })}
+            value={formData.policyNumber || ''}
+            onChange={(e) => setFormData({ ...formData, policyNumber: e.target.value })}
           />
         </div>
 
@@ -55,7 +55,7 @@ const InsuredDetails = () =>  {
           <input
             type="date"
             className="input input-bordered w-1/3"
-            // value={formData.policyStartDate || ''}
+            value={formData.policyStartDate || ''}
             onChange={(e) => setFormData({ ...formData, policyStartDate: e.target.value })}
           />
         </div>
@@ -65,7 +65,7 @@ const InsuredDetails = () =>  {
           <input
             type="date"
             className="input input-bordered w-1/3"
-            // value={formData.policyEndDate || ''}
+            value={formData.policyEndDate || ''}
             onChange={(e) => setFormData({ ...formData, policyEndDate: e.target.value })}
           />
         </div>
@@ -75,7 +75,7 @@ const InsuredDetails = () =>  {
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.insuredName || ''}
+            value={formData.insuredName || ''}
             onChange={(e) => setFormData({ ...formData, insuredName: e.target.value })}
           />
         </div>
@@ -85,7 +85,7 @@ const InsuredDetails = () =>  {
           <input
             type="text"
             className="input input-bordered w-full"
-            // value={formData.insuredAddress || ''}
+            value={formData.insuredAddress || ''}
             onChange={(e) => setFormData({ ...formData, insuredAddress: e.target.value })}
           />
         </div>
@@ -96,7 +96,7 @@ const InsuredDetails = () =>  {
           <input
             type="datetime-local"
             className="input input-bordered w-1/3"
-            // value={formData.accidentDateTime || ''}
+            value={formData.accidentDateTime || ''}
             onChange={(e) => setFormData({ ...formData, accidentDateTime: e.target.value })}
           />
         </div>
@@ -106,7 +106,7 @@ const InsuredDetails = () =>  {
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.ivDriver || ''}
+            value={formData.ivDriver || ''}
             onChange={(e) => setFormData({ ...formData, ivDriver: e.target.value })}
           />
         </div>
@@ -116,7 +116,7 @@ const InsuredDetails = () =>  {
           <input
             type="date"
             className="input input-bordered w-1/3"
-            // value={formData.claimIntimationDate || ''}
+            value={formData.claimIntimationDate || ''}
             onChange={(e) => setFormData({ ...formData, claimIntimationDate: e.target.value })}
           />
         </div>
@@ -126,7 +126,7 @@ const InsuredDetails = () =>  {
           <input
             type="text"
             className="input input-bordered w-3/4"
-            // value={formData.ivNumber || ''}
+            value={formData.ivNumber || ''}
             onChange={(e) => setFormData({ ...formData, ivNumber: e.target.value })}
           />
         </div>
@@ -135,7 +135,7 @@ const InsuredDetails = () =>  {
           <label className="label">Vehicle Type</label>
           <select
             className="select select-bordered w-1/3"
-            // value={formData.vehicleType || ''}
+            value={formData.vehicleType || ''}
             onChange={(e) => setFormData({ ...formData, vehicleType: e.target.value })}
           >
             <option value="">Select Type</option>
@@ -155,18 +155,17 @@ const InsuredDetails = () =>  {
           <input
             type="number"
             className="input input-bordered w-1/2"
-            // value={formData.invoiceAmount || ''}
+            value={formData.invoiceAmount || ''}
             onChange={(e) => setFormData({ ...formData, invoiceAmount: e.target.value })}
           />
         </div>
 
-        {/* 15. Loss Location */}
         <div>
           <label className="label">Loss Location</label>
           <input
             type="text"
             className="input input-bordered w-full"
-            // value={formData.lossLocation || ''}
+            value={formData.lossLocation || ''}
             onChange={(e) => setFormData({ ...formData, lossLocation: e.target.value })}
           />
         </div>
@@ -176,7 +175,7 @@ const InsuredDetails = () =>  {
           <input
             type="text"
             className="input input-bordered w-full"
-            // value={formData.causeOfLoss || ''}
+            value={formData.causeOfLoss || ''}
             onChange={(e) => setFormData({ ...formData, causeOfLoss: e.target.value })}
           />
         </div>

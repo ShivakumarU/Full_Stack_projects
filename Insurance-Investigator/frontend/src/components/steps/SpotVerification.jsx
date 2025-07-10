@@ -70,7 +70,7 @@ const SpotVerification = ({ formData, setFormData }) => {
                 multiple
                 type="file"
                 className="file-input file-input-bordered w-1/2"
-                onChange={(e) => handleChange('spotPhotos', e.target.files[0])}
+                onChange={(e) => handleChange('spotPhotosUpload', e.target.files[0])}
               />
             </div>
           )}
@@ -81,8 +81,8 @@ const SpotVerification = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.photoNotTakenReason || ''}
-                onChange={(e) => handleChange('photoNotTakenReason', e.target.value)}
+                value={formData.spotPhotosNotTakenReason || ''}
+                onChange={(e) => handleChange('spotPhotosNotTakenReason', e.target.value)}
               />
             </div>
           )}

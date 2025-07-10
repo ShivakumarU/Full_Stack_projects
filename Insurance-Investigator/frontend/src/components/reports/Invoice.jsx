@@ -170,7 +170,7 @@ const logoURL = '/Letter Head logo and name.jpg';
 const stamp = '/Stamp and Sign copy.jpg';
 
 const Invoice = ({ data }) => {
-  const { insuranceCompany, refNumber, claimNo, insuredName, invoiceAmount = 0 } = data;
+  const { insuranceCompany, refNumber, claimNumber, insuredName, invoiceAmount = 0 } = data;
 
   const bankRows = [
     { label: 'Bank Name :', value: 'HDFC Bank' },
@@ -180,7 +180,7 @@ const Invoice = ({ data }) => {
   ];
 
   const descriptions = [
-    { label: 'Professional fee', amount: invoiceAmount.toFixed(2) },
+    { label: 'Professional fee', amount: Number(invoiceAmount || 0).toFixed(2) },
     { label: 'Convenience', amount: '0.00' },
     { label: 'Petition enquiry', amount: '0.00' },
     { label: 'Owner enquiry', amount: '0.00' },
@@ -191,7 +191,7 @@ const Invoice = ({ data }) => {
     { label: 'GST Applicable : No', amount: '0.00' },
   ];
 
-  const totalWords = numberToWords(invoiceAmount);
+const totalWords = numberToWords(Number(invoiceAmount || 0));
 
   return (
     <Document>
@@ -210,7 +210,7 @@ const Invoice = ({ data }) => {
             <View style={styles.rightTextBlock}>
               <Text>Date: {new Date().toLocaleDateString()}</Text>
               <Text>Invoice Number: {refNumber}</Text>
-              <Text>Claim Number: {claimNo}</Text>
+              <Text>Claim Number: {claimNumber}</Text>
               <Text>Insured Name: {insuredName}</Text>
             </View>
 
@@ -238,7 +238,7 @@ const Invoice = ({ data }) => {
               <View style={[styles.tableRow, { fontWeight: 'bold' }]}>
                 <View style={styles.cellLeft}><Text>Total Amount</Text></View>
                 <View style={styles.verticalDivider} />
-                <View style={styles.cellRight}><Text>{invoiceAmount.toFixed(2)}</Text></View>
+                <View style={styles.cellRight}><Text>{Number(invoiceAmount || 0).toFixed(2)}</Text></View>
               </View>
 
               <Text style={styles.amountInWords}>{totalWords}</Text>
