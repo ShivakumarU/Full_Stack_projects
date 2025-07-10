@@ -8,8 +8,9 @@ const DriverInvestigationSchema = new mongoose.Schema({
   },
 
   driverInVehicle: { type: String, enum: ["yes", "no"], required: true },
-
   driverInjured: { type: String, enum: ["yes", "no"] },
+  driverHospitalized : {type: String, enum: ["yes", "no"]},
+  driverHospitalName: {type: String},
   driverMedicalRecords: { type: String, enum: ["available", "not available"] },
   driverInjuriesCorelating: { type: String, enum: ["yes", "no"] },
 
@@ -18,8 +19,8 @@ const DriverInvestigationSchema = new mongoose.Schema({
     enum: [
       "corelating",
       "not co-relating",
-      "No places visited",
-      "drivernot-cooperated",
+      "no places visited",
+      "driver not-cooperated",
       "basic mobile"
     ],
     required: true
@@ -27,31 +28,31 @@ const DriverInvestigationSchema = new mongoose.Schema({
 
   driverTimelinePhotosAttached: { type: String, enum: ["yes", "no"] },
 
-  driverAccidentPhotosMobile: {
+  driverAccidentPhotosInMobile: {
     type: String,
-    enum: ["available", "not available", "Basic mobile"]
+    enum: ["available", "not available", "driver not-cooperated", "basic mobile"]
   },
 
-  driverAccidentPhotosDate: {
+  driverAccidentPhotosDateInfo: {
     type: String,
-    enum: ["On the same day", "Before accident date", "After the accident date"]
+    enum: ["on the same day", "before accident date", "after accident date"]
   },
 
   driverPhotosSource: {
     type: String,
     enum: [
-      "Camera files",
-      "Whatsapp files",
-      "SnapChat files",
-      "Instagram files",
-      "Other person sent in Whatsapp"
+      "camera files",
+      "whatsapp files",
+      "snapchat files",
+      "instagram files",
+      "other person sent in whatsapp"
     ]
   },
 
   driverPhotosSenderName: { type: String },
-  driverPhotosSenderNumber: { type: String },
+  driverPhotosSenderNumber: { type: String ,   match: [/^\d{10}$/, "Please enter a valid 10-digit mobile number"]},
 
-  driverDL: {
+  driverDLStatus: {
     type: String,
     enum: [
       "having valid DL",
@@ -65,12 +66,12 @@ const DriverInvestigationSchema = new mongoose.Schema({
 
   driverCallData: {
     type: String,
-    enum: ["Match", "Mismatch", "Not available"],
+    enum: ["match", "mismatch", "not available"],
     required: true
   },
 
-  addAnything: { type: String, enum: ["yes", "no"] },
-  additionalComments: { type: String }
+  driverAddAnything: { type: String, enum: ["yes", "no"] },
+  driverAdditionalComments: { type: String }
 
 }, {
   timestamps: true

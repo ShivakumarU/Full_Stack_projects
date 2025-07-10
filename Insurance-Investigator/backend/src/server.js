@@ -10,7 +10,8 @@ import garageVerificationRoutes from "./routes/garageVerification.routes.js";
 import investigationFindingRoutes from "./routes/investigationFinding.routes.js";
 import driverInvestigationRoutes from "./routes/driverInvestigation.routes.js";
 import occupantInvestigationRoutes from "./routes/occupantInvestigation.routes.js";
-import otherDetailsRoutes from "./routes/otherDetails.routes.js"
+import otherDetailsRoutes from "./routes/otherDetails.routes.js";
+import uploadRoutes from './routes/uploadRoutes.js'
 
 
 dotenv.config();
@@ -32,6 +33,9 @@ app.use("/api/investigationfinding-insured", investigationFindingRoutes);
 app.use("/api/driver-investigation", driverInvestigationRoutes);
 app.use("/api/occupants-investigation", occupantInvestigationRoutes);
 app.use("/api/other-details", otherDetailsRoutes);
+app.use("/api/files", uploadRoutes);
+app.use('/uploads', express.static('uploads'));
+
 
 const startServer = async () => {
   try {

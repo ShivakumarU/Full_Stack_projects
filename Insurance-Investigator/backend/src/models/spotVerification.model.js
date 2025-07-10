@@ -22,7 +22,7 @@ const SpotVerificationSchema = new mongoose.Schema({
     enum: ["co-relating", "not co-relating"],
   },
 
-  photosTaken: {
+  spotPhotosTaken: {
     type: String,
     enum: ["yes", "no"],
   },

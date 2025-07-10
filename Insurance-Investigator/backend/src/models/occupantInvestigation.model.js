@@ -21,17 +21,17 @@ const OccupantSchema = new mongoose.Schema({
 
   timelinePhonePhotosAttached: { type: String, enum: ["yes", "no"] },
 
-  accidentPhotosInMobile: {
+  occupantsAccidentPhotosInMobile: {
     type: String,
     enum: ["available", "not available", "Basic mobile"]
   },
 
-  accidentPhotoDate: {
+  accidentPhotoDateInfo: {
     type: String,
     enum: ["On the same day", "Before accident date", "After the accident date"]
   },
 
-  photosNoticedIn: {
+  occupantsPhotosNoticedIn: {
     type: String,
     enum: [
       "Camera files",
@@ -42,10 +42,10 @@ const OccupantSchema = new mongoose.Schema({
     ]
   },
 
-  photosSenderName: { type: String },
-  PhotosSenderNumber: { type: String },
+  occupantsphotosSenderName: { type: String },
+  occupantsPhotosSenderNumber: { type: String },
 
-  occupantDL: {
+  occupantDLStatus: {
     type: String,
     enum: [
       "having valid DL",
@@ -61,23 +61,29 @@ const OccupantSchema = new mongoose.Schema({
     enum: ["Match", "Mismatch", "Not available"]
   },
 
-  addAnything: { type: String, enum: ["yes", "no"] },
-  additionalComments: { type: String } 
+  occupantsAddAnything: { type: String, enum: ["yes", "no"] },
+  occupantsAdditionalComments: { type: String }
 });
 
-const Form8OccupantSchema = new mongoose.Schema({
-  caseNumber: {
-    type: String,
-    required: true,
-    ref: "insuredDetails"
+const Form8OccupantSchema = new mongoose.Schema(
+  {
+    caseNumber: {
+      type: String,
+      required: true,
+      ref: "insuredDetails"
+    },
+
+    anyOccupantInIV: { type: String, enum: ["yes", "no"], required: true },
+
+    anyOccupantVerified: { type: String, enum: ["yes", "no"], required: true },
+    occupantNotVerifiedReason: { type: String },
+    occupantsVerifiedCount: { type: Number },
+
+    occupants: [OccupantSchema]
   },
-
-  anyOccupantVerified: { type: String, enum: ["yes", "no"], required: true },
-  occupantsVerifiedCount: { type: Number },
-
-  occupants: [OccupantSchema]
-}, {
-  timestamps: true
-});
+  {
+    timestamps: true
+  }
+);
 
 export default mongoose.model("Form8Occupant", Form8OccupantSchema);

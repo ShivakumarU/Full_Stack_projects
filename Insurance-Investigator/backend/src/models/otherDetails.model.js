@@ -12,26 +12,26 @@ const otherDetailsSchema = new mongoose.Schema({
     enum: ["yes", "no"],
     required: true,
   },
-  evidence: {
+  overSeatingEvidence: {
     type: String,
   },
 
-  policeCaseFiled: {
+  policeCaseFiledOthers: {
     type: String,
     enum: ["yes", "no", "panchanama-only"],
     required: true,
   },
-  policeStationName: {
+  policeStationNameOthers: {
     type: String,
   },
-  psDriverName: {
+  asPerPsDriverName: {
     type: String,
   },
-  psAccidentDate: {
+  asPerPsAccidentDate: {
     type: String,
   },
 
-  insuredNameMatchInRCExtractPolicy: {
+  insuredNameMatchInRC: {
     type: String,
     enum: ["matching", "not matching"],
     required: true,
@@ -42,7 +42,7 @@ const otherDetailsSchema = new mongoose.Schema({
 
   tsEChallan: {
     type: String,
-    enum: ["No pending challan", "No suspects found", "old damages noted"],
+    enum: ["no pending challan", "no suspects found", "old damages noted"],
     required: true,
   },
 
@@ -64,12 +64,12 @@ const otherDetailsSchema = new mongoose.Schema({
     type: String,
   },
 
-  suspects: {
+  conclusionOpinion: {
     type: String,
-    enum: ["yes", "no"],
+    enum: ["payable", "repudiation"],
     required: true,
   },
-  suspectsEvidence: {
+  suspectsEvidenceReason: {
     type: String,
   }
 }, {

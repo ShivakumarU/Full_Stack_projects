@@ -12,8 +12,8 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
 
  
   insuredInjured: { type: String, enum: ["yes", "no"] },
-  hospitalized: {type: String,enum: ['yes', 'no'],},
-  hospitalName: {type: String},
+  insuredHospitalized: {type: String,enum: ['yes', 'no'],},
+  insuredHospitalName: {type: String},
   insuredMedicalRecords: { type: String, enum: ["available", "not available"] },
   insuredInjuriesCorelating: { type: String, enum: ["yes", "no"] },
 
@@ -37,7 +37,7 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
     enum: ["available", "not available", "basic mobile"],
   },
 
-  photosDateInfo: {
+  insuredPhotosDateInfo: {
     type: String,
     enum: ["on the same day", "before accident date", "after accident date"],
   },
@@ -54,7 +54,7 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
   insuredPhotosSenderName: { type: String },
   insuredPhotosSenderNumber: { type: String },
 
-  insuredDL: {
+  insuredDLStatus: {
     type: String,
     enum: [
       "having valid DL",
@@ -68,8 +68,8 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
 
   insuredCallData: { type: String, enum: ["match", "mismatch", "not available"] },
 
-  addAnything: { type: String, enum: ["yes", "no"] },
-  additionalComments: { type: String },
+  insuredAddAnything: { type: String, enum: ["yes", "no"] },
+  insuredAdditionalComments: { type: String },
 },
 { timestamps: true });
 
