@@ -1,4 +1,4 @@
-import React from 'react';
+import { uploadFile } from "../../../utils/uploadFile";
 
 const InsuredStatement = ({ formData, setFormData }) => {
   const handleChange = (key, value) => {
@@ -41,8 +41,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
             <input
               type="text"
               className="input input-bordered w-full"
-              value={formData.insuredVerifiedReason || ''}
-              onChange={(e) => handleChange('insuredVerifiedReason', e.target.value)}
+              value={formData.insuredNotVerifiedReason || ''}
+              onChange={(e) => handleChange('insuredNotVerifiedReason', e.target.value)}
             />
           </div>
         )}
@@ -53,9 +53,23 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <label className="label">Insured Visit Photo</label>
               <input
                 type="file"
+                multiple
                 className="file-input file-input-bordered w-3/4"
-                onChange={(e) => handleChange('insuredVisitPhoto', e.target.files?.[0] || null)}
-              />
+                onChange={async (e) => {
+                      const files = Array.from(e.target.files);
+                      const uploadedUrls = [];
+
+                      for (let file of files) {
+                        const url = await uploadFile(file);
+                        uploadedUrls.push(url);
+                      }
+
+                      setFormData((prev) => ({
+                        ...prev,
+                        insuredPhotosUpload: uploadedUrls,
+                      }));
+                    }}               
+               />
             </div>
 
             <div>
@@ -76,7 +90,9 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                // value={formData.insuredName || ''}
+                value={formData.insuredNameInInsuredStatement || ''}
+                onChange={(e) => handleChange('insuredNameInInsuredStatement', e.target.value)}
+
               />
             </div>
 
@@ -95,7 +111,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-3/4"
-                // value={formData.ivNumber || ''}
+                value={formData.ivNumberInInsuredStatement || ''}
+                onChange={(e) => handleChange('ivNumberInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -117,8 +134,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="date"
                 className="input input-bordered w-1/3"
-                value={formData.accidentDate || ''}
-                onChange={(e) => handleChange('accidentDate', e.target.value)}
+                value={formData.accidentDateInInsuredStatement || ''}
+                onChange={(e) => handleChange('accidentDateInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -127,8 +144,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="time"
                 className="input input-bordered w-1/3"
-                value={formData.accidentTime || ''}
-                onChange={(e) => handleChange('accidentTime', e.target.value)}
+                value={formData.accidentTimeInInsuredStatement || ''}
+                onChange={(e) => handleChange('accidentTimeInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -137,8 +154,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.travellingPerson || ''}
-                onChange={(e) => handleChange('travellingPerson', e.target.value)}
+                value={formData.travellingPersonRelationInInsuredStatement || ''}
+                onChange={(e) => handleChange('travellingPersonRelationInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -160,8 +177,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.travellingPersonName || ''}
-                onChange={(e) => handleChange('travellingPersonName', e.target.value)}
+                value={formData.travellingPersonNameInInsuredStatement || ''}
+                onChange={(e) => handleChange('travellingPersonNameInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -170,8 +187,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.accidentPlace || ''}
-                onChange={(e) => handleChange('accidentPlace', e.target.value)}
+                value={formData.accidentPlaceInInsuredStatement || ''}
+                onChange={(e) => handleChange('accidentPlaceInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -180,8 +197,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.travelFrom || ''}
-                onChange={(e) => handleChange('travelFrom', e.target.value)}
+                value={formData.travelFromInsuredStatement || ''}
+                onChange={(e) => handleChange('travelFromInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -190,8 +207,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.travelTo || ''}
-                onChange={(e) => handleChange('travelTo', e.target.value)}
+                value={formData.travelToInsuredStatement || ''}
+                onChange={(e) => handleChange('travelToInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -200,8 +217,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.accidentManner || ''}
-                onChange={(e) => handleChange('accidentManner', e.target.value)}
+                value={formData.accidentMannerInInsuredStatement || ''}
+                onChange={(e) => handleChange('accidentMannerInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -210,8 +227,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="number"
                 className="input input-bordered w-1/2"
-                value={formData.totalPersons || ''}
-                onChange={(e) => handleChange('totalPersons', e.target.value)}
+                value={formData.totalPersonsInInsuredStatement || ''}
+                onChange={(e) => handleChange('totalPersonsInInsuredStatement', e.target.value)}
               />
             </div>
 
@@ -219,23 +236,23 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <label className="label">Any Injury/Death ?</label>
               <select
                 className="select select-bordered"
-                value={formData.injuredPerson || ''}
-                onChange={(e) => handleChange('injuredPerson', e.target.value)}
+                value={formData.anyInjuryInInsured || ''}
+                onChange={(e) => handleChange('anyInjuryInInsured', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="No one injured">No one injured</option>
-                <option value="IV driving person injured">Injured</option>
+                <option value="injured">Injured</option>
               </select>
             </div>
 
-            {formData.injuredPerson && formData.injuredPerson !== 'No one injured' && (
+            {formData.anyInjuryInInsured === 'injured' && (
               <div>
                 <label className="label">Injured Name & relation with IV</label>
                 <input
                   type="text"
                   className="input input-bordered w-full"
-                  value={formData.injuredName || ''}
-                  onChange={(e) => handleChange('injuredName', e.target.value)}
+                  value={formData.injuredNameRelationInInsured || ''}
+                  onChange={(e) => handleChange('injuredNameRelationInInsured', e.target.value)}
                 />
               </div>
             )}
@@ -244,24 +261,24 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <label className="label">Police Case Filed</label>
               <select
                 className="select select-bordered"
-                value={formData.policeCase || ''}
-                onChange={(e) => handleChange('policeCase', e.target.value)}
+                value={formData.policeCaseInInsured || ''}
+                onChange={(e) => handleChange('policeCaseInInsured', e.target.value)}
               >
                 <option value="">Select</option>
-                <option value="FIRfiled">FIR Filed</option>
+                <option value="yes">Yes</option>
                 <option value="no">No</option>
                 <option value="Panchanama">Panchanama</option>
               </select>
             </div>
 
-            {(formData.policeCase === 'FIRfiled' || formData.policeCase === 'Panchanama') && (
+            {(formData.policeCaseInInsured === 'yes' || formData.policeCaseInInsured === 'Panchanama') && (
               <div>
                 <label className="label">Police Station Name</label>
                 <input
                   type="text"
                   className="input input-bordered w-full"
-                  value={formData.policeStationName || ''}
-                  onChange={(e) => handleChange('policeStationName', e.target.value)}
+                  value={formData.policeStationNameInInsured || ''}
+                  onChange={(e) => handleChange('policeStationNameInInsured', e.target.value)}
                 />
               </div>
             )}
@@ -271,8 +288,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.ivDriverName || ''}
-                onChange={(e) => handleChange('ivDriverName', e.target.value)}
+                value={formData.ivDriverNameInInsured || ''}
+                onChange={(e) => handleChange('ivDriverNameInInsured', e.target.value)}
               />
             </div>
 
@@ -280,8 +297,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <label className="label">IV Driver DL</label>
               <select
                 className="select select-bordered"
-                value={formData.driverDL || ''}
-                onChange={(e) => handleChange('driverDL', e.target.value)}
+                value={formData.driverDLInInsured || ''}
+                onChange={(e) => handleChange('driverDLInInsured', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="having valid DL">Having valid DL</option>
@@ -295,8 +312,8 @@ const InsuredStatement = ({ formData, setFormData }) => {
               <label className="label">Statement Given</label>
               <select
                 className="select select-bordered"
-                value={formData.statementGiven || ''}
-                onChange={(e) => handleChange('statementGiven', e.target.value)}
+                value={formData.statementGivenInInsured || ''}
+                onChange={(e) => handleChange('statementGivenInInsured', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="yes">Yes</option>

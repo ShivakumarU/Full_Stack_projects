@@ -35,17 +35,17 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
               <>
                 <div>
                   <label className="label">Hospitalized ?</label>
-                  <select className="select select-bordered" value={formData.hospitalized || ''} onChange={(e) => handleChange('hospitalized', e.target.value)}>
+                  <select className="select select-bordered" value={formData.insuredHospitalized || ''} onChange={(e) => handleChange('insuredHospitalized', e.target.value)}>
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
                 </div>
 
-                {formData.hospitalized === 'yes' && (<>
+                {formData.insuredHospitalized === 'yes' && (<>
                   <div>
                     <label className='label'>Hospital Name</label>
-                    <input type="text" className="input input-bordered w-full" value={formData.hospitalName || ''} onChange={(e) => handleChange('hospitalName', e.target.value)} />
+                    <input type="text" className="input input-bordered w-full" value={formData.insuredHospitalName || ''} onChange={(e) => handleChange('insuredHospitalName', e.target.value)} />
                   </div>
                   <div>
                     <label className="label">Medical Records</label>
@@ -59,7 +59,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
 
                 <div>
                   <label className="label">Injuries Correlating</label>
-                  <select className="select select-bordered" value={formData.insuredInjuriesCorrelating || ''} onChange={(e) => handleChange('insuredInjuriesCorrelating', e.target.value)}>
+                  <select className="select select-bordered" value={formData.insuredInjuriesCorelating || ''} onChange={(e) => handleChange('insuredInjuriesCorelating', e.target.value)}>
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
@@ -82,7 +82,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.timelineStatus !== 'basic mobile' && (
+        {formData.insuredGoogleTimeline !== 'basic mobile' && (
           <>
             <div>
               <label className="label">Timeline/Phone Photos Attached</label>
@@ -107,7 +107,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
               <>
                 <div>
                   <label className="label">Accident Photos Date Info</label>
-                  <select className="select select-bordered" value={formData.photosDateInfo || ''} onChange={(e) => handleChange('photosDateInfo', e.target.value)}>
+                  <select className="select select-bordered" value={formData.insuredPhotosDateInfo || ''} onChange={(e) => handleChange('insuredPhotosDateInfo', e.target.value)}>
                     <option value="">Select</option>
                     <option value="on the same day">On the Same Day</option>
                     <option value="before accident date">Before Accident Date</option>
@@ -146,7 +146,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
 
         <div>
           <label className="label">Insured DL</label>
-          <select className="select select-bordered" value={formData.insuredDL || ''} onChange={(e) => handleChange('insuredDL', e.target.value)}>
+          <select className="select select-bordered" value={formData.insuredDLStatus || ''} onChange={(e) => handleChange('insuredDLStatus', e.target.value)}>
             <option value="">Select</option>
             <option value="having valid DL">Having Valid DL</option>
             <option value="having invalid DL">Having Invalid DL</option>
@@ -168,17 +168,17 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
 
         <div>
           <label className="label">Do you want to add anything?</label>
-          <select className="select select-bordered" value={formData.addAnything || ''} onChange={(e) => handleChange('addAnything', e.target.value)}>
+          <select className="select select-bordered" value={formData.insuredAddAnything || ''} onChange={(e) => handleChange('insuredAddAnything', e.target.value)}>
             <option value="">Select</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
         </div>
 
-        {formData.addAnything === 'yes' && (
+        {formData.insuredAddAnything === 'yes' && (
           <div className="md:col-span-2">
             <label className="label">Additional Comments</label>
-            <textarea className="textarea textarea-bordered w-full" value={formData.additionalComments || ''} onChange={(e) => handleChange('additionalComments', e.target.value)} />
+            <textarea className="textarea textarea-bordered w-full" value={formData.insuredAdditionalComments || ''} onChange={(e) => handleChange('insuredAdditionalComments', e.target.value)} />
           </div>
         )}
       </div>

@@ -1,3 +1,5 @@
+import { uploadFile } from "../../../utils/uploadFile";
+
 const GarageVerification = ({ formData, setFormData }) => {
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
@@ -26,8 +28,8 @@ const GarageVerification = ({ formData, setFormData }) => {
           <input
             type="text"
             className="input input-bordered w-full"
-            value={formData.garageVisitReason || ''}
-            onChange={(e) => handleChange('garageVisitReason', e.target.value)}
+            value={formData.garageNotVisitedReason || ''}
+            onChange={(e) => handleChange('garageNotVisitedReason', e.target.value)}
           />
         </div>
       )}
@@ -105,8 +107,21 @@ const GarageVerification = ({ formData, setFormData }) => {
                 type="file"
                 multiple
                 className="file-input file-input-bordered w-3/4"
-                onChange={(e) => handleChange('garagePhotoFiles', e.target.files[0])}
-              />
+                onChange={async (e) => {
+                    const files = Array.from(e.target.files);
+                    const uploadedUrls = [];
+
+                    for (let file of files) {
+                      const url = await uploadFile(file);
+                      uploadedUrls.push(url);
+                    }
+
+                    setFormData((prev) => ({
+                      ...prev,
+                      garagePhotosUpload: uploadedUrls,
+                    }));
+                  }}          
+               />
             </div>
           )}
 

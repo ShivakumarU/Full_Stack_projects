@@ -43,21 +43,21 @@ const DriverInvestigation = ({ formData, setFormData }) => {
               <>
                 <div>
                   <label className="label">Hospitalized ?</label>
-                  <select className="select select-bordered" value={formData.Hospitalized || ''} onChange={(e) => handleChange('Hospitalized', e.target.value)}>
+                  <select className="select select-bordered" value={formData.driverHospitalized || ''} onChange={(e) => handleChange('driverHospitalized', e.target.value)}>
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
                 </div>
 
-                {formData.Hospitalized === 'yes' && (<>
+                {formData.driverHospitalized === 'yes' && (<>
                   <div>
                     <label className='label'>Hospital Name</label>
-                    <input type="text" className="input input-bordered w-full" value={formData.HospitalName || ''} onChange={(e) => handleChange('HospitalName', e.target.value)} />
+                    <input type="text" className="input input-bordered w-full" value={formData.driverHospitalName || ''} onChange={(e) => handleChange('driverHospitalName', e.target.value)} />
                   </div>
                   <div>
                     <label className="label">Medical Records</label>
-                    <select className="select select-bordered" value={formData.medicalRecords || ''} onChange={(e) => handleChange('medicalRecords', e.target.value)}>
+                    <select className="select select-bordered" value={formData.driverMedicalRecords || ''} onChange={(e) => handleChange('driverMedicalRecords', e.target.value)}>
                       <option value="">Select</option>
                       <option value="available">Available</option>
                       <option value="not available">Not Available</option>
@@ -70,8 +70,8 @@ const DriverInvestigation = ({ formData, setFormData }) => {
                   <label className="label">Injuries Correlating</label>
                   <select
                     className="select select-bordered"
-                    value={formData.driverInjuriesCorrelating || ''}
-                    onChange={(e) => handleChange('driverInjuriesCorrelating', e.target.value)}
+                    value={formData.driverInjuriesCorelating || ''}
+                    onChange={(e) => handleChange('driverInjuriesCorelating', e.target.value)}
                   >
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
@@ -87,8 +87,8 @@ const DriverInvestigation = ({ formData, setFormData }) => {
           <label className="label">Driver Google Timeline</label>
           <select
             className="select select-bordered"
-            value={formData.driverTimeline || ''}
-            onChange={(e) => handleChange('driverTimeline', e.target.value)}
+            value={formData.driverGoogleTimeline || ''}
+            onChange={(e) => handleChange('driverGoogleTimeline', e.target.value)}
           >
             <option value="">Select</option>
             <option value="corelating">Corelating</option>
@@ -99,14 +99,14 @@ const DriverInvestigation = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.driverTimeline !== 'basic mobile' && (
+        {formData.driverGoogleTimeline !== 'basic mobile' && (
           <>
             <div>
               <label className="label">Timeline/Phone Photos Attached</label>
               <select
                 className="select select-bordered"
-                value={formData.driverTimelinePhotos || ''}
-                onChange={(e) => handleChange('driverTimelinePhotos', e.target.value)}
+                value={formData.driverTimelinePhotosAttached || ''}
+                onChange={(e) => handleChange('driverTimelinePhotosAttached', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="yes">Yes</option>
@@ -118,8 +118,8 @@ const DriverInvestigation = ({ formData, setFormData }) => {
               <label className="label">Accident Photos in Driver Mobile</label>
               <select
                 className="select select-bordered"
-                value={formData.driverAccidentPhotos || ''}
-                onChange={(e) => handleChange('driverAccidentPhotos', e.target.value)}
+                value={formData.driverAccidentPhotosInMobile || ''}
+                onChange={(e) => handleChange('driverAccidentPhotosInMobile', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="available">Available</option>
@@ -129,14 +129,14 @@ const DriverInvestigation = ({ formData, setFormData }) => {
               </select>
             </div>
 
-            {formData.driverAccidentPhotos === 'available' && (
+            {formData.driverAccidentPhotosInMobile === 'available' && (
               <>
                 <div>
                   <label className="label">Accident Photo Date Info</label>
                   <select
                     className="select select-bordered"
-                    value={formData.driverPhotoDateInfo || ''}
-                    onChange={(e) => handleChange('driverPhotoDateInfo', e.target.value)}
+                    value={formData.driverAccidentPhotosDateInfo || ''}
+                    onChange={(e) => handleChange('driverAccidentPhotosDateInfo', e.target.value)}
                   >
                     <option value="">Select</option>
                     <option value="on the same day">On the Same Day</option>
@@ -149,8 +149,8 @@ const DriverInvestigation = ({ formData, setFormData }) => {
                   <label className="label">Photos Noticed In</label>
                   <select
                     className="select select-bordered"
-                    value={formData.driverPhotoSource || ''}
-                    onChange={(e) => handleChange('driverPhotoSource', e.target.value)}
+                    value={formData.driverPhotosSource || ''}
+                    onChange={(e) => handleChange('driverPhotosSource', e.target.value)}
                   >
                     <option value="">Select</option>
                     <option value="camera files">Camera Files</option>
@@ -161,16 +161,17 @@ const DriverInvestigation = ({ formData, setFormData }) => {
                   </select>
                 </div>
 
-                {formData.driverPhotoSource === 'other person sent in whatsapp' && (
-                  <div className="md:col-span-2">
-                    <label className="label">Name & Number of Person</label>
-                    <input
-                      type="text"
-                      className="input input-bordered w-full"
-                      value={formData.driverWhatsappSenderInfo || ''}
-                      onChange={(e) => handleChange('driverWhatsappSenderInfo', e.target.value)}
-                    />
-                  </div>
+                {formData.driverPhotosSource === 'other person sent in whatsapp' && (
+                  <>
+                    <div className="md:col-span-1">
+                      <label className="label">Other Person Name :</label>
+                      <input type="text" className="input input-bordered w-2/3" value={formData.driverPhotosSenderName || ''} onChange={(e) => handleChange('driverPhotosSenderName', e.target.value)} />
+                    </div>
+                    <div className="md:col-span-1">
+                      <label className="label">Other Person Mobile no: </label>
+                      <input type="text" className="input input-bordered w-2/3" value={formData.driverPhotosSenderNumber || ''} onChange={(e) => handleChange('driverPhotosSenderNumber', e.target.value)} />
+                    </div>
+                  </>
                 )}
               </>
             )}

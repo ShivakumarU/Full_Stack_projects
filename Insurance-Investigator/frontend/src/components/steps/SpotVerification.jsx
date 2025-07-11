@@ -1,9 +1,30 @@
-
+import { uploadFile } from "../../../utils/uploadFile";
 
 const SpotVerification = ({ formData, setFormData }) => {
-  const handleChange = (key, value) => {
-    setFormData({ ...formData, [key]: value });
-  };
+    const handleChange = (key, value) => {
+      let newFormData = { ...formData, [key]: value };
+
+      if (key === "spotVerified") {
+        if (value === "no") {
+          newFormData.spotMatching = "";
+          newFormData.spotPhotosTaken = "";
+          newFormData.spotPhotosUpload = [];
+          newFormData.spotPhotosNotTakenReason = "";
+        } else if (value === "yes") {
+          newFormData.spotNotVerifiedReason = "";
+        }
+      }
+
+      if (key === "spotPhotosTaken") {
+        if (value === "no") {
+          newFormData.spotPhotosUpload = [];
+        } else if (value === "yes") {
+          newFormData.spotPhotosNotTakenReason = "";
+        }
+      }
+
+      setFormData(newFormData);
+    };
 
   return (
     <div className="space-y-4 p-5">
@@ -54,8 +75,8 @@ const SpotVerification = ({ formData, setFormData }) => {
             <label className="label"> Photos Taken</label>
             <select
               className="select select-bordered"
-              value={formData.photosTaken || ''}
-              onChange={(e) => handleChange('photosTaken', e.target.value)}
+              value={formData.spotPhotosTaken || ''}
+              onChange={(e) => handleChange('spotPhotosTaken', e.target.value)}
             >
               <option value="">Select</option>
               <option value="yes">Yes</option>
@@ -63,19 +84,32 @@ const SpotVerification = ({ formData, setFormData }) => {
             </select>
           </div>
 
-          {formData.photosTaken === 'yes' && (
+          {formData.spotPhotosTaken === 'yes' && (
             <div>
               <label className="label">Upload Spot Photos</label>
               <input
                 multiple
                 type="file"
                 className="file-input file-input-bordered w-1/2"
-                onChange={(e) => handleChange('spotPhotosUpload', e.target.files[0])}
+                onChange={async (e) => {
+                    const files = Array.from(e.target.files);
+                    const uploadedUrls = [];
+
+                    for (let file of files) {
+                      const url = await uploadFile(file);
+                      uploadedUrls.push(url);
+                    }
+
+                    setFormData((prev) => ({
+                      ...prev,
+                      spotPhotosUpload: uploadedUrls,
+                    }));
+                  }}         
               />
             </div>
           )}
 
-          {formData.photosTaken === 'no' && (
+          {formData.spotPhotosTaken === 'no' && (
             <div>
               <label className="label">Reason for not taking photos</label>
               <input

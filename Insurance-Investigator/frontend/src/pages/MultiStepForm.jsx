@@ -34,6 +34,7 @@ const MultiStepForm = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
+    //insured-details
       insuranceCompany: "",
       caseNumber: "",
       refNumber: "",
@@ -53,24 +54,192 @@ const MultiStepForm = () => {
       causeOfLoss: "",
 
 
+      //Insured-Statement
+      insuredType: "",
+      insuredVerified: "",
+      insuredNotVerifiedReason: "",
+      insuredPhotosUpload: [],
+
+      insuredGender: "",
+      insuredNameInInsuredStatement: "",
+      insuredOccupation: "",
+
+      ivNumberInInsuredStatement: "",
+      ivUse: "",
+
+      accidentDateInInsuredStatement: "",
+      accidentTimeInInsuredStatement: "",
+
+      travellingPersonRelationInInsuredStatement: "",
+      driverGender: "",
+      travellingPersonNameInInsuredStatement: "",
+
+      accidentPlaceInInsuredStatement: "",
+      travelFromInsuredStatement: "",
+      travelToInsuredStatement: "",
+      accidentMannerInInsuredStatement: "",
+      totalPersonsInInsuredStatement: "",
+
+      anyInjuryInInsured: "",
+      injuredNameRelationInInsured: "",
+
+      policeCaseInInsured: "",
+      policeStationNameInInsured: "",
+
+      ivDriverNameInInsured: "",
+      driverDLInInsured: "",
+      statementGivenInInsured: "",
+
+
+      //Driver-Statement 
+      driverVerified: "",               
+      driverNotVisitReason: "",         
+      
+      driverPhotosTaken: "",             
+      driverPhotosUpload: [],            
+
+      driverGenderInDriver: "",   
+      driverNameInDriver: "",
+      driverOccupation: "",
+      travelFromInDriver: "",
+      travelToInDriver: "",
+      carNoInDriver: "",
+      ivTotalPersonsInDriver: "",
+
+      accidentPlaceInDriver: "",
+      accidentDateInDriver: "",
+      accidentTimeInDriver: "",
+      accidentMannerInDriver: "",
+
+      whoIsInjuredInDriver: "",          
+      injuredNameRelationInDriver: "",   
+
+      policeCaseInDriver: "",          
+      policeStationNameInDriver: "",     
+
+      carDrivenByInDriver: "",          
+      driverNameInDriverStatement: "",
+
+      driverDLInDriver: "",             
+      statementGivenInDriver: ""   ,
+
+
+      //Spot-Verification
+      spotVerified: "",
+      spotNotVerifiedReason: "",
+
+      spotMatching: "",
+      
+      spotPhotosTaken: "",
+      spotPhotosUpload: [],
+
+      spotPhotosNotTakenReason: "",
+
+      //Garage-verification
+      garageVisited: "",
+      garageNotVisitedReason: "",
+
+      damagesMatching: "",         
+      multipleDamages: "",       
+
+      bloodMarks: "",             
+      bloodMarksDescription: "",
+
+      garagePhotosTaken: "",       
+      garagePhotosUpload: [],      
+      garagePhotosNotTakenReason: "",
+
+      //insured-investigation
       insuredInVehicle: "",
       insuredInjured: "",
-      hospitalized: "",
-      hospitalName: "",
+      insuredHospitalized: "",
+      insuredHospitalName: "",
       insuredMedicalRecords: "",
-      insuredInjuriesCorrelating: "",
+      insuredInjuriesCorelating: "",
       insuredGoogleTimeline: "",
       insuredTimelinePhotosAttached: "",
       insuredAccidentPhotosInMobile: "",
-      photosDateInfo: "",
+      insuredPhotosDateInfo: "",
       insuredPhotosSource: "",
       insuredPhotosSenderName: "",
       insuredPhotosSenderNumber: "",
-      insuredDL: "",
+      insuredDLStatus: "",
       insuredCallData: "",
-      addAnything: "",
-      additionalComments: ""
+      insuredAddAnything: "",
+      insuredAdditionalComments: "", 
+
+
+    //driver-investigation
+      driverInVehicle: '',
+      driverInjured: '',
+      driverHospitalized: '',
+      driverHospitalName: '',
+      driverMedicalRecords: '',
+      driverInjuriesCorelating: '',
+      driverGoogleTimeline: '',
+      driverTimelinePhotosAttached: '',
+      driverAccidentPhotosInMobile: '',
+      driverAccidentPhotosDateInfo: '',
+      driverPhotosSource: '',
+      driverPhotosSenderName: '',
+      driverPhotosSenderNumber: '',
+      driverDLStatus: '',
+      driverCallData: '',
+      driverAddAnything: '',
+      driverAdditionalComments: '',
+
+      // Occupant-Investigation
+      anyOccupantInIV: "",
+      anyOccupantVerified: "",
+      noVerificationReason: "",
+      occupantsVerifiedCount: 0,
+      occupants: [
+        {
+          occupantName: "",
+          occupantInjured: "",
+          medicalRecords: "",
+          injuriesCorelating: "",
+
+          occupantGoogleTimeline: "",
+          timelinePhonePhotosAttached: "",
+          occupantsAccidentPhotosInMobile: "",
+          accidentPhotoDateInfo: "",
+          occupantsPhotosNoticedIn: "",
+          occupantsphotosSenderName: "",
+          occupantsPhotosSenderNumber: "",
+
+          occupantDLStatus: "",
+          occupantCallData: "",
+
+          occupantsAddAnything: "",
+          occupantsAdditionalComments: ""
+        }
+      ],
+
+      // Other-Details
+      overSeating: "",
+      overSeatingEvidence: "",
+
+      policeCaseFiledOthers: "",
+      policeStationNameOthers: "",
+      asPerPsDriverName: "",
+      asPerPsAccidentDate: "",
+
+      insuredNameMatchInRC: "",
+      insuredNameMismatchReason: "",
+
+      tsEChallan: "",
+
+      thirdPartyVehicleInvolved: "",
+      thirdPartyDetails: "",
+
+      anyOtherInfo: "",
+      otherInfoDescription: "",
+
+      conclusionOpinion: "",
+      suspectsEvidenceReason: ""
   });
+
   const StepComponent = steps[currentStep].component ;
   const [downloadInvoice,setdownloadInvoice] = useState(false);
 

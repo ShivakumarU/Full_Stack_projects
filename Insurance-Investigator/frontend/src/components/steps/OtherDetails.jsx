@@ -39,8 +39,8 @@ const OtherDetails = ({ formData, setFormData }) => {
           <label className="label">Any Police Case Filed</label>
           <select
             className="select select-bordered"
-            value={formData.policeCaseFiled || ''}
-            onChange={(e) => handleChange('policeCaseFiled', e.target.value)}
+            value={formData.policeCaseFiledOthers || ''}
+            onChange={(e) => handleChange('policeCaseFiledOthers', e.target.value)}
           >
             <option value="">Select</option>
             <option value="yes">Yes</option>
@@ -49,15 +49,15 @@ const OtherDetails = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {(formData.policeCaseFiled === 'yes' || formData.policeCaseFiled === 'panchanama-only') && (
+        {(formData.policeCaseFiledOthers === 'yes' || formData.policeCaseFiledOthers === 'panchanama-only') && (
           <>
             <div>
               <label className="label">Police Station Name</label>
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.policeStationName || ''}
-                onChange={(e) => handleChange('policeStationName', e.target.value)}
+                value={formData.policeStationNameOthers || ''}
+                onChange={(e) => handleChange('policeStationNameOthers', e.target.value)}
               />
             </div>
 
@@ -66,18 +66,18 @@ const OtherDetails = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.psDriverName || ''}
-                onChange={(e) => handleChange('psDriverName', e.target.value)}
+                value={formData.asPerPsDriverName || ''}
+                onChange={(e) => handleChange('asPerPsDriverName', e.target.value)}
               />
             </div>
 
             <div>
               <label className="label">Accident Date (as per PS)</label>
               <input
-                type="text"
-                className="input input-bordered w-full"
-                value={formData.psAccidentDate || ''}
-                onChange={(e) => handleChange('psAccidentDate', e.target.value)}
+                type="date"
+                className="input input-bordered w-1/4"
+                value={formData.asPerPsAccidentDate || ''}
+                onChange={(e) => handleChange('asPerPsAccidentDate', e.target.value)}
               />
             </div>
           </>
@@ -87,8 +87,8 @@ const OtherDetails = ({ formData, setFormData }) => {
           <label className="label">Insured Name in RC/Extract and Policy</label>
           <select
             className="select select-bordered"
-            value={formData.rcPolicyNameMatch || ''}
-            onChange={(e) => handleChange('rcPolicyNameMatch', e.target.value)}
+            value={formData.insuredNameMatchInRC || ''}
+            onChange={(e) => handleChange('insuredNameMatchInRC', e.target.value)}
           >
             <option value="">Select</option>
             <option value="matching">Matching</option>
@@ -96,14 +96,14 @@ const OtherDetails = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.rcPolicyNameMatch === 'not matching' && (
+        {formData.insuredNameMatchInRC === 'not matching' && (
           <div className="md:col-span-2">
             <label className="label">Reason for Name Mismatch</label>
             <input
               type="text"
               className="input input-bordered w-full"
-              value={formData.nameMismatchReason || ''}
-              onChange={(e) => handleChange('nameMismatchReason', e.target.value)}
+              value={formData.insuredNameMismatchReason || ''}
+              onChange={(e) => handleChange('insuredNameMismatchReason', e.target.value)}
             />
           </div>
         )}
@@ -112,8 +112,8 @@ const OtherDetails = ({ formData, setFormData }) => {
           <label className="label">TS E-Challan</label>
           <select
             className="select select-bordered"
-            value={formData.tsChallan || ''}
-            onChange={(e) => handleChange('tsChallan', e.target.value)}
+            value={formData.tsEChallan || ''}
+            onChange={(e) => handleChange('tsEChallan', e.target.value)}
           >
             <option value="">Select</option>
             <option value="no pending challan">No Pending Challan</option>
@@ -126,8 +126,8 @@ const OtherDetails = ({ formData, setFormData }) => {
           <label className="label">Third-Party Vehicle Involved</label>
           <select
             className="select select-bordered"
-            value={formData.tpInvolved || ''}
-            onChange={(e) => handleChange('tpInvolved', e.target.value)}
+            value={formData.thirdPartyVehicleInvolved || ''}
+            onChange={(e) => handleChange('thirdPartyVehicleInvolved', e.target.value)}
           >
             <option value="">Select</option>
             <option value="yes">Yes</option>
@@ -135,13 +135,13 @@ const OtherDetails = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.tpInvolved === 'yes' && (
+        {formData.thirdPartyVehicleInvolved === 'yes' && (
           <div className="md:col-span-2">
             <label className="label">Third-Party Details</label>
             <textarea
               className="textarea textarea-bordered w-full"
-              value={formData.tpDetails || ''}
-              onChange={(e) => handleChange('tpDetails', e.target.value)}
+              value={formData.thirdPartyDetails || ''}
+              onChange={(e) => handleChange('thirdPartyDetails', e.target.value)}
             />
           </div>
         )}
@@ -150,8 +150,8 @@ const OtherDetails = ({ formData, setFormData }) => {
           <label className="label">Any Other Information?</label>
           <select
             className="select select-bordered"
-            value={formData.otherInfo || ''}
-            onChange={(e) => handleChange('otherInfo', e.target.value)}
+            value={formData.anyOtherInfo || ''}
+            onChange={(e) => handleChange('anyOtherInfo', e.target.value)}
           >
             <option value="">Select</option>
             <option value="yes">Yes</option>
@@ -159,13 +159,13 @@ const OtherDetails = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.otherInfo === 'yes' && (
+        {formData.anyOtherInfo === 'yes' && (
           <div className="md:col-span-2">
             <label className="label">Additional Information</label>
             <textarea
               className="textarea textarea-bordered w-full"
-              value={formData.otherInfoText || ''}
-              onChange={(e) => handleChange('otherInfoText', e.target.value)}
+              value={formData.otherInfoDescription || ''}
+              onChange={(e) => handleChange('otherInfoDescription', e.target.value)}
             />
           </div>
         )}
@@ -179,8 +179,8 @@ const OtherDetails = ({ formData, setFormData }) => {
             <label className="label">Opinion</label>
             <select
               className="select select-bordered"
-              value={formData.opinion || ''}
-              onChange={(e) => handleChange('opinion', e.target.value)}
+              value={formData.conclusionOpinion || ''}
+              onChange={(e) => handleChange('conclusionOpinion', e.target.value)}
             >
               <option value="">Select</option>
               <option value="payable">Payable</option>
@@ -188,13 +188,13 @@ const OtherDetails = ({ formData, setFormData }) => {
             </select>
           </div>
 
-          {formData.opinion === 'repudiation' && (
+          {formData.conclusionOpinion === 'repudiation' && (
             <div className="md:col-span-2">
               <label className="label">Evidence (Reason)</label>
               <textarea
                 className="textarea textarea-bordered w-full"
-                value={formData.suspectEvidence || ''}
-                onChange={(e) => handleChange('suspectEvidence', e.target.value)}
+                value={formData.suspectsEvidenceReason || ''}
+                onChange={(e) => handleChange('suspectsEvidenceReason', e.target.value)}
               />
             </div>
           )}

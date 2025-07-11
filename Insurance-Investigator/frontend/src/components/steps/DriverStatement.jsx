@@ -1,4 +1,4 @@
-import React from 'react';
+import { uploadFile } from "../../../utils/uploadFile";
 
 const DriverStatement = ({ formData, setFormData }) => {
   const handleChange = (key, value) => {
@@ -15,8 +15,8 @@ const DriverStatement = ({ formData, setFormData }) => {
           <label className="label">Driver Verified ?</label>
           <select
             className="select select-bordered"
-            value={formData.visited || ''}
-            onChange={(e) => handleChange('visited', e.target.value)}
+            value={formData.driverVerified || ''}
+            onChange={(e) => handleChange('driverVerified', e.target.value)}
           >
             <option value="">Select</option>
             <option value="yes">Yes</option>
@@ -24,26 +24,26 @@ const DriverStatement = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.visited === 'no' && (
+        {formData.driverVerified === 'no' && (
           <div className="md:col-span-2">
             <label className="label">Reason for not visiting</label>
             <input
               type="text"
               className="input input-bordered w-full"
-              value={formData.visitReason || ''}
-              onChange={(e) => handleChange('visitReason', e.target.value)}
+              value={formData.driverNotVisitReason || ''}
+              onChange={(e) => handleChange('driverNotVisitReason', e.target.value)}
             />
           </div>
         )}
 
-        {formData.visited === 'yes' && (
+        {formData.driverVerified === 'yes' && (
           <>
             <div>
               <label className="label">Photos Taken</label>
               <select
                 className="select select-bordered"
-                value={formData.photosTaken || ''}
-                onChange={(e) => handleChange('photosTaken', e.target.value)}
+                value={formData.driverPhotosTaken || ''}
+                onChange={(e) => handleChange('driverPhotosTaken', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="yes">Yes</option>
@@ -51,15 +51,27 @@ const DriverStatement = ({ formData, setFormData }) => {
               </select>
             </div>
 
-            {formData.photosTaken === 'yes' && (
+            {formData.driverPhotosTaken === 'yes' && (
               <div>
                 <label className="label">Upload Photo</label>
                 <input
                   type="file"
+                  multiple
                   className="file-input file-input-bordered w-3/4"
-                  onChange={(e) =>
-                    handleChange('photoFile', e.target.files?.[0] || null)
-                  }
+                  onChange={async (e) => {
+                      const files = Array.from(e.target.files);
+                      const uploadedUrls = [];
+
+                      for (let file of files) {
+                        const url = await uploadFile(file);
+                        uploadedUrls.push(url);
+                      }
+
+                      setFormData((prev) => ({
+                        ...prev,
+                        driverPhotosUpload: uploadedUrls,
+                      }));
+                    }}   
                 />
               </div>
             )}
@@ -68,8 +80,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <label className="label">Driver Gender</label>
               <select
                 className="select select-bordered w-1/4"
-                value={formData.driverGender || ''}
-                onChange={(e) => handleChange('driverGender', e.target.value)}
+                value={formData.driverGenderInDriver || ''}
+                onChange={(e) => handleChange('driverGenderInDriver', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="he">He</option>
@@ -82,8 +94,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-3/4"
-                value={formData.driverName || ''}
-                onChange={(e) => handleChange('driverName', e.target.value)}
+                value={formData.driverNameInDriver || ''}
+                onChange={(e) => handleChange('driverNameInDriver', e.target.value)}
               />
             </div>
 
@@ -102,8 +114,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-4/5"
-                value={formData.travelFrom || ''}
-                onChange={(e) => handleChange('travelFrom', e.target.value)}
+                value={formData.travelFromInDriver || ''}
+                onChange={(e) => handleChange('travelFromInDriver', e.target.value)}
               />
             </div>
 
@@ -112,8 +124,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-4/5"
-                value={formData.travelTo || ''}
-                onChange={(e) => handleChange('travelTo', e.target.value)}
+                value={formData.travelToInDriver || ''}
+                onChange={(e) => handleChange('travelToInDriver', e.target.value)}
               />
             </div>
 
@@ -122,8 +134,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-3/4"
-                value={formData.carNo || ''}
-                onChange={(e) => handleChange('carNo', e.target.value)}
+                value={formData.carNoInDriver || ''}
+                onChange={(e) => handleChange('carNoInDriver', e.target.value)}
               />
             </div>
 
@@ -132,8 +144,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="number"
                 className="input input-bordered w-1/3"
-                value={formData.totalPersons || ''}
-                onChange={(e) => handleChange('totalPersons', e.target.value)}
+                value={formData.ivTotalPersonsInDriver || ''}
+                onChange={(e) => handleChange('ivTotalPersonsInDriver', e.target.value)}
               />
             </div>
 
@@ -142,8 +154,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-4/5"
-                value={formData.accidentPlace || ''}
-                onChange={(e) => handleChange('accidentPlace', e.target.value)}
+                value={formData.accidentPlaceInDriver || ''}
+                onChange={(e) => handleChange('accidentPlaceInDriver', e.target.value)}
               />
             </div>
 
@@ -152,8 +164,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="date"
                 className="input input-bordered w-1/3"
-                value={formData.accidentDate || ''}
-                onChange={(e) => handleChange('accidentDate', e.target.value)}
+                value={formData.accidentDateInDriver || ''}
+                onChange={(e) => handleChange('accidentDateInDriver', e.target.value)}
               />
             </div>
 
@@ -162,8 +174,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="time"
                 className="input input-bordered w-1/3"
-                value={formData.accidentTime || ''}
-                onChange={(e) => handleChange('accidentTime', e.target.value)}
+                value={formData.accidentTimeInDriver || ''}
+                onChange={(e) => handleChange('accidentTimeInDriver', e.target.value)}
               />
             </div>
 
@@ -172,8 +184,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                value={formData.accidentManner || ''}
-                onChange={(e) => handleChange('accidentManner', e.target.value)}
+                value={formData.accidentMannerInDriver || ''}
+                onChange={(e) => handleChange('accidentMannerInDriver', e.target.value)}
               />
             </div>
 
@@ -181,23 +193,23 @@ const DriverStatement = ({ formData, setFormData }) => {
               <label className="label">Who is Injured?</label>
               <select
                 className="select select-bordered w-1/2"
-                value={formData.whoInjured || ''}
-                onChange={(e) => handleChange('whoInjured', e.target.value)}
+                value={formData.whoIsInjuredInDriver || ''}
+                onChange={(e) => handleChange('whoIsInjuredInDriver', e.target.value)}
               >
                 <option value="">Select</option>
-                <option value="No one injured">No one injured</option>
-                <option value="All persons in IV injured">injured</option>
+                <option value="no one injured">No one injured</option>
+                <option value="injured">injured</option>
               </select>
             </div>
 
-            {formData.whoInjured && formData.whoInjured !== 'No one injured' && (
+            {formData.whoIsInjuredInDriver === 'injured' && (
               <div>
                 <label className="label">Injured Name & relation with IV</label>
                 <input
                   type="text"
                   className="input input-bordered w-full"
-                  value={formData.injuredName || ''}
-                  onChange={(e) => handleChange('injuredName', e.target.value)}
+                  value={formData.injuredNameRelationInDriver || ''}
+                  onChange={(e) => handleChange('injuredNameRelationInDriver', e.target.value)}
                 />
               </div>
             )}
@@ -206,8 +218,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <label className="label">Police Case Filed</label>
               <select
                 className="select select-bordered "
-                value={formData.policeCase || ''}
-                onChange={(e) => handleChange('policeCase', e.target.value)}
+                value={formData.policeCaseInDriver || ''}
+                onChange={(e) => handleChange('policeCaseInDriver', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="yes">Yes</option>
@@ -215,14 +227,14 @@ const DriverStatement = ({ formData, setFormData }) => {
               </select>
             </div>
 
-            {formData.policeCase === 'yes' && (
+            {formData.policeCaseInDriver === 'yes' && (
               <div>
                 <label className="label">Police Station Name</label>
                 <input
                   type="text"
                   className="input input-bordered w-5/6"
-                  value={formData.policeStation || ''}
-                  onChange={(e) => handleChange('policeStation', e.target.value)}
+                  value={formData.policeStationNameInDriver || ''}
+                  onChange={(e) => handleChange('policeStationNameInDriver', e.target.value)}
                 />
               </div>
             )}
@@ -231,8 +243,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <label className="label">Car Driven By</label>
               <select
                 className="select select-bordered"
-                value={formData.carDrivenBy || ''}
-                onChange={(e) => handleChange('carDrivenBy', e.target.value)}
+                value={formData.carDrivenByInDriver || ''}
+                onChange={(e) => handleChange('carDrivenByInDriver', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="himself">Himself</option>
@@ -246,8 +258,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <input
                 type="text"
                 className="input input-bordered w-5/6"
-                value={formData.driverNameStatement || ''}
-                onChange={(e) => handleChange('driverNameStatement', e.target.value)}
+                value={formData.driverNameInDriverStatement || ''}
+                onChange={(e) => handleChange('driverNameInDriverStatement', e.target.value)}
               />
             </div>
 
@@ -255,8 +267,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <label className="label">IV Driver DL</label>
               <select
                 className="select select-bordered"
-                value={formData.driverDL || ''}
-                onChange={(e) => handleChange('driverDL', e.target.value)}
+                value={formData.driverDLInDriver || ''}
+                onChange={(e) => handleChange('driverDLInDriver', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="having valid DL">Having valid DL</option>
@@ -270,8 +282,8 @@ const DriverStatement = ({ formData, setFormData }) => {
               <label className="label">Statement Given</label>
               <select
                 className="select select-bordered"
-                value={formData.statementGiven || ''}
-                onChange={(e) => handleChange('statementGiven', e.target.value)}
+                value={formData.statementGivenInDriver || ''}
+                onChange={(e) => handleChange('statementGivenInDriver', e.target.value)}
               >
                 <option value="">Select</option>
                 <option value="yes">Yes</option>
