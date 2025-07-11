@@ -4,23 +4,16 @@ import LogoName from '../assets/Logo-Name.png'
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
+    const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "black");
 
     const handleToggle = (e) => {
-        if(e.target.checked){
-            setTheme("acid");
-        }else{
-            setTheme("black");
-        }
-    }
+    const newTheme = theme === "acid" ? "black" : "acid";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    };
 
     const navigate = useNavigate();
-
-    useEffect(()=>{
-        localStorage.setItem("theme", theme);
-        const localTheme = localStorage.getItem("theme");
-        document.querySelector("html").setAttribute("data-theme", localTheme);
-    }, [theme]); 
 
   return (
     <div className="navbar bg-base-100 my-2">
@@ -40,7 +33,7 @@ const NavBar = () => {
                 </div>
                 
                 <label className="swap swap-rotate mx-2">
-                    <input type="checkbox" onChange={handleToggle} />
+                    <input type="checkbox" onChange={handleToggle} checked={theme === "acid"}  />
                     <svg
                         className="swap-on h-6 w-6 fill-current"
                         xmlns="http://www.w3.org/2000/svg"

@@ -5,7 +5,8 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom' ;
 import { Toaster } from 'react-hot-toast';
 
-
+const savedTheme = localStorage.getItem("theme") || "black";
+document.documentElement.setAttribute("data-theme", savedTheme);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
