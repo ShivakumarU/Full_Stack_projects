@@ -1,10 +1,10 @@
 import express from "express";
 import {
   createInsuredDetails,
-  getAllInsuredDetails,
   getInsuredDetailsByID,
   updateInsuredDetails,
-  deleteInsuredDetails
+  deleteInsuredDetails, 
+  getAllInsuredSummaries
 } from "../controllers/insuredDetails.controller.js";
 
 const router = express.Router();
@@ -13,7 +13,9 @@ router.post("/", createInsuredDetails);
 
 router.get("/:caseNumber", getInsuredDetailsByID);
 
-router.get("/", getAllInsuredDetails);
+// router.get("/", getAllInsuredDetails);
+
+router.get('/', getAllInsuredSummaries)
 
 router.put("/:caseNumber", updateInsuredDetails);
 

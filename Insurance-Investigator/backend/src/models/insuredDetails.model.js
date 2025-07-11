@@ -7,7 +7,8 @@ const insuredDetailsSchema = new mongoose.Schema({
     enum: [
       "TATA AIG General Insurance Co Ltd",
       "Chola MS General Insurance Co Ltd",
-      "Reliance General Insurance Co Ltd"
+      "Reliance General Insurance Co Ltd",
+      "Digit General Insurance Co Ltd"
     ],
     required: true,
   },

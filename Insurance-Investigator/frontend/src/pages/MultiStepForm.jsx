@@ -399,12 +399,12 @@ const MultiStepForm = () => {
   return (
       <div className="p-6 max-w-8xl mx-auto  mt-1">
         <div className="flex-col flex-wrap mb-6 p-4 border-b-[1px]">
-          <button onClick={() => navigate('/home')} className="btn btn-outline btn-xs mb-5">
+          <button onClick={() => navigate('/home')} className="btn btn-outline btn-xl mb-5">
             <ArrowLeft size={15}/> Back to Home
           </button>
           <div className="flex flex-wrap justify-center gap-3">
             {steps.map((step, index)=>(
-                <button key={index} onClick={()=>setCurrentStep(index)} className={`btn btn-xs btn-outline ${index == currentStep ? 'btn-info': 'btn-primary'}`} >{step.title}</button>
+                <button key={index} onClick={()=>setCurrentStep(index)} className={`btn btn-xs btn-outline ${index == currentStep ? 'border-2 shadow-[0px_2px_10px_black] px-4 text-center border-green-500 gradient-flex': 'btn-outline'}`} >{step.title}</button>
             ))}
           </div>
         </div>
@@ -423,7 +423,7 @@ const MultiStepForm = () => {
 
           <button
             onClick={saveFormDataToDB}
-            className="btn btn-outline btn-success"> Save <DatabaseZap /></button>
+            className="btn btn-outline"> Save <DatabaseZap /></button>
 
           {currentStep < steps.length - 1 && (
             <button

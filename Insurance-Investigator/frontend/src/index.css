@@ -47,7 +47,7 @@
 }
 
 .gradient-flex {
-  background: linear-gradient(to right, rgb(236, 63, 63), #3cfd02); 
+  background: linear-gradient(to right, rgb(236, 63, 63), #2eaa09, rgb(1, 136, 113)); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-flex;

@@ -33,15 +33,29 @@ export const getInsuredDetailsByID = async (req, res) => {
 };
 
 
-export const getAllInsuredDetails = async (req,res) =>{
-    try {
-        const allDetails = await InsuredDetails.find();
-        res.status(200).json(allDetails);
-    } catch (error) {
-        console.error(" Error fetching insured details:", error);
-        res.status(500).json({ message: "Server Error" });
-    }
-}
+// export const getAllInsuredDetails = async (req,res) =>{
+//     try {
+//         const allDetails = await InsuredDetails.find();
+//         res.status(200).json(allDetails);
+//     } catch (error) {
+//         console.error(" Error fetching insured details:", error);
+//         res.status(500).json({ message: "Server Error" });
+//     }
+// }
+
+export const getAllInsuredSummaries = async (req, res) => {
+  try {
+    const summaries = await InsuredDetails.find(
+      {},
+      'caseNumber insuredName claimNumber insuranceCompany ivNumber vehicleType createdAt policyStartDate accidentDateTime'
+    );
+    res.status(200).json(summaries);
+  } catch (error) {
+    console.error("Error fetching insured summaries:", error); 
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 
 export const updateInsuredDetails = async (req, res) => {
   try {

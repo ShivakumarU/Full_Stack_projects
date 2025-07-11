@@ -8,9 +8,9 @@ const NavBar = () => {
 
     const handleToggle = (e) => {
         if(e.target.checked){
-            setTheme("light");
+            setTheme("acid");
         }else{
-            setTheme("luxury");
+            setTheme("black");
         }
     }
 
@@ -32,11 +32,11 @@ const NavBar = () => {
         </div>
         <div className="flex-none">
             <div className="flex items-center gap-4">
-                <button onClick={()=> navigate('/investigations')} className="btn btn-outline btn-primary btn-hover-fill before:bg-primary hover:text-white">
+                <button onClick={()=> navigate('/investigations')} className="btn btn-outline btn-hover-fill before:bg-orange-600 hover:text-white">
                   <span>Create a New Case</span>
                 </button>                
                 <div className="form-control">
-                    <input type="text" placeholder="Search" className="input input-bordered input-success w-full max-w-xs" />
+                    <input type="text" placeholder="Search" className="input border-yellow-600 focus:border-gray-500 focus:outline-none focus:border-2 w-full max-w-xs" />
                 </div>
                 
                 <label className="swap swap-rotate mx-2">
