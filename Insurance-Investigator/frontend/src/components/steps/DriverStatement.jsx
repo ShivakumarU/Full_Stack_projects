@@ -1,4 +1,5 @@
 import { uploadFile } from "../../../utils/uploadFile";
+import DateInputText from "../DateInputText";
 
 const DriverStatement = ({ formData, setFormData }) => {
   const handleChange = (key, value) => {
@@ -158,16 +159,12 @@ const DriverStatement = ({ formData, setFormData }) => {
                 onChange={(e) => handleChange('accidentPlaceInDriver', e.target.value)}
               />
             </div>
-
-            <div>
-              <label className="label">Accident Date</label>
-              <input
-                type="date"
-                className="input input-bordered w-1/3"
-                value={formData.accidentDateInDriver || ''}
-                onChange={(e) => handleChange('accidentDateInDriver', e.target.value)}
-              />
-            </div>
+            
+            <DateInputText
+              label="Accident Date"
+              value={formData.accidentDateInDriver}
+              onChange={(val) => setFormData({ ...formData, accidentDateInDriver: val })}
+            />
 
             <div>
               <label className="label">Accident Time</label>

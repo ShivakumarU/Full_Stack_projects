@@ -1,4 +1,5 @@
 import { uploadFile } from "../../../utils/uploadFile";
+import DateInputText from "../DateInputText";
 
 const InsuredStatement = ({ formData, setFormData }) => {
   const handleChange = (key, value) => {
@@ -129,15 +130,11 @@ const InsuredStatement = ({ formData, setFormData }) => {
               </select>
             </div>
 
-            <div>
-              <label className="label">Accident Date</label>
-              <input
-                type="date"
-                className="input input-bordered w-1/3"
-                value={formData.accidentDateInInsuredStatement || ''}
-                onChange={(e) => handleChange('accidentDateInInsuredStatement', e.target.value)}
-              />
-            </div>
+            <DateInputText
+              label="Accident Date"
+              value={formData.accidentDateInInsuredStatement}
+              onChange={(val) => setFormData({ ...formData, accidentDateInInsuredStatement: val })}
+            />
 
             <div>
               <label className="label">Accident Time</label>

@@ -18,16 +18,17 @@ const insuredDetailsSchema = new mongoose.Schema({
   claimNumber: { type: String, required: true },
   policyNumber: { type: String, required: true },
 
-  policyStartDate: { type: Date, required: true },
-  policyEndDate: { type: Date, required: true },
+  policyStartDate: { type: String, required: true },
+  policyEndDate: { type: String, required: true },
 
   insuredName: { type: String, required: true },
   insuredAddress: { type: String, required: true },
 
-  accidentDateTime: { type: Date, required: true },
+  accidentDate: { type: String, required: true },
+  accidentTime: { type: String, required: true },
 
   ivDriver: { type: String, required: true }, 
-  claimIntimationDate: { type: Date, required: true },
+  claimIntimationDate: { type: String, required: true },
 
   ivNumber: { type: String, required: true },
 

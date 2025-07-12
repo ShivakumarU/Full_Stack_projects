@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import DriverInvestigation from "../components/steps/DriverInvestigation";
 import DriverStatement from "../components/steps/DriverStatement";
 import InsuredDetails from "../components/steps/InsuredDetails";
@@ -15,375 +15,143 @@ import Invoice from '../components/reports/Invoice';
 import toast from 'react-hot-toast';
 import api from "../../lib/axios";
 
-
 const steps = [
-  {title: "Insured Details", component: InsuredDetails},
-  {title: "Insured Statement", component: InsuredStatement},
-  {title: "Driver Statement", component: DriverStatement},
-  {title: "Spot Verification", component: SpotVerification},  
-  {title: "Garage Verification", component: GarageVerification}, 
-  {title: "Insured Findings", component: InvestigationFindingsInsured},
-  {title: "Driver Investigation", component: DriverInvestigation}, 
-  {title: "Occupant Investigation", component: OccupantInvestigation}, 
-  {title: "Other Details", component: OtherDetails}
-]
+  { title: "Insured Details", component: InsuredDetails },
+  { title: "Insured Statement", component: InsuredStatement },
+  { title: "Driver Statement", component: DriverStatement },
+  { title: "Spot Verification", component: SpotVerification },
+  { title: "Garage Verification", component: GarageVerification },
+  { title: "Insured Findings", component: InvestigationFindingsInsured },
+  { title: "Driver Investigation", component: DriverInvestigation },
+  { title: "Occupant Investigation", component: OccupantInvestigation },
+  { title: "Other Details", component: OtherDetails }
+];
 
+const isValidDateFormat = (dateString) => {
+  const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+  return regex.test(dateString);
+};
 
 const MultiStepForm = () => {
-  
   const navigate = useNavigate();
+  const { caseNumber } = useParams();
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
-    //insured-details
-      insuranceCompany: "",
-      caseNumber: "",
-      refNumber: "",
-      claimNumber: "",
-      policyNumber: "",
-      policyStartDate: "",
-      policyEndDate: "",
-      insuredName: "",
-      insuredAddress: "",
-      accidentDateTime: "",
-      ivDriver: "",
-      claimIntimationDate: "",
-      ivNumber: "",
-      vehicleType: "",
-      invoiceAmount: "",
-      lossLocation: "",
-      causeOfLoss: "",
+  const [localCaseNumber, setLocalCaseNumber] = useState(caseNumber || '');
+  const [formData, setFormData] = useState({});
+  const [createdEndpoints, setCreatedEndpoints] = useState(new Set());
+  const [downloadInvoice, setDownloadInvoice] = useState(false);
 
+  useEffect(() => {
+    const fetchFormData = async () => {
+      if (!caseNumber) return;
 
-      //Insured-Statement
-      insuredType: "",
-      insuredVerified: "",
-      insuredNotVerifiedReason: "",
-      insuredPhotosUpload: [],
+      const endpoints = [
+        "insured-details",
+        "insured-statement",
+        "driver-statement",
+        "spot-verification",
+        "garage-verification",
+        "investigationfinding-insured",
+        "driver-investigation",
+        "occupants-investigation",
+        "other-details"
+      ];
 
-      insuredGender: "",
-      insuredNameInInsuredStatement: "",
-      insuredOccupation: "",
+      const responses = await Promise.all(
+        endpoints.map(endpoint =>
+          api.get(`/${endpoint}/${caseNumber}`)
+            .then(res => ({ endpoint, data: res.data }))
+            .catch(() => null)
+        )
+      );
 
-      ivNumberInInsuredStatement: "",
-      ivUse: "",
-
-      accidentDateInInsuredStatement: "",
-      accidentTimeInInsuredStatement: "",
-
-      travellingPersonRelationInInsuredStatement: "",
-      driverGender: "",
-      travellingPersonNameInInsuredStatement: "",
-
-      accidentPlaceInInsuredStatement: "",
-      travelFromInsuredStatement: "",
-      travelToInsuredStatement: "",
-      accidentMannerInInsuredStatement: "",
-      totalPersonsInInsuredStatement: "",
-
-      anyInjuryInInsured: "",
-      injuredNameRelationInInsured: "",
-
-      policeCaseInInsured: "",
-      policeStationNameInInsured: "",
-
-      ivDriverNameInInsured: "",
-      driverDLInInsured: "",
-      statementGivenInInsured: "",
-
-
-      //Driver-Statement 
-      driverVerified: "",               
-      driverNotVisitReason: "",         
-      
-      driverPhotosTaken: "",             
-      driverPhotosUpload: [],            
-
-      driverGenderInDriver: "",   
-      driverNameInDriver: "",
-      driverOccupation: "",
-      travelFromInDriver: "",
-      travelToInDriver: "",
-      carNoInDriver: "",
-      ivTotalPersonsInDriver: "",
-
-      accidentPlaceInDriver: "",
-      accidentDateInDriver: "",
-      accidentTimeInDriver: "",
-      accidentMannerInDriver: "",
-
-      whoIsInjuredInDriver: "",          
-      injuredNameRelationInDriver: "",   
-
-      policeCaseInDriver: "",          
-      policeStationNameInDriver: "",     
-
-      carDrivenByInDriver: "",          
-      driverNameInDriverStatement: "",
-
-      driverDLInDriver: "",             
-      statementGivenInDriver: ""   ,
-
-
-      //Spot-Verification
-      spotVerified: "",
-      spotNotVerifiedReason: "",
-
-      spotMatching: "",
-      
-      spotPhotosTaken: "",
-      spotPhotosUpload: [],
-
-      spotPhotosNotTakenReason: "",
-
-      //Garage-verification
-      garageVisited: "",
-      garageNotVisitedReason: "",
-
-      damagesMatching: "",         
-      multipleDamages: "",       
-
-      bloodMarks: "",             
-      bloodMarksDescription: "",
-
-      garagePhotosTaken: "",       
-      garagePhotosUpload: [],      
-      garagePhotosNotTakenReason: "",
-
-      //insured-investigation
-      insuredInVehicle: "",
-      insuredInjured: "",
-      insuredHospitalized: "",
-      insuredHospitalName: "",
-      insuredMedicalRecords: "",
-      insuredInjuriesCorelating: "",
-      insuredGoogleTimeline: "",
-      insuredTimelinePhotosAttached: "",
-      insuredAccidentPhotosInMobile: "",
-      insuredPhotosDateInfo: "",
-      insuredPhotosSource: "",
-      insuredPhotosSenderName: "",
-      insuredPhotosSenderNumber: "",
-      insuredDLStatus: "",
-      insuredCallData: "",
-      insuredAddAnything: "",
-      insuredAdditionalComments: "", 
-
-
-    //driver-investigation
-      driverInVehicle: '',
-      driverInjured: '',
-      driverHospitalized: '',
-      driverHospitalName: '',
-      driverMedicalRecords: '',
-      driverInjuriesCorelating: '',
-      driverGoogleTimeline: '',
-      driverTimelinePhotosAttached: '',
-      driverAccidentPhotosInMobile: '',
-      driverAccidentPhotosDateInfo: '',
-      driverPhotosSource: '',
-      driverPhotosSenderName: '',
-      driverPhotosSenderNumber: '',
-      driverDLStatus: '',
-      driverCallData: '',
-      driverAddAnything: '',
-      driverAdditionalComments: '',
-
-      // Occupant-Investigation
-      anyOccupantInIV: "",
-      anyOccupantVerified: "",
-      noVerificationReason: "",
-      occupantsVerifiedCount: 0,
-      occupants: [
-        {
-          occupantName: "",
-          occupantInjured: "",
-          medicalRecords: "",
-          injuriesCorelating: "",
-
-          occupantGoogleTimeline: "",
-          timelinePhonePhotosAttached: "",
-          occupantsAccidentPhotosInMobile: "",
-          accidentPhotoDateInfo: "",
-          occupantsPhotosNoticedIn: "",
-          occupantsphotosSenderName: "",
-          occupantsPhotosSenderNumber: "",
-
-          occupantDLStatus: "",
-          occupantCallData: "",
-
-          occupantsAddAnything: "",
-          occupantsAdditionalComments: ""
+      const created = new Set();
+      const mergedData = responses.reduce((acc, res) => {
+        if (res?.data) {
+          created.add(res.endpoint);
+          return { ...acc, ...res.data };
         }
-      ],
+        return acc;
+      }, {});
 
-      // Other-Details
-      overSeating: "",
-      overSeatingEvidence: "",
+      setCreatedEndpoints(created);
+      setFormData(prev => ({ ...prev, ...mergedData }));
+    };
 
-      policeCaseFiledOthers: "",
-      policeStationNameOthers: "",
-      asPerPsDriverName: "",
-      asPerPsAccidentDate: "",
+    fetchFormData();
+  }, [caseNumber]);
 
-      insuredNameMatchInRC: "",
-      insuredNameMismatchReason: "",
+  const StepComponent = steps[currentStep].component;
 
-      tsEChallan: "",
-
-      thirdPartyVehicleInvolved: "",
-      thirdPartyDetails: "",
-
-      anyOtherInfo: "",
-      otherInfoDescription: "",
-
-      conclusionOpinion: "",
-      suspectsEvidenceReason: ""
-  });
-
-  const StepComponent = steps[currentStep].component ;
-  const [downloadInvoice,setdownloadInvoice] = useState(false);
-
-  const saveFormDataToDB = async () =>{
-   try {
-    let res;
-    switch (currentStep) {
-      case 0:
-        res = await api.post("/insured-details", formData);
-        if (res.status === 200 || res.status === 201) {
-          setFormData((prev) => ({ ...prev, caseNumber: res.data.caseNumber }));
-          toast.success("Insured Details Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
+  const saveFormDataToDB = async () => {
+    try {
+      const dateFields = ['policyStartDate', 'accidentDateTime'];
+      for (let field of dateFields) {
+        if (formData[field] && !isValidDateFormat(formData[field])) {
+          toast.error(`"${field}" must be in DD/MM/YYYY format`);
+          return;
         }
-        break;
-
-      case 1:
-        res = await api.post("/insured-statement", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Insured Statement Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 2:
-        res = await api.post("/driver-statement", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Driver Statement Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }          
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 3:
-        res = await api.post("/spot-verification", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Spot Verification Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 4:
-        res = await api.post("/garage-verification", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Garage Verification Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 5:
-        res = await api.post("/investigationfinding-insured", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Insured Findings Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 6:
-        res = await api.post("/driver-investigation", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Driver Investigation Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 7:
-        res = await api.post("/occupants-investigation", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Occupant Investigation Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
-
-      case 8:
-        res = await api.post("/other-details", formData);
-        if (res.status === 200 || res.status === 201) {
-          toast.success("Other Details Saved!");
-          if (currentStep < steps.length - 1) {
-            setCurrentStep((prev) => prev + 1);
-          }
-        } else {
-          toast.error("Unexpected response from server.");
-        }
-        break;
       }
-     }catch (error) {
-      console.error("Error saving Details", error)
-          if (error.response) {
-          const status = error.response.status;
 
-          if (status === 400) {
-            toast.error("Bad request. Please check the form.");
-          } else if (status === 500) {
-            toast.error("Server error. Try again later.");
-          } else {
-            toast.error(`Unexpected error: ${status}`);
-          }
-        } else if (error.request) {
-          toast.error("No response from server. Check your connection.");
-        } else {
-          toast.error("Something went wrong. Please try again.");
+      const endpoints = [
+        "insured-details",
+        "insured-statement",
+        "driver-statement",
+        "spot-verification",
+        "garage-verification",
+        "investigationfinding-insured",
+        "driver-investigation",
+        "occupants-investigation",
+        "other-details"
+      ];
+
+      const endpoint = endpoints[currentStep];
+      const isExisting = createdEndpoints.has(endpoint);
+      const method = isExisting ? api.put : api.post;
+      const url = isExisting ? `/${endpoint}/${localCaseNumber}` : `/${endpoint}`;
+      const res = await method(url, formData);
+
+      if (res.status === 200 || res.status === 201) {
+        if (!isExisting) {
+          setCreatedEndpoints(prev => new Set(prev).add(endpoint));
         }
+
+        if (currentStep === 0 && !localCaseNumber) {
+          const newCaseNumber = res.data.caseNumber;
+          setLocalCaseNumber(newCaseNumber);
+          setFormData((prev) => ({ ...prev, caseNumber: newCaseNumber }));
+          navigate(`/investigations/${newCaseNumber}`);
+        }
+
+        toast.success(`${steps[currentStep].title} Saved!`);
+
+        if (currentStep < steps.length - 1) {
+          setCurrentStep((prev) => prev + 1);
+        }
+      } else {
+        toast.error("Unexpected response from server.");
+      }
+    } catch (error) {
+      console.error("Error saving Details", error);
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 400) toast.error("Bad request. Please check the form.");
+        else if (status === 500) toast.error("Server error. Try again later.");
+        else toast.error(`Unexpected error: ${status}`);
+      } else if (error.request) {
+        toast.error("No response from server. Check your connection.");
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
     }
-
-  
+  };
 
   if (downloadInvoice) {
     return (
       <div className="w-screen h-screen">
         <div className="absolute top-4 left-4 z-10">
           <button
-            onClick={() => setdownloadInvoice(false)}
+            onClick={() => setDownloadInvoice(false)}
             className="btn btn-warning hover:btn-success ml-50 mt-16"
           >
             ← Back to Form
@@ -397,57 +165,62 @@ const MultiStepForm = () => {
   }
 
   return (
-      <div className="p-6 max-w-8xl mx-auto  mt-1">
-        <div className="flex-col flex-wrap mb-6 p-4 border-b-[1px]">
-          <button onClick={() => navigate('/home')} className="btn btn-outline btn-xl mb-5">
-            <ArrowLeft size={15}/> Back to Home
-          </button>
-          <div className="flex flex-wrap justify-center gap-3">
-            {steps.map((step, index)=>(
-                <button key={index} onClick={()=>setCurrentStep(index)} className={`btn btn-xs btn-outline ${index == currentStep ? 'border-2 shadow-[0px_2px_10px_black] px-4 text-center border-green-500 gradient-flex': 'btn-outline'}`} >{step.title}</button>
-            ))}
-          </div>
-        </div>
-        <div className="mb-6 rounded shadow-md bg-base-100">
-            <StepComponent formData={formData} setFormData={setFormData} />
-        </div>
-        <div className=" flex justify-between mb-5 pt-6 p-3 border-t-[1px]">
-          {currentStep > 0 && (
+    <div className="p-6 max-w-8xl mx-auto mt-1">
+      <div className="flex-col flex-wrap mb-6 p-4 border-b-[1px]">
+        <button onClick={() => navigate('/home')} className="btn btn-outline btn-xl mb-5">
+          <ArrowLeft size={15} /> Back to Home
+        </button>
+        <div className="flex flex-wrap justify-center gap-3">
+          {steps.map((step, index) => (
             <button
-              onClick={() => setCurrentStep((prev) => prev - 1)}
-              className="btn btn-outline"
+              key={index}
+              onClick={() => setCurrentStep(index)}
+              className={`btn btn-xs btn-outline ${index === currentStep ? 'border-2 shadow-[0px_2px_10px_black] px-4 text-center border-green-500 gradient-flex' : 'btn-outline'}`}
             >
-              <CircleArrowLeft /> Previous
+              {step.title}
             </button>
-          )}
-
-          <button
-            onClick={saveFormDataToDB}
-            className="btn btn-outline"> Save <DatabaseZap /></button>
-
-          {currentStep < steps.length - 1 && (
-            <button
-              onClick={() => setCurrentStep((prev) => prev + 1)}
-              className="btn btn-outline"
-            >
-              Next <CircleArrowRight />
-            </button>
-          )}
-
-          {currentStep === steps.length - 1 && (
-            <div className="flex gap-4 mt-4">
-              <button onClick={()=> setdownloadInvoice(true)} className="btn btn-outline">
-                Invoice <Download />
-              </button>
-              <button className="btn btn-outline">
-                Report <Download />
-              </button>
-            </div>
-          )}
-
+          ))}
         </div>
       </div>
-  )
+      <div className="mb-6 rounded shadow-md bg-base-100">
+        <StepComponent formData={formData} setFormData={setFormData} />
+      </div>
+      <div className="flex justify-between mb-5 pt-6 p-3 border-t-[1px]">
+        {currentStep > 0 && (
+          <button
+            onClick={() => setCurrentStep((prev) => prev - 1)}
+            className="btn btn-outline"
+          >
+            <CircleArrowLeft /> Previous
+          </button>
+        )}
 
-}
-export default MultiStepForm ;
+        <button onClick={saveFormDataToDB} className="btn btn-outline">
+          Save <DatabaseZap />
+        </button>
+
+        {currentStep < steps.length - 1 && (
+          <button
+            onClick={() => setCurrentStep((prev) => prev + 1)}
+            className="btn btn-outline"
+          >
+            Next <CircleArrowRight />
+          </button>
+        )}
+
+        {currentStep === steps.length - 1 && (
+          <div className="flex gap-4 mt-4">
+            <button onClick={() => setDownloadInvoice(true)} className="btn btn-outline">
+              Invoice <Download />
+            </button>
+            <button className="btn btn-outline">
+              Report <Download />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MultiStepForm;

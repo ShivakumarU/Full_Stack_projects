@@ -1,4 +1,4 @@
-import React from 'react'
+import DateInputText from "../DateInputText";
 
 const InsuredDetails = ({formData, setFormData}) =>  {
   return (
@@ -51,25 +51,17 @@ const InsuredDetails = ({formData, setFormData}) =>  {
           />
         </div>
 
-        <div>
-          <label className="label">Policy Start Date</label>
-          <input
-            type="date"
-            className="input input-bordered w-1/3"
-            value={formData.policyStartDate || ''}
-            onChange={(e) => setFormData({ ...formData, policyStartDate: e.target.value })}
-          />
-        </div>
+        <DateInputText
+          label="Policy Start Date"
+          value={formData.policyStartDate}
+          onChange={(val) => setFormData({ ...formData, policyStartDate: val })}
+        />
 
-        <div>
-          <label className="label">Policy End Date</label>
-          <input
-            type="date"
-            className="input input-bordered w-1/3"
-            value={formData.policyEndDate || ''}
-            onChange={(e) => setFormData({ ...formData, policyEndDate: e.target.value })}
-          />
-        </div>
+        <DateInputText
+          label="Policy End Date"
+          value={formData.policyEndDate}
+          onChange={(val) => setFormData({ ...formData, policyEndDate: val })}
+        />
 
         <div>
           <label className="label">Insured Name</label>
@@ -91,14 +83,19 @@ const InsuredDetails = ({formData, setFormData}) =>  {
           />
         </div>
 
-
+        <DateInputText
+          label="Accident Date"
+          value={formData.accidentDate}
+          onChange={(val) => setFormData({ ...formData, accidentDate: val })}
+        />
         <div>
-          <label className="label">Accident Date & Time</label>
+          <label className="label">Accident Time</label>
           <input
-            type="datetime-local"
+            type="time"
+            placeholder="DD/MM/YYYY"
             className="input input-bordered w-1/3"
-            value={formData.accidentDateTime || ''}
-            onChange={(e) => setFormData({ ...formData, accidentDateTime: e.target.value })}
+            value={formData.accidentTime || ''}
+            onChange={(e) => setFormData({ ...formData, accidentTime: e.target.value })}
           />
         </div>
 
@@ -111,16 +108,13 @@ const InsuredDetails = ({formData, setFormData}) =>  {
             onChange={(e) => setFormData({ ...formData, ivDriver: e.target.value })}
           />
         </div>
-
-        <div>
-          <label className="label">Claim Intimation Date</label>
-          <input
-            type="date"
-            className="input input-bordered w-1/3"
-            value={formData.claimIntimationDate || ''}
-            onChange={(e) => setFormData({ ...formData, claimIntimationDate: e.target.value })}
-          />
-        </div>
+        
+        <DateInputText
+          label="Claim Intimation Date"
+          value={formData.claimIntimationDate}
+          onChange={(val) => setFormData({ ...formData, claimIntimationDate: val })}
+        />        
+        
 
         <div>
           <label className="label">IV Number</label>

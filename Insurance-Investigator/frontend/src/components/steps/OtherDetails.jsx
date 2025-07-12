@@ -1,4 +1,5 @@
 import React from 'react';
+import DateInputText from '../DateInputText';
 
 const OtherDetails = ({ formData, setFormData }) => {
   const handleChange = (key, value) => {
@@ -70,16 +71,11 @@ const OtherDetails = ({ formData, setFormData }) => {
                 onChange={(e) => handleChange('asPerPsDriverName', e.target.value)}
               />
             </div>
-
-            <div>
-              <label className="label">Accident Date (as per PS)</label>
-              <input
-                type="date"
-                className="input input-bordered w-1/4"
-                value={formData.asPerPsAccidentDate || ''}
-                onChange={(e) => handleChange('asPerPsAccidentDate', e.target.value)}
-              />
-            </div>
+            <DateInputText
+              label="Accident Date (as per PS)"
+              value={formData.asPerPsAccidentDate}
+              onChange={(val) => setFormData({ ...formData, asPerPsAccidentDate: val })}
+            />
           </>
         )}
 

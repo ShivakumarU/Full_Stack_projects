@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react';
 import api from '../../lib/axios';
 import { Trash } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
   const [cases, setCases] = useState([]);
+
+  const navigate = useNavigate();
 
   const fetchCases = async () => {
     try {
@@ -61,51 +64,70 @@ const Home = () => {
 return (
     <div>
       <NavBar />
-<div className="p-10 border-b mt-5">
-  <h2 className="text-2xl font-bold mb-12 mt-5 gradient-flex">Insurance - All Pending Cases : {cases.length}</h2>
+      <div className="p-10 border-b mt-5">
+        <h2 className="text-2xl font-bold mb-12 mt-5 gradient-flex">Insurance - All Pending Cases : {cases.length}</h2>
 
-  <div className="grid grid-cols-[50px_repeat(6,_1fr)_50px] gap-4 border-b py-3 px-2 bg-gray-300 text-black  text-left">
-    <div>S.No</div>
-    <div>Company Name</div>
-    <div>Insured Name</div>
-    <div>Claim Number</div>
-    <div>Vehicle Number</div>
-    <div>Vehicle Type</div>
-    <div>Close Proximity ( Days )</div>
-    <div>Delete</div>
-  </div>
+        <div className="grid grid-cols-[50px_repeat(6,_1fr)_50px] gap-4 border-b py-3 px-2 bg-gray-300 text-black  text-left">
+          <div>S.No</div>
+          <div>Company Name</div>
+          <div>Insured Name</div>
+          <div>Claim Number</div>
+          <div>Vehicle Number</div>
+          <div>Vehicle Type</div>
+          <div>Close Proximity ( Days )</div>
+        </div>
+        {cases.map((item, index) => {
+          const parseDDMMYYYY = (dateStr) => {
+            if (!dateStr) return null;
+            const [dd, mm, yyyy] = dateStr.split('/');
+            const isoString = `${yyyy}-${mm}-${dd}`;
+            const date = new Date(isoString);
+            return isNaN(date) ? null : date;
+          };
 
-  {cases.map((item, index) => {
-  const accidentDate = new Date(item.accidentDateTime)
-  const policyStartDate = new Date(item.policyStartDate);
-  const closeProximity =
-    !isNaN(accidentDate) && !isNaN(policyStartDate)
-      ? Math.ceil((accidentDate - policyStartDate) / (1000 * 60 * 60 * 24))
-      : "N/A";
-    return (<button
-      key={item.caseNumber}
-      className="grid grid-cols-[50px_repeat(6,_1fr)_50px] gap-4 py-3 px-2 border-b text-left hover:bg-gray-400 w-full hover:text-black"
-    >
-      <div>{index+1}</div>
-      <div>
-        {item.insuranceCompany.includes("TATA") ? "TATA" :
-        item.insuranceCompany.includes("Chola") ? "CHOLA" :
-        item.insuranceCompany.includes("Reliance") ? "RELIANCE" :
-        item.insuranceCompany.includes("Digit") ? "DIGIT" :
-        item.insuranceCompany.split(" ")[0]}
+          const accidentDate = parseDDMMYYYY(item.accidentDateTime);
+          const policyStartDate = parseDDMMYYYY(item.policyStartDate);
+
+          const closeProximity =
+            accidentDate && policyStartDate
+              ? Math.ceil((accidentDate - policyStartDate) / (1000 * 60 * 60 * 24))
+              : "N/A";
+
+          return (
+            <button 
+              onClick={() => navigate(`/investigations/${item.caseNumber}`)}
+              key={item.caseNumber}
+              className="grid grid-cols-[50px_repeat(6,_1fr)_50px] gap-4 py-3 px-2 border-b text-left hover:bg-gray-400 w-full hover:text-black"
+            >
+              <div>{index + 1}</div>
+              <div>
+                {item.insuranceCompany.includes("TATA") ? "TATA" :
+                item.insuranceCompany.includes("Chola") ? "CHOLA" :
+                item.insuranceCompany.includes("Reliance") ? "RELIANCE" :
+                item.insuranceCompany.includes("Digit") ? "DIGIT" :
+                item.insuranceCompany.split(" ")[0]}
+              </div>
+              <div>{item.insuredName}</div>
+              <div>{item.claimNumber}</div>
+              <div>{item.ivNumber}</div>
+              <div>{item.vehicleType}</div>
+              <div className={`px-2 py-1 rounded ${closeProximity <= 30 ? "bg-red-500 w-1/5" : ""}`}>
+                {closeProximity}
+              </div>
+              <div className='flex items-center justify-center'>
+                <Trash
+                  onClick={(e) => {
+                    e.stopPropagation(); // prevents button click from navigating
+                    handleDeleteClaim(item.caseNumber);
+                  }}
+                  className="w-5 h-5 transition-all duration-200 hover:w-4 hover:h-4 cursor-pointer"
+                />
+              </div>
+            </button>
+          );
+        })}
+
       </div>
-      <div>{item.insuredName}</div>
-      <div>{item.claimNumber}</div>
-      <div>{item.ivNumber}</div>
-      <div>{item.vehicleType}</div>
-      <div className={`px-2 py-1 rounded
-    ${closeProximity <= 30 ? "bg-red-500 w-1/5" : ""}`}>{closeProximity}</div>
-      <div className='flex items-center justify-center'> <Trash onClick={()=>handleDeleteClaim(item.caseNumber)} className="w-5 h-5 transition-all duration-200 hover:w-4 hover:h-4 cursor-pointer"
-/></div>
-    </button>)
-    ;
-})}
-</div>
 
     </div>
   );
