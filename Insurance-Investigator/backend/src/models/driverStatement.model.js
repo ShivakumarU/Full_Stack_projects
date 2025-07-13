@@ -82,7 +82,7 @@ const DriverStatementSchema = new mongoose.Schema({
 
   policeCaseInDriver: {
     type: String,
-    enum: ["yes", "no"]
+    enum: ["yes", "no","Panchanama"]
   },
 
   policeStationNameInDriver: {

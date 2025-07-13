@@ -210,7 +210,7 @@ const InsuredStatement = ({ formData, setFormData }) => {
             </div>
 
             <div>
-              <label className="label">Accident Manner</label>
+              <label className="label">Accident Manner 🔴🔴🔴🔴🔴</label>
               <input
                 type="text"
                 className="input input-bordered w-full"

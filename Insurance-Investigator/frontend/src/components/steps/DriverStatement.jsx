@@ -177,7 +177,7 @@ const DriverStatement = ({ formData, setFormData }) => {
             </div>
 
             <div>
-              <label className="label">Accident Manner</label>
+              <label className="label">Accident Manner 🔴🔴🔴🔴🔴</label>
               <input
                 type="text"
                 className="input input-bordered w-full"
@@ -221,10 +221,11 @@ const DriverStatement = ({ formData, setFormData }) => {
                 <option value="">Select</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
+                <option value="Panchanama">Panchanama</option>
               </select>
             </div>
 
-            {formData.policeCaseInDriver === 'yes' && (
+            {(formData.policeCaseInDriver === 'yes' || formData.policeCaseInDriver === "Panchanama") && (
               <div>
                 <label className="label">Police Station Name</label>
                 <input

@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     padding: 28,
     fontSize: 12,
     fontFamily: 'BookmanOldStyle',
+    border: '1pt solid black'
   },
   outerBorder: {
-    border: '1pt solid black',
+    // border: '1pt solid black',
     padding: 15,
-    height: '100%',
   },
   logo: {
     width: '100%',
@@ -119,16 +119,19 @@ const Report = ({ data }) => {
           </Text>
           <View>
           <Text style={{ marginTop: 9 , lineHeight:1.2, textIndent:40, textAlign:'justify'}}>
-            {`       ${data.insuredType?.charAt(0).toUpperCase() + data.insuredType?.slice(1)} ${data.insuredName}, Occu: ${data.insuredOccupation} is having a vehicle with Reg.no: ${data.ivNumberInInsuredStatement} using for his ${data.ivUse}. This vehicle met with an accident on ${data.accidentDateInInsuredStatement} at ${data.accidentTimeInInsuredStatement} while ${data.travellingPersonRelationInInsuredStatement} was travelling from ${data.travelFromInsuredStatement} to ${data.travelToInsuredStatement}, ${data.driverGender} met with an accident in ${data.accidentPlaceInInsuredStatement} ${data.accidentMannerInInsuredStatement}. At the time of accident, ${data.driverGender} is travelling ${
+            {`${data.insuredVerified === "yes" ?      
+            `${data.insuredType?.charAt(0).toUpperCase() + data.insuredType?.slice(1)} ${data.insuredName}, Occ: ${data.insuredOccupation} is having a vehicle with Reg.no: ${data.ivNumberInInsuredStatement}, using for his ${data.ivUse}. This vehicle met with an accident on ${data.accidentDateInInsuredStatement} at ${data.accidentTimeInInsuredStatement} while ${data.travellingPersonRelationInInsuredStatement} was travelling from ${data.travelFromInsuredStatement} to ${data.travelToInsuredStatement}, at ${data.accidentPlaceInInsuredStatement} ${data.accidentMannerInInsuredStatement}. At the time of accident, ${data.driverGender} is travelling ${
               data.totalPersonsInInsuredStatement === 1
                 ? "alone"
                 : data.totalPersonsInInsuredStatement === 2
                 ? "along with another person"
                 : `along with ${data.totalPersonsInInsuredStatement - 1} other persons`
             }. In this accident, IV damaged ${
-              data.anyInjuryInInsured === "injured"
-                ? `and ${data.injuredNameRelationInInsured} is injured.`
-                : "but no one injured."
+            data.anyInjuryInInsured?.toLowerCase() === "injured"
+              ? `and ${data.injuredNameRelationInInsured} is injured.`
+              : data.anyInjuryInInsured?.toLowerCase() === "no one injured"
+              ? "but no one injured."
+              : ""
             } Regarding this accident, ${
               data.policeCaseInInsured === "yes"
                 ? `Police filed F.I.R at ${data.policeStationNameInInsured}.`
@@ -137,7 +140,7 @@ const Report = ({ data }) => {
                 : data.policeCaseInInsured === "Panchanama"
                 ? `Police issued panchanama only at ${data.policeStationNameInInsured}. `
                 : ""
-            } At the time of accident, IV driver by ${data.ivDriverNameInInsured} and ${data.driverGender} is ${data.driverDLInsured}. For the same, ${data.insuredGender} provided ${
+            } At the time of accident, IV driven by ${data.ivDriverNameInInsured} and ${data.driverGender} is ${data.driverDLInInsured}. For the same, ${data.insuredGender} provided ${
               data.insuredGender === "he"
                 ? "his"
                 : data.insuredGender === "she"
@@ -149,10 +152,46 @@ const Report = ({ data }) => {
                 : data.statementGivenInInsured === "no"
                 ? "orally only"
                 : ""
-            }.`}
+            }.`
+          :`${data.insuredType?.charAt(0).toUpperCase() + data.insuredType?.slice(1)} ${data.insuredName}, Occ: ${data.insuredOccupation} is having a vehicle with Reg.no: ${data.ivNumberInInsuredStatement}. Insured raised the claim against the vehicle damage. For the same, we tried to verify the genuineness of the claim but we are unable to do so due to ${data.insuredNotVerifiedReason}.`}`}
           </Text>
-
-
+          { data.insuredType === "insured" &&
+            <View style={{marginTop:15}} >
+              <Text style={{fontWeight:'bold', textDecoration:"underline"}}>
+                Driver Version : 
+              </Text>
+              <Text style={{marginTop:10,lineHeight:1.2, textIndent:40, textAlign:'justify'}}>
+                {`${data.driverVerified==="no"? `During the course of investigation, we are unable to meet the driver due to ${data.driverNotVisitReason}`
+                :`Driver - ${data.driverNameInDriver}, Occ: ${data.driverOccupation}, is driving insured vehicle with Reg.No: ${data.carNoInDriver} from ${data.travelFromInDriver} to ${data.travelToInDriver} ${data.ivTotalPersonsInDriver === 1
+                ? "alone"
+                : data.ivTotalPersonsInDriver === 2
+                ? "along with another person"
+                : `along with ${data.ivTotalPersonsInDriver - 1} other persons and met with accident at ${data.accidentPlaceInDriver} on ${data.accidentDateInDriver} at ${data.accidentTimeInDriver} due to ${data.accidentMannerInDriver}. As a result IV damaged, ${
+                data.whoIsInjuredInDriver?.toLowerCase() === "injured"
+                  ? `and ${data.injuredNameRelationInDriver} is injured.`
+                  : data.whoIsInjuredInDriver?.toLowerCase() === "no one injured"
+                  ? "but no one injured."
+                  : ""
+                } Regarding this accident, ${
+              data.policeCaseInDriver === "yes"
+                ? `Police filed F.I.R at ${data.policeStationNameInDriver}.`
+                : data.policeCaseInDriver === "no"
+                ? "No police case filed."
+                : data.policeCaseInDriver === "Panchanama"
+                ? `Police issued panchanama only at ${data.policeStationNameInDriver}.} `
+                : ""
+            } As per ${data.driverGenderInDriver==="he" ? "his" : data.driverGenderInDriver==="she"?"her":""} version, at the time of accident IV driven by ${data.carDrivenByInDriver === "himself" ? "himself" :  data.carDrivenByInDriver === "herself" ? "herself" : data.carDrivenByInDriver === "other-person" ? "other person" : " "} (${data.driverNameInDriverStatement}), ${
+              data.driverGenderInDriver} is ${data.driverDLInDriver}. For the same ${data.driverGenderInDriver} provided ${data.driverGenderInDriver==="he" ? "his" : data.driverGenderInDriver==="she"?"her":""} statement ${
+              data.statementGivenInDriver === "yes"
+                ? "in written note"
+                : data.statementGivenInDriver === "no"
+                ? "orally only"
+                : ""
+            }.`}`}`}
+              </Text>
+            </View>
+          }
+          
           </View>
 
         </View>
