@@ -12,6 +12,7 @@ import GarageVerification from "../components/steps/GarageVerification";
 import { ArrowLeft, CircleArrowLeft, CircleArrowRight, DatabaseZap, Download } from "lucide-react";
 import { PDFViewer } from '@react-pdf/renderer';
 import Invoice from '../components/reports/Invoice';
+import Report from '../components/reports/Report';
 import toast from 'react-hot-toast';
 import api from "../../lib/axios";
 
@@ -40,6 +41,7 @@ const MultiStepForm = () => {
   const [formData, setFormData] = useState({});
   const [createdEndpoints, setCreatedEndpoints] = useState(new Set());
   const [downloadInvoice, setDownloadInvoice] = useState(false);
+  const [downloadReport, setDownloadReport] = useState(false);
 
   useEffect(() => {
     const fetchFormData = async () => {
@@ -164,6 +166,24 @@ const MultiStepForm = () => {
     );
   }
 
+  if(downloadReport){
+    return(
+      <div className="w-screen h-screen">
+        <div className="absolute top-4 left-4 z-10">
+          <button
+            onClick={() => setDownloadReport(false)}
+            className="btn btn-warning hover:btn-success ml-50 mt-16"
+          >
+            ← Back to Form
+          </button>
+        </div>
+        <PDFViewer width="100%" height="100%">
+          <Report data={formData} />
+        </PDFViewer>
+      </div>
+    )
+  }
+
   return (
     <div className="p-6 max-w-8xl mx-auto mt-1">
       <div className="flex-col flex-wrap mb-6 p-4 border-b-[1px]">
@@ -213,7 +233,7 @@ const MultiStepForm = () => {
             <button onClick={() => setDownloadInvoice(true)} className="btn btn-outline">
               Invoice <Download />
             </button>
-            <button className="btn btn-outline">
+            <button onClick={() => setDownloadReport(true)} className="btn btn-outline">
               Report <Download />
             </button>
           </div>

@@ -6,12 +6,12 @@ const isValidDateFormat = (dateString) => {
   return regex.test(dateString);
 };
 
-const DateInputText = ({ label, value, onChange }) => {
+const DateInputText = ({ label, value = '', onChange }) => {
   const [hasError, setHasError] = useState(false);
 
   const handleBlur = () => {
     if (value && !isValidDateFormat(value)) {
-      toast.error(`Invalid date format in "${label}". Use DD/MM/YYYY`);
+      toast.error(`Invalid date in "${label}". Use DD/MM/YYYY`);
       setHasError(true);
     } else {
       setHasError(false);
@@ -19,12 +19,12 @@ const DateInputText = ({ label, value, onChange }) => {
   };
 
   return (
-    <div>
-      <label className="label">{label}</label>
+    <div className="mb-4">
+      <label className="block mb-1 font-medium text-gray-700">{label}</label>
       <input
         type="text"
         placeholder="DD/MM/YYYY"
-        value={value || ''}
+        value={value}
         className={`input input-bordered w-1/3 ${hasError ? 'border-red-500' : ''}`}
         onChange={(e) => onChange(e.target.value)}
         onBlur={handleBlur}

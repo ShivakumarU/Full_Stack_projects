@@ -80,18 +80,22 @@ return (
           const parseDDMMYYYY = (dateStr) => {
             if (!dateStr) return null;
             const [dd, mm, yyyy] = dateStr.split('/');
-            const isoString = `${yyyy}-${mm}-${dd}`;
-            const date = new Date(isoString);
-            return isNaN(date) ? null : date;
+            const date = new Date(`${yyyy}-${mm}-${dd}T00:00:00`);
+            return isNaN(date.getTime()) ? null : date;
           };
 
           const accidentDate = parseDDMMYYYY(item.accidentDateTime);
           const policyStartDate = parseDDMMYYYY(item.policyStartDate);
 
-          const closeProximity =
-            accidentDate && policyStartDate
-              ? Math.ceil((accidentDate - policyStartDate) / (1000 * 60 * 60 * 24))
-              : "N/A";
+          let closeProximity = "N/A";
+          let isRed = false;
+
+          if (accidentDate && policyStartDate) {
+            const diffTime = accidentDate.getTime() - policyStartDate.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            closeProximity = diffDays;
+            isRed = diffDays <= 30;
+          }
 
           return (
             <button 
@@ -117,7 +121,7 @@ return (
               <div className='flex items-center justify-center'>
                 <Trash
                   onClick={(e) => {
-                    e.stopPropagation(); // prevents button click from navigating
+                    e.stopPropagation();
                     handleDeleteClaim(item.caseNumber);
                   }}
                   className="w-5 h-5 transition-all duration-200 hover:w-4 hover:h-4 cursor-pointer"
