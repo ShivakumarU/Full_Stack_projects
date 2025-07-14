@@ -100,7 +100,7 @@ const DriverInvestigation = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.driverGoogleTimeline !== 'basic mobile' && (
+        {(formData.driverGoogleTimeline !== 'basic mobile' && formData.driverGoogleTimeline !== 'damaged mobile') && (
           <>
             <div>
               <label className="label">Timeline/Phone Photos Attached</label>
@@ -126,7 +126,6 @@ const DriverInvestigation = ({ formData, setFormData }) => {
                 <option value="available">Available</option>
                 <option value="not available">Not Available</option>
                 <option value="driver not-cooperated">Driver Not-Cooperated</option>
-                <option value="basic mobile">Basic Mobile</option>
               </select>
             </div>
 

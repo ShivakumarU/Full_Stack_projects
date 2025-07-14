@@ -35,7 +35,7 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
 
   insuredAccidentPhotosInMobile: {
     type: String,
-    enum: ["available", "not available", "basic mobile"],
+    enum: ["available", "not available", "not co-operated"],
   },
 
   insuredPhotosDateInfo: {

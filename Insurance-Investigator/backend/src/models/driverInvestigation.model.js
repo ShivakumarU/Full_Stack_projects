@@ -31,7 +31,7 @@ const DriverInvestigationSchema = new mongoose.Schema({
 
   driverAccidentPhotosInMobile: {
     type: String,
-    enum: ["available", "not available", "driver not-cooperated", "basic mobile"]
+    enum: ["available", "not available", "driver not-cooperated"]
   },
 
   driverAccidentPhotosDateInfo: {

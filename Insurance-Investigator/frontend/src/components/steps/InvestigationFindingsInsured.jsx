@@ -83,7 +83,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
           </select>
         </div>
 
-        {formData.insuredGoogleTimeline !== 'basic mobile' && (
+        {(formData.insuredGoogleTimeline !== 'basic mobile' && formData.insuredGoogleTimeline !=='damaged mobile') && (
           <>
             <div>
               <label className="label">Timeline/Phone Photos Attached</label>
@@ -100,7 +100,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
                 <option value="">Select</option>
                 <option value="available">Available</option>
                 <option value="not available">Not Available</option>
-                <option value="basic mobile">Basic Mobile</option>
+                <option value="not co-operated">not co-operated</option>
               </select>
             </div>
 

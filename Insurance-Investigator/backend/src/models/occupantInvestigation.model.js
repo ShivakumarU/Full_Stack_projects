@@ -24,7 +24,7 @@ const OccupantSchema = new mongoose.Schema({
 
   occupantsAccidentPhotosInMobile: {
     type: String,
-    enum: ["available", "not available", "Basic mobile"]
+    enum: ["available", "not available", "not co-operated"]
   },
 
   accidentPhotoDateInfo: {

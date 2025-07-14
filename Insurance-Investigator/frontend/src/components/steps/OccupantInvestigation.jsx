@@ -156,7 +156,7 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                         </select>
                       </div>
 
-                      {occupant.occupantGoogleTimeline !== 'basic mobile' && (
+                      {(occupant.occupantGoogleTimeline !== 'basic mobile' && occupant.occupantGoogleTimeline !== 'damaged mobile') && (
                         <>
                           <div>
                             <label className="label">Timeline/Phone Photos Attached</label>
@@ -181,7 +181,7 @@ const OccupantInvestigation = ({ formData, setFormData }) => {
                               <option value="">Select</option>
                               <option value="available">Available</option>
                               <option value="not available">Not Available</option>
-                              <option value="Basic mobile">Basic Mobile</option>
+                              <option value="not co-operated">not co-operated</option>
                             </select>
                           </div>
 
