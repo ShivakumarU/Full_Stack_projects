@@ -223,30 +223,30 @@ const Report = ({ data }) => {
                         {data.insuredVerified==="yes" && (
                           <Text style={{lineHeight:1.3, textAlign:'justify'}}>
                             {`\u2022 Based on ${data.insuredType} version, we tried to verify ${data.insuredGender==="she" ? "her":"his"} google timeline ${
-                                data.insuredGoogleTimeline==="corelating" ? `and found ${data.insuredGender==="she" ? "her":"his"} timeline is co-relating with ${data.insuredGender==="she" ? "her":"his"} version. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns. ${
+                                data.insuredGoogleTimeline==="corelating" ? `and found ${data.insuredGender==="she" ? "her":"his"} timeline is co-relating with ${data.insuredGender==="she" ? "her":"his"} version. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns.`} ${
                                 data.insuredAccidentPhotosInMobile === 'not co-operated'
                                 ? `The insured did not cooperate when asked to check ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery.`
                                 : `Then, we verified ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery and ${
                                     data.insuredAccidentPhotosInMobile === 'available'
                                       ? `found accident-related photos. These photos were captured ${data.insuredPhotosDateInfo} ${data.insuredPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person [ ${data.insuredPhotosSenderName}-${data.insuredPhotosSenderNumber} ] through Whatsapp.` : `, and were found in ${data.insuredPhotosSource}.`}`
                                       : 'did not find any accident-related photos in the gallery.'
-                                      }` }`}` 
-                              : data.insuredGoogleTimeline==="not co-relating" ? `and found ${data.insuredGender==="she" ? "her":"his"} timeline is not co-relating with ${data.insuredGender==="she" ? "her":"his"} version. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns. ${
+                                      }`}` 
+                              : data.insuredGoogleTimeline==="not co-relating" ? `and found ${data.insuredGender==="she" ? "her":"his"} timeline is not co-relating with ${data.insuredGender==="she" ? "her":"his"} version. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns.`} ${
                                 data.insuredAccidentPhotosInMobile === 'not co-operated'
                                 ? `The insured did not cooperate when asked to check ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery.`
                                 : `Then, we verified ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery and ${
                                     data.insuredAccidentPhotosInMobile === 'available'
                                       ? `found accident-related photos. These photos were captured ${data.insuredPhotosDateInfo} ${data.insuredPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person [ ${data.insuredPhotosSenderName}-${data.insuredPhotosSenderNumber} ] through Whatsapp.` : `, and were found in ${data.insuredPhotosSource}.`}`
                                       : 'did not find any accident-related photos in the gallery.'
-                                      }` }`}`
-                              : data.insuredGoogleTimeline==="no places visited" ? `, but ${data.insuredGender==="she" ? "her":"his"} google timeline is showing as no places visited. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns. ${
+                                      }`}`
+                              : data.insuredGoogleTimeline==="no places visited" ? `, but ${data.insuredGender==="she" ? "her":"his"} google timeline is showing as no places visited. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns.`} ${
                                 data.insuredAccidentPhotosInMobile === 'not co-operated'
                                 ? `The insured did not cooperate when asked to check ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery.`
                                 : `Then, we verified ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery and ${
                                     data.insuredAccidentPhotosInMobile === 'available'
                                       ? `found accident-related photos. These photos were captured ${data.insuredPhotosDateInfo} ${data.insuredPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person [ ${data.insuredPhotosSenderName}-${data.insuredPhotosSenderNumber} ] through Whatsapp.` : `, and were found in ${data.insuredPhotosSource}.`}`
                                       : 'did not find any accident-related photos in the gallery.'
-                                      }` }`}` 
+                                      }`}` 
                               : data.insuredGoogleTimeline==="insured not-cooperated" ? `, but ${data.insuredGoogleTimeline}. ${ 
                                 data.insuredAccidentPhotosInMobile === 'not co-operated' 
                                 ? `The insured did not cooperate when asked to check ${data.insuredGender === 'she' ? 'her' : 'his'} mobile gallery.` 
@@ -254,7 +254,7 @@ const Report = ({ data }) => {
                                     data.insuredAccidentPhotosInMobile === 'available'
                                       ? `found accident-related photos. These photos were captured ${data.insuredPhotosDateInfo} ${
                                           data.insuredPhotosSource === 'other person sent in whatsapp'
-                                            ? `and were shared by another person (${data.insuredPhotosSenderName} – ${data.insuredPhotosSenderNumber}) through WhatsApp.`
+                                            ? `and were shared by another person (${data.insuredPhotosSenderName}-${data.insuredPhotosSenderNumber}) through WhatsApp.`
                                             : `and were found in ${data.insuredPhotosSource}.`
                                         }`
                                       : 'did not find any accident-related photos in the gallery.'
@@ -276,9 +276,58 @@ const Report = ({ data }) => {
                           )
                         }
                         { data.insuredType==='insured' && data.driverVerified==='no'? ``: (
-                            <Text style={{lineHeight:1.3, textAlign:'justify'}}>
-                              {`\u2022 `}
-                            </Text>
+                            <>
+                              {data.driverVerified==="yes" && (
+                                <Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                                  {`\u2022 Based on driver version, we tried to verify ${data.driverGenderInDriver==="she" ? "her":"his"} google timeline ${
+                                      data.driverGoogleTimeline==="corelating" ? `and found ${data.driverGenderInDriver==="she" ? "her":"his"} timeline is co-relating with ${data.driverGenderInDriver==="she" ? "her":"his"} version. We ${data.driverTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.driverGenderInDriver} refused to share them, citing privacy concerns.`} ${
+                                      data.driverAccidentPhotosInMobile === 'driver not-cooperated'
+                                      ? `The driver did not cooperate when asked to check ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery.`
+                                      : `Then, we verified ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery and ${
+                                          data.driverAccidentPhotosInMobile === 'available'
+                                            ? `found accident-related photos. These photos were captured ${data.driverAccidentPhotosDateInfo} ${data.driverPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person [ ${data.driverPhotosSenderName}-${data.driverPhotosSenderNumber} ] through Whatsapp.` : `, and were found in ${data.driverPhotosSource}.`}`
+                                            : 'did not find any accident-related photos in the gallery.'
+                                            }`}` 
+                                    : data.driverGoogleTimeline==="not co-relating" ? `and found ${data.driverGenderInDriver==="she" ? "her":"his"} timeline is not co-relating with ${data.driverGenderInDriver==="she" ? "her":"his"} version. We ${data.driverTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.driverGenderInDriver} refused to share them, citing privacy concerns.`} ${
+                                      data.driverAccidentPhotosInMobile === 'driver not-cooperated'
+                                      ? `The driver did not cooperate when asked to check ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery.`
+                                      : `Then, we verified ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery and ${
+                                          data.driverAccidentPhotosInMobile === 'available'
+                                            ? `found accident-related photos. These photos were captured ${data.driverAccidentPhotosDateInfo} ${data.driverPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person [ ${data.driverPhotosSenderName}-${data.driverPhotosSenderNumber} ] through Whatsapp.` : `, and were found in ${data.driverPhotosSource}.`}`
+                                            : 'did not find any accident-related photos in the gallery.'
+                                            }`}`
+                                    : data.driverGoogleTimeline==="no places visited" ? `, but ${data.driverGenderInDriver==="she" ? "her":"his"} google timeline is showing as no places visited. We ${data.driverTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.driverGenderInDriver} refused to share them, citing privacy concerns.`} ${
+                                      data.driverAccidentPhotosInMobile === 'driver not-cooperated'
+                                      ? `The driver did not cooperate when asked to check ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery.`
+                                      : `Then, we verified ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery and ${
+                                          data.driverAccidentPhotosInMobile === 'available'
+                                            ? `found accident-related photos. These photos were captured ${data.driverAccidentPhotosDateInfo} ${data.driverPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person [ ${data.driverPhotosSenderName}-${data.driverPhotosSenderNumber} ] through Whatsapp.` : `, and were found in ${data.driverPhotosSource}.`}`
+                                            : 'did not find any accident-related photos in the gallery.'
+                                            }`}` 
+                                    : data.driverGoogleTimeline==="driver not-cooperated" ? `, but ${data.driverGoogleTimeline}. ${ 
+                                      data.driverAccidentPhotosInMobile === 'driver not-cooperated' 
+                                      ? `The driver did not cooperate when asked to check ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery.` 
+                                      : `Then, we verified ${data.driverGenderInDriver === 'she' ? 'her' : 'his'} mobile gallery and ${
+                                          data.driverAccidentPhotosInMobile === 'available'
+                                            ? `found accident-related photos. These photos were captured ${data.driverAccidentPhotosDateInfo} ${data.driverPhotosSource === 'other person sent in whatsapp' ? `and were shared by another person (${data.driverPhotosSenderName}–${data.driverPhotosSenderNumber}) through WhatsApp.` : `and were found in ${data.driverPhotosSource}.`}`
+                                            : 'did not find any accident-related photos in the gallery.'
+                                        }`}`
+                                    : data.driverGoogleTimeline==='basic mobile'? `, but we found driver is using a basic featured mobile. Hence, we are unable to verify other accident-related details including photos.` 
+                                    : data.driverGoogleTimeline==='damaged mobile' ? `but we found driver mobile is in damaged condition. We have attached that mobile photo for your reference. Hence, we are unable to verify other accident-related details including photos.` : `` } `}
+                                </Text>)
+                              }
+                              { data.driverVerified==="yes" &&
+                                (<Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                                    {`${data.driverInVehicle==='no' ? `` : `\u2022 In the said accident, driver ${data.driverInjured==='no' ? `was not injured.` : `was injured and those injuries are ${data.driverInjuriesCorelating==="no" ? `not co-relating with IV accident` : `co-relating with IV accident`} ${data.driverHospitalized ==='no' ? `, and ${data.driverGenderInDriver} stated that ${data.driverGenderInDriver} was not treated in any hospital.` : `and ${data.driverGenderInDriver} was treated at ${data.driverHospitalName}, ${data.driverMedicalRecords==="not available"? `but ${data.driverGenderInDriver} was not having any medical records.`: `and ${data.driverGenderInDriver} also submitted mediacl records, we enclosed the same for your reference.`}`}`}`}`}
+                                </Text>)
+                              }
+                              { data.driverVerified==="yes" &&
+                                (<Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                                    {`\u2022 We have verified the driver call data ${data.driverCallData==="not available" ? `, but it was not availble for the accident date.` : `${data.driverCallData==="match" ?`, it matches with the version provided, and we did not find any suspects.` : `${data.driverCallData==="mismatch" ? `and found some differences in call log. So, we identified a few suspects and enclosed for your reference.`:``}`}`} ${data.driverDLStatus==="not provided" ? `The driver did not provide ${data.driverGenderInDriver==="he"?"his":"her"} driving license for verification`: `We have enquired with driver DL and found that ${data.driverGenderInDriver} ${data.driverDLStatus}`}.`}
+                                    {`\n ${data.driverAddAnything==='yes' ? `\u2022 ${data.driverAdditionalComments}` :``} `}
+                                </Text>)
+                              }
+                            </>
                          )
                         }
                 </View>

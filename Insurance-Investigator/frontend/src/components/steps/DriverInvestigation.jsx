@@ -186,10 +186,10 @@ const DriverInvestigation = ({ formData, setFormData }) => {
             onChange={(e) => handleChange('driverDLStatus', e.target.value)}
           >
             <option value="">Select</option>
-            <option value="having valid DL">Having Valid DL</option>
-            <option value="having invalid DL">Having Invalid DL</option>
-            <option value="not having DL">Not Having DL</option>
-            <option value="having LLR only">Having LLR Only</option>
+            <option value="is having valid DL">Having Valid DL</option>
+            <option value="is having invalid DL">Having Invalid DL</option>
+            <option value="is not having DL">Not Having DL</option>
+            <option value="is having LLR only">Having LLR Only</option>
             <option value="not provided">Not Provided</option>
           </select>
         </div>
