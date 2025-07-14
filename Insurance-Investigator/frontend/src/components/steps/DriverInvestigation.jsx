@@ -96,6 +96,7 @@ const DriverInvestigation = ({ formData, setFormData }) => {
             <option value="no places visited">No Places Visited</option>
             <option value="driver not-cooperated">Driver Not-Cooperated</option>
             <option value="basic mobile">Basic Mobile</option>
+            <option value="damaged mobile">damaged mobile</option>
           </select>
         </div>
 

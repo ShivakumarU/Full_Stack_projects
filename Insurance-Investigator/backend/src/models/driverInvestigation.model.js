@@ -21,7 +21,8 @@ const DriverInvestigationSchema = new mongoose.Schema({
       "not co-relating",
       "no places visited",
       "driver not-cooperated",
-      "basic mobile"
+      "basic mobile",
+      "damaged mobile"
     ],
     required: true
   },

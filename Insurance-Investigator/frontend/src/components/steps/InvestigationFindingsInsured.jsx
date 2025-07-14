@@ -79,6 +79,7 @@ const InvestigationFindingsInsured = ({ formData, setFormData }) => {
             <option value="no places visited">No Places Visited</option>
             <option value="insured not-cooperated">Insured Not-Cooperated</option>
             <option value="basic mobile">Basic Mobile</option> 
+            <option value="damaged mobile">damaged mobile</option>
           </select>
         </div>
 

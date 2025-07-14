@@ -14,7 +14,8 @@ const OccupantSchema = new mongoose.Schema({
       "not co-relating",
       "No places visited",
       "driver not-cooperated",
-      "basic mobile"
+      "basic mobile",
+      "damaged mobile"
     ],
     required: true,
   },

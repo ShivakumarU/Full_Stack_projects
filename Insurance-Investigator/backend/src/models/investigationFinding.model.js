@@ -26,6 +26,7 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
       "no places visited",
       "insured not-cooperated",
       "basic mobile",
+      "damaged mobile"
     ],
     required: true,
   },
