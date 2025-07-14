@@ -220,7 +220,8 @@ const Report = ({ data }) => {
                         <Text style={{lineHeight:1.3, textAlign:'justify'}}>
                             {`\u2022 Based on claim intimation details, we ${data.insuredVerified === "no" ? `didn't verified the insured about the accident due to ${data.insuredNotVerifiedReason}.` : `verified with the insured about the accident. As per ${data.insuredGender === "she" ? "her" :"his"} version, the accident was occured while ${data.travellingPersonRelationInInsuredStatement} was travelling from ${data.travelFromInsuredStatement} to ${data.travelToInsuredStatement}, met with accident at ${data.accidentPlaceInInsuredStatement} on ${data.accidentDateInInsuredStatement} at ${data.accidentTimeInInsuredStatement} hrs ${data.insuredInVehicle==="yes"?`.`:`and ${data.insuredGender} is not in IV at the time of loss.`}`} `}
                        </Text>
-                        <Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                        {data.insuredVerified==="yes" && (
+                          <Text style={{lineHeight:1.3, textAlign:'justify'}}>
                             {`\u2022 Based on ${data.insuredType} version, we tried to verify ${data.insuredGender==="she" ? "her":"his"} google timeline ${
                                 data.insuredGoogleTimeline==="corelating" ? `and found ${data.insuredGender==="she" ? "her":"his"} timeline is co-relating with ${data.insuredGender==="she" ? "her":"his"} version. We ${data.insuredTimelinePhotosAttached==='yes'?`attached the timeline photos with this report.`:`have not attached the timeline photos with this report because ${data.insuredGender} refused to share them, citing privacy concerns. ${
                                 data.insuredAccidentPhotosInMobile === 'not co-operated'
@@ -260,13 +261,26 @@ const Report = ({ data }) => {
                                   }`}`
                               : data.insuredGoogleTimeline==='basic mobile'? `, but we found ${data.insuredType} is using a basic featured mobile. Hence, we are unable to verify other accident-related details including photos.` 
                               : data.insuredGoogleTimeline==='damaged mobile' ? `but we found ${data.insuredType} mobile is in damaged condition. We have attached that mobile photo for your reference. Hence, we are unable to verify other accident-related details including photos.` : `` } `}
-                       </Text>
-                       <Text style={{lineHeight:1.3, textAlign:'justify'}}>
-                            {`${data.insuredInVehicle==='no' ? `` : `\u2022 In the said accident, ${data.insuredType} ${data.insuredInjured==='no' ? `was not injured.` : `was injured and those injuries are ${data.insuredInjuriesCorelating==="no" ? `not co-relating with IV accident` : `co-relating with IV accident`} ${data.insuredHospitalized ==='no' ? `, and ${data.insuredGender} stated that ${data.insuredGender} was not treated in any hospital.` : `and ${data.insuredGender} was treated at ${data.insuredHospitalName}, ${data.insuredMedicalRecords==="not available"? `but ${data.insuredGender} was not having any medical records.`: `and ${data.insuredGender} also submitted mediacl records, we enclosed the same for your reference.`}`}`}`}`}
-                       </Text>
-                       <Text style={{lineHeight:1.3, textAlign:'justify'}}>
-                          {`\u2022 `}
-                       </Text>
+                          </Text>)
+                        }
+                        { data.insuredVerified==="yes" &&
+                          (<Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                              {`${data.insuredInVehicle==='no' ? `` : `\u2022 In the said accident, ${data.insuredType} ${data.insuredInjured==='no' ? `was not injured.` : `was injured and those injuries are ${data.insuredInjuriesCorelating==="no" ? `not co-relating with IV accident` : `co-relating with IV accident`} ${data.insuredHospitalized ==='no' ? `, and ${data.insuredGender} stated that ${data.insuredGender} was not treated in any hospital.` : `and ${data.insuredGender} was treated at ${data.insuredHospitalName}, ${data.insuredMedicalRecords==="not available"? `but ${data.insuredGender} was not having any medical records.`: `and ${data.insuredGender} also submitted mediacl records, we enclosed the same for your reference.`}`}`}`}`}
+                          </Text>)
+                        }
+                        { data.insuredVerified==="yes" &&
+                          (<Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                              {`\u2022 We have verified the ${data.insuredType}'s call data ${data.insuredCallData==="not available" ? `, but it was not availble for the accident date.` : `${data.insuredCallData==="match" ?`, it matches with the version provided, and we did not find any suspects.` : `${data.insuredCallData==="mismatch" ? `and found some differences in call log. So, we identified a few suspects and enclosed for your reference.`:``}`}`} ${data.insuredDLStatus==="not provided" ? `The ${data.insuredType} did not provide ${data.insuredGender==="he"?"his":"her"} driving license for verification`: `We have enquired with ${data.insuredType} DL and found that ${data.insuredGender} ${data.insuredDLStatus}`}.`}
+                              {`\n ${data.insuredAddAnything==='yes' ? `\u2022 ${data.insuredAdditionalComments}` :``} `}
+                          </Text>
+                          )
+                        }
+                        { data.insuredType==='insured' && data.driverVerified==='no'? ``: (
+                            <Text style={{lineHeight:1.3, textAlign:'justify'}}>
+                              {`\u2022 `}
+                            </Text>
+                         )
+                        }
                 </View>
           
           </View>

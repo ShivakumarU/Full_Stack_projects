@@ -58,10 +58,10 @@ const InvestigationFindingInsuredSchema = new mongoose.Schema({
   insuredDLStatus: {
     type: String,
     enum: [
-      "having valid DL",
-      "having invalid DL",
-      "not having DL",
-      "having LLR only",
+      "is having valid DL",
+      "is having invalid DL",
+      "is not having DL",
+      "is having LLR only",
       "not provided",
     ],
     required: true,
