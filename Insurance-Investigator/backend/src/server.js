@@ -18,9 +18,19 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT  ;
 
+const allowedOrigins = ['https://insurance-fe-gilt.vercel.app', 'http://localhost:5173'];
+
 app.use(cors({
-  origin: 'http://localhost:5173'
-})) ;
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
+
 
 app.use(express.json());
 
