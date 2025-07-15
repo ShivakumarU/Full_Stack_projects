@@ -42,7 +42,7 @@ const otherDetailsSchema = new mongoose.Schema({
 
   tsEChallan: {
     type: String,
-    enum: ["no pending challan", "no suspects found", "old damages noted"],
+    enum: ["no pending challan", "no suspects found", "old damages"],
     required: true,
   },
 
