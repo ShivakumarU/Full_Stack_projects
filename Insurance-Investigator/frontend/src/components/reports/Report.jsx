@@ -135,7 +135,7 @@ const Report = ({ data }) => {
           <View>
                 <Text style={{ marginTop: 9 , lineHeight:1.2, textIndent:40, textAlign:'justify'}}>
                   {`${data.insuredVerified === "yes" ?      
-                  `${data.insuredType?.charAt(0).toUpperCase() + data.insuredType?.slice(1)} ${data.insuredName}, Occ: ${data.insuredOccupation} is having a vehicle with Reg.no: ${data.ivNumberInInsuredStatement}, using for ${data.insuredGender=== "she" ? `her`:`his`} ${data.ivUse}. This vehicle met with an accident on ${data.accidentDateInInsuredStatement} at ${data.accidentTimeInInsuredStatement} hrs while ${data.travellingPersonRelationInInsuredStatement} was travelling from ${data.travelFromInsuredStatement} to ${data.travelToInsuredStatement}, at ${data.accidentPlaceInInsuredStatement} ${data.accidentMannerInInsuredStatement}. At the time of accident, ${data.driverGender} is travelling ${
+                  `${data.insuredType?.charAt(0).toUpperCase() + data.insuredType?.slice(1)} ${data.insuredName}, Occ: ${data.insuredOccupation} is having a vehicle with Reg.no: ${data.ivNumberInInsuredStatement}, using for ${data.insuredGender=== "she" ? `her`:`his`} ${data.ivUse}. This vehicle met with an accident on ${data.accidentDateInInsuredStatement} at ${data.accidentTimeInInsuredStatement} hrs while ${data.travellingPersonRelationInInsuredStatement} was travelling from ${data.travelFromInsuredStatement} to ${data.travelToInsuredStatement}, at ${data.accidentPlaceInInsuredStatement} ${data.accidentMannerInInsuredStatement}. At the time of accident, ${data.travellingPersonRelationInInsuredStatement} is travelling ${
                     data.totalPersonsInInsuredStatement === 1
                       ? "alone"
                       : data.totalPersonsInInsuredStatement === 2
@@ -531,12 +531,40 @@ const Report = ({ data }) => {
                       Mahesh Kola{'\n'}Authorized Signatory
                     </Text>
                 </View>
-                <View>
-                  <Text>Driver Visit Photos :</Text>
-                
+                {/* <View style={{flexDirection:"column", textAlign:'center', fontSize:15, marginTop:20}}> 
+                  <Text style={{textDecoration:'underline', marginBottom:20}}> Insured Visit Photos :</Text>
+                  <Text>
                     <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
-                
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                  </Text>
                 </View>
+                <View style={{flexDirection:"column", textAlign:'center', fontSize:15, marginTop:20}}> 
+                  <Text style={{textDecoration:'underline', marginBottom:20}}>Driver Visit Photos :</Text>
+                  <Text>
+                    <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                  </Text>
+                </View>
+                <View style={{flexDirection:"column", textAlign:'center', fontSize:15, marginTop:20}}> 
+                  <Text style={{textDecoration:'underline', marginBottom:20}}>Spot Photos :</Text>
+                  <Text>
+                    <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                    <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                 </Text>
+                </View>
+                <View style={{flexDirection:"column", textAlign:'center', fontSize:15, marginTop:20}}> 
+                  <Text style={{textDecoration:'underline', marginBottom:20}}>Garage Photos :</Text>
+                  <Text>
+                    <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                    <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
+                    <Image src="http://localhost:5001/uploads/d4d0594e-c39a-4ddc-a7cb-42c597aa547a.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt="" />
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                    <Image src="http://localhost:5001/uploads/7129a975-9135-4ab8-b365-a878eaf79e76.jpg" style={{width:200,height:100,objectFit: 'cover'}} alt=""/>
+                 </Text>
+                </View> */}
           </View>
 
         </View>
