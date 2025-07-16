@@ -47,7 +47,7 @@ export const getAllInsuredSummaries = async (req, res) => {
   try {
     const summaries = await InsuredDetails.find(
       {},
-      'caseNumber insuredName claimNumber insuranceCompany ivNumber vehicleType createdAt policyStartDate accidentDateTime'
+      'caseNumber insuredName claimNumber insuranceCompany ivNumber vehicleType createdAt policyStartDate accidentDate'
     );
     res.status(200).json(summaries);
   } catch (error) {
