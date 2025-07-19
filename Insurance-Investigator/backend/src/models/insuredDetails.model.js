@@ -47,6 +47,14 @@ const insuredDetailsSchema = new mongoose.Schema({
     required: true,
   },
 
+  accidentType: {
+    type: String,
+    enum : [
+      "accident",
+      "fire accident"
+    ]
+  },
+
   invoiceAmount: { type: Number, required: true },
   lossLocation: { type: String, required: true },
   causeOfLoss: { type: String, required: true },
