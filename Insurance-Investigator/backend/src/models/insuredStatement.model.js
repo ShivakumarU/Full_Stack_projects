@@ -83,6 +83,7 @@ const InsuredStatementSchema = new mongoose.Schema({
     type: String,
     enum: ["yes", "no"],
   },
+  withdrawOfClaim : {type:String, enum: ["yes", "no"]}
 
 }, {
   timestamps: true,

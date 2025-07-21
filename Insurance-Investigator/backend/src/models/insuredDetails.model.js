@@ -58,6 +58,13 @@ const insuredDetailsSchema = new mongoose.Schema({
   invoiceAmount: { type: Number, required: true },
   lossLocation: { type: String, required: true },
   causeOfLoss: { type: String, required: true },
+  vehicleCondition: {type: String, 
+    enum : [
+      "moving",
+      "parked",
+      "operating"
+    ]
+  }
 
 }, { timestamps: true });
 

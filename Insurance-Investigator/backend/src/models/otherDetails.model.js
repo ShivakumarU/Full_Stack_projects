@@ -64,6 +64,19 @@ const otherDetailsSchema = new mongoose.Schema({
     type: String,
   },
 
+  feildFastag: {
+    type: String,
+    enum: ["no suspects", "suspects"]
+  },
+
+  breakInPolicy: {
+    type: String,
+    enum: ["yes", "no"]
+  },
+  drunkAndDrive: {
+    type: String,
+    enum: ["yes", "no"]
+  },
   conclusionOpinion: {
     type: String,
     enum: ["payable", "repudiation"],
