@@ -66,7 +66,7 @@ const otherDetailsSchema = new mongoose.Schema({
 
   feildFastag: {
     type: String,
-    enum: ["no suspects", "suspects"]
+    enum: ["no suspects", "suspects", "not applicable"]
   },
 
   breakInPolicy: {
