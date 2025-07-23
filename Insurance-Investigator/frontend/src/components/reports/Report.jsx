@@ -165,11 +165,12 @@ console.log("Insured Photo 0: ", data?.insuredPhotosUpload?.[0]);
               </React.Fragment>
             ))}
           </View>
-          <Text style={{fontWeight:'bold', marginTop:15, textDecoration:'underline'}}>
+          <Text style={{fontWeight:'bold', marginTop:19, textDecoration:'underline'}}>
             {data.insuredType && data.insuredType.charAt(0).toUpperCase() + data.insuredType.slice(1)} Version :
           </Text>
-          {data.withdrawOfClaim==="no" ? (<View>
-                  <Text style={{ marginTop: 9 , lineHeight:1.2, textIndent:40, textAlign:'justify'}}>
+          {data.withdrawOfClaim==="no" ? 
+          (<View>
+                  <Text style={{ marginTop: 19 , lineHeight:1.2, textIndent:40, textAlign:'justify'}}>
                     {`${data.insuredVerified === "yes" ?      
                     `${data.insuredType?.charAt(0).toUpperCase() + data.insuredType?.slice(1)} ${data.insuredName}, Occ: ${data.insuredOccupation} is having a vehicle with Reg.no: ${data.ivNumberInInsuredStatement}, using for ${data.insuredGender=== "she" ? `her`:`his`} ${data.ivUse}. This vehicle met with ${data.accidentType === 'accident' ? 'an accident' : 'a fire accident'} on ${data.accidentDateInInsuredStatement} at ${data.accidentTimeInInsuredStatement} hrs while ${data.travellingPersonRelationInInsuredStatement} was travelling from ${data.travelFromInsuredStatement} to ${data.travelToInsuredStatement}, at ${data.accidentPlaceInInsuredStatement} ${data.accidentMannerInInsuredStatement}. At the time of accident, ${data.travellingPersonRelationInInsuredStatement} is travelling ${
                       data.totalPersonsInInsuredStatement === 1
@@ -577,13 +578,15 @@ console.log("Insured Photo 0: ", data?.insuredPhotosUpload?.[0]);
                         </Text>
                     </View> )
                   } 
-          </View>) 
+           </View>) 
           : 
           (
             <View>
-              {`During the course of investigation, we met with the ${data.insuredType}-${data.insuredNameInInsuredStatement}, Occ:${data.insuredOccupation} to enquire about the accident. As per ${data.insuredType}, ${data.insuredGender} is having a vehicle with Reg.No: ${
-                data.ivNumber}. This vehicle met with ${data.accidentType}`
-              }
+              <Text style={{ marginTop: 19 , lineHeight:1.2, textIndent:40, textAlign:'justify'}}>
+                {`During the course of investigation, we met with the ${data.insuredType} - ${data.insuredNameInInsuredStatement}, Occ: ${data.insuredOccupation}, to enquire about the accident. As per ${data.insuredType}, ${data.insuredGender} is having a vehicle with Reg.No: ${
+                  data.ivNumber}. This vehicle met with ${data.accidentType==="accident"?`an accident`:`a fire accident`} on ${data.accidentDateInInsuredStatement}. For the same, ${data.insuredGender} raised a claim with Claim.No: ${data.claimNumber}. Now ${data.insuredGender} would like to withdraw the claim. For the same we obtained all the required documents and attached with this report.`
+                }
+              </Text>
             </View>
           )}                   
           <View style={{marginTop:15}}>
