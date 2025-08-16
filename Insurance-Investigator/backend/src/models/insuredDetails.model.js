@@ -64,7 +64,8 @@ const insuredDetailsSchema = new mongoose.Schema({
       "parked",
       "operating"
     ]
-  }
+  },
+  isFinished: { type: Boolean, default: false }
 
 }, { timestamps: true });
 
