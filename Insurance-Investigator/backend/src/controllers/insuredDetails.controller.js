@@ -33,15 +33,59 @@ export const getInsuredDetailsByID = async (req, res) => {
 };
 
 
-export const getAllInsuredDetails = async (req,res) =>{
-    try {
-        const allDetails = await InsuredDetails.find();
-        res.status(200).json(allDetails);
-    } catch (error) {
-        console.error(" Error fetching insured details:", error);
-        res.status(500).json({ message: "Server Error" });
-    }
-}
+export const getAllInsuredDetails = async (req, res) => {
+  try {
+    // Parse pagination parameters
+    const page = parseInt(req.query.page, 10) || 1;
+    let limit = parseInt(req.query.limit, 10) || 10;
+    limit = Math.min(limit, 10); // Always cap at 10
+
+    const skip = (page - 1) * limit;
+
+    // ✅ Handle status filter
+    const status = req.query.status;
+    let query = {};
+    if (status === "pending") query.isFinished = false;
+    if (status === "finished") query.isFinished = true;
+
+    // Total count based on filter
+    const totalRecords = await InsuredDetails.countDocuments(query);
+    const totalPages = Math.ceil(totalRecords / limit);
+
+    // Fetch required fields
+    const allDetails = await InsuredDetails.find(query, {
+      insuranceCompany: 1,
+      caseNumber: 1,
+      claimNumber: 1,
+      ivNumber: 1,
+      insuredName: 1,
+      vehicleType: 1,
+      accidentDate: 1,
+      policyStartDate: 1,
+      createdAt: 1,
+      isFinished: 1,
+      _id: 0
+    })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      data: allDetails,
+      pagination: {
+        totalRecords,
+        totalPages,
+        currentPage: page,
+        pageSize: limit,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching insured details:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+
 
 
 export const updateInsuredDetails = async (req, res) => {
